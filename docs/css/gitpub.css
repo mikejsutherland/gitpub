@@ -1,0 +1,93 @@
+html {
+    overflow-y: scroll;
+}
+
+body { 
+    font-family: "Segoe UI", Frutiger,Tahoma,Helvetica,"Helvetica Neue", Arial, sans-serif; 
+}
+
+input {
+    padding: 2px 5px;
+    font-size: 1.2em;
+}
+
+
+button.pw {
+    margin: 5px 0px;
+}
+
+.edit:hover {
+    cursor: pointer;
+}
+
+div.charts {
+    overflow: hidden;
+}
+
+.left {
+    float: left!important;
+}
+
+.right {
+    float: right!important;
+}
+
+.blue {
+    color: #66ccff;
+}
+
+.red {
+    color: #ff3333;
+}
+
+.green {
+    color: #00cc00;
+}
+
+br.clear {
+    clear: both;
+    height: 0px;
+    padding: 0;
+    margin: 0;
+    line-height: 0px;
+}
+
+h3 {
+    margin: 0 0 .5em;
+    font-weight: bold;
+    font-size: 1.5em;
+    text-align: left;
+}
+
+.oversized {
+    /* margin: 0 0 .5em; */
+    font-weight: bold;
+    font-size: 10.5em;
+    text-align: left;
+}
+
+.category {
+    width: 200px;
+    padding: 0 auto;
+    font-weight: normal;
+    font-size: 1.5em;
+    text-align: left;
+}
+.category:hover {
+    cursor: pointer;
+}
+
+#dialog label {
+    
+}
+#dialog span {
+    margin-left: 28px;
+    font-size: 12px;
+}
+
+#members .ui-state-default {
+    background-image: none; /* remove default bg image */
+} 
+#members a {
+    color: blue;
+}
