@@ -1,0 +1,6 @@
+RewriteEngine on
+#RewriteBase /
+#RewriteRule docs/(.+) - [L,NC]
+#RewriteRule project/(.+)/(.+)/(.+)$ ?repo=$1&nav=$2&file=$3 [L]
+#RewriteRule project/(.+)/([a-z0-9-_]+)$ ?repo=$1&nav=$2 [L]
+#RewriteRule project/(.+)$ ?repo=$1 [L]

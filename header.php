@@ -1,6 +1,10 @@
 <?
     session_start(); 
 
+    require_once('lib/gitpub/gp.req.php');
+    require_once('lib/gitpub/gp.repo.php');
+    require_once('lib/gitpub/gp.view.php');
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,6 +18,11 @@
     <!-- jquery & jquery-ui javascript frameworks -->
     <script rel="javascript" type="text/javascript" src="docs/include/jquery/jquery-1.7.1.min.js"></script>
     <script rel="javascript" type="text/javascript" src="docs/include/jqueryui/js/jquery-ui-1.8.19.custom.min.js"></script>
+
+    <!-- -->
+    <script rel="javascript" type="text/javascript" src="docs/include/history.js/jquery.history.js"></script>      
+    <script rel="javascript" type="text/javascript" src="docs/include/history.js/jquery.scrollto.min.js"></script>
+    <script rel="javascript" type="text/javascript" src="docs/include/history.js/ajaxify-html5.js"></script>
 
     <!-- pennywise stylesheet -->
     <link rel="stylesheet" type="text/css" media="all" href="docs/css/gitpub.css" />
