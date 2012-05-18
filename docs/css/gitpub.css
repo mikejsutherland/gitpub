@@ -58,6 +58,13 @@ body {
     border: 1px solid #ddd;
 }
 
+.dir_icon {
+    background:#fff url('../images/dir_icon.png') no-repeat center center;
+}
+.file_icon {
+    background:#fff url('../images/file_icon.gif') no-repeat center center;
+}
+
 .box {
     background-color: #e7eef1;
 }

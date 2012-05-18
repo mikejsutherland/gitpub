@@ -141,7 +141,7 @@
             $hist = $master->getHistory($val);
             $lhist = get_object_vars(array_pop($hist));
 
-            print "<tr><td></td><td>";
+            print "<tr><td class='dir_icon'> </td><td>";
             print "<a class='ajaxy' href='?repo=". $_SESSION['repo'] ."&nav=files&cwd=". base64_encode($fullpath . $dir) ."'>$dir/</a><br />\n";
             print "</td><td></td><td>". $lhist['summary'] ."</td></tr>\n";
 
@@ -152,7 +152,7 @@
             $hist = $master->getHistory($val);
             $lhist = get_object_vars(array_pop($hist));
 
-            print "<tr><td></td><td>";
+            print "<tr><td class='file_icon'> </td><td>";
             print "<a class='ajaxy' href='?repo=". $_SESSION['repo'] ."&nav=files&cwd=". base64_encode($fullpath . $file) ."'>$file</a><br />\n";
             print "</td><td></td><td>". $lhist['summary'] ."</td></tr>\n";
         }
