@@ -1,4 +1,4 @@
-    <div class="footer gradient_gray">
+    <div class="footer">
         <div class="content">
             <div class="right">
                 Thanks ;)
