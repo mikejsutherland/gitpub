@@ -173,12 +173,12 @@ ul#tabs li.active {
     font-weight: bold;
 }
 
-table.filebrowser {
+table.browser {
     border-collapse: collapse;
     width: 100%;
     border: 1px solid #ddd;
 }
-table.filebrowser td, th {
+table.browser td, th {
     text-align: left;
     padding: 5px 5px;
     font-size: 0.8em;
@@ -186,23 +186,23 @@ table.filebrowser td, th {
     border-bottom: 1px solid #ddd;
     vertical-align: top;
 }
-table.filebrowser td a, a:visited, a:active {
+table.browser td a, a:visited, a:active {
     color: #398bc5;
     text-decoration: none;
 }
-table.filebrowser td a:hover {
+table.browser td a:hover {
     text-decoration: underline;
 }
-table.filebrowser th {
+table.browser th {
     line-height: 28px;
     -webkit-font-smoothing: antialiased;
 }
 
-table.filebrowser tbody th {
+table.browser tbody th {
     width: 300px;
 }
 
-table.filebrowser caption {
+table.browser caption {
     margin: 0 0 .5em;
     font-weight: bold;
     font-size: 1.5em;
