@@ -127,6 +127,21 @@
             $file = preg_replace("|^$filepath/|", "", $file);
 
             $fullpath = "$filepath/";
+print "<!-- $filepath -->\n";
+            # Determine the parent
+
+            if ( $c == 0 ) {
+
+                $parent = explode('/', $filepath);
+                array_pop($parent);
+
+                print "<tr><td class=''> </td><td>";
+                print "<a class='ajaxy' href='?repo=". $_SESSION['repo'] ."&nav=files&cwd=". base64_encode(implode('/', $parent)) ."'>..</a><br />\n";
+                print "</td><td></td><td></td></tr>\n";
+
+                $c++;
+            }
+            
         }
 
         #print "<!-- FP: $fullpath file: $file -->\n";
