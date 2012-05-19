@@ -90,9 +90,9 @@
     # Reverse the history as we want the newest displayed first
     $hist = array_reverse($hist);
 
-    print "<pre>";
-    print_r(get_object_vars(array_shift($hist)));
-    print "</pre>\n"
+    #print "<pre>";
+    #print_r(get_object_vars(array_shift($hist)));
+    #print "</pre>\n"
 ?>
 
                 <table class="commit browser">
