@@ -84,13 +84,15 @@
     $master_name = $gitrepo->getTip('master');
 
     $master = $gitrepo->getObject($master_name);
+
+    $commit_id = sha1_hex($master_name);
     $hist = $master->getHistory();
     # Reverse the history as we want the newest displayed first
     $hist = array_reverse($hist);
 
-    #print "<pre>";
-    #print_r(get_object_vars(array_shift($hist)));
-    #print "</pre>\n"
+    print "<pre>";
+    print_r(get_object_vars(array_shift($hist)));
+    print "</pre>\n"
 ?>
 
                 <table class="commit browser">
@@ -107,11 +109,13 @@
                         <? if ( count($hist) > 0 ) { foreach($hist as $commit) {
                             $com = get_object_vars($commit); 
                             $details = get_object_vars($com['author']);
+                            $history = get_object_vars($com['history']);
                             print "<tr>\n<td>". $details['name'] ."</td>\n";
                             print "<td>". strftime('%F %T', $details['time']) ."</td>\n";
                             print "<td>". $com['summary'] ."</td>\n";
-                            print "<td>". sha1_hex($com['tree']) ."</td></tr>\n";
-                            #print "<pre>". print_r($com) ."</pre>\n"; 
+                            print "<td>". $commit_id ."</td></tr>\n";
+                            $commit_id = sha1_hex($com['parents'][0]);
+                            # todo: add com['tree'] too!
                         } } ?>
 
                     </tbody>
@@ -119,7 +123,7 @@
 
 <? } elseif ( $_SESSION['nav'] == 'branches' ) { ?>
 
-    hrm....branches you say....
+    what...you don't dev on master?
 
 
 
