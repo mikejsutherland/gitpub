@@ -18,7 +18,7 @@
                 array_push($base, $piece);
                 $c++;
 
-                $navlinks .= "<a class='ajaxy' href='". $CONFIG['base_uri'] ."/?repo=". $_SESSION['repo'] ."&nav=files&cwd=". base64_encode(implode('/',$base)) ."'>$piece</a>";
+                $navlinks .= "<a class='ajaxy' href='". $_SESSION['CONFIG']['base_uri'] ."/?repo=". $_SESSION['repo'] ."&nav=files&cwd=". base64_encode(implode('/',$base)) ."'>$piece</a>";
 
                 if ( $c < $pathpieces ) { 
                     $navlinks .= "/";
