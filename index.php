@@ -37,33 +37,7 @@
 <? } else { ?>
 
             <div class="navbar">
-                <a href="<?=$CONFIG['base_uri'];?>/">projects</a>/<a href="<?=$CONFIG['base_uri'];?>/?repo=<?=$_SESSION['repo'];?>"><?=$_SESSION['repo'];?></a>
-<? 
-    if ( isset($filepath) && $filepath !== "" ) {
-
-        $pathsegments = explode('/', $filepath);
-        $pathpieces = count($pathsegments);
-#print "<!-- $pathpieces: $filepath ". print_r(explode('/', $filepath))." -->\n";
-
-        if ( $pathpieces > 0 ) {
-
-            print "/";
-            $c = 0;
-
-            $base = Array();
-
-            foreach ($pathsegments as $piece) {
-
-                array_push($base, $piece);
-
-                $c++;
-                print "<a class='ajaxy' href='". $CONFIG['base_uri'] ."/?repo=". $_SESSION['repo'] ."&nav=files&cwd=". base64_encode(implode('/',$base)) ."'>$piece</a>";
-                if ( $c < $pathpieces ) { print "/"; }
-            }
-        }
-
-    }
-?>
+                <a href="<?=$CONFIG['base_uri'];?>/">projects</a>/<a href="<?=$CONFIG['base_uri'];?>/?repo=<?=$_SESSION['repo'];?>"><?=$_SESSION['repo'];?></a><? if ( isset($filepath) && $filepath !== "" ) { print getFileTreeNav($filepath); } ?>
             </div>
 
             <div>
