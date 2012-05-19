@@ -15,7 +15,7 @@
     $repos = getRepos($CONFIG['repo_directory']);
     $repo_count = count($repos);
 
-    $filepath = ( isset($_GET['cwd']) ) ? base64_decode($_GET['cwd']) : "";
+    $_SESSION['filepath'] = ( isset($_GET['cwd']) ) ? base64_decode($_GET['cwd']) : "";
 
 ?>
 
@@ -37,7 +37,7 @@
 <? } else { ?>
 
             <div class="navbar">
-                <a href="<?=$CONFIG['base_uri'];?>/">projects</a>/<a href="<?=$CONFIG['base_uri'];?>/?repo=<?=$_SESSION['repo'];?>"><?=$_SESSION['repo'];?></a><? if ( isset($filepath) && $filepath !== "" ) { print getFileTreeNav($filepath); } ?>
+                <a href="<?=$CONFIG['base_uri'];?>/">projects</a>/<a href="<?=$CONFIG['base_uri'];?>/?repo=<?=$_SESSION['repo'];?>"><?=$_SESSION['repo'];?></a><? if ( isset($_SESSION['filepath']) && $_SESSION['filepath'] !== "" ) { print getFileTreeNav($_SESSION['filepath']); } ?>
             </div>
 
             <div>
@@ -53,102 +53,24 @@
             <div id="filebrowser">
 
 <?
+        $gitrepo = new Git($_SESSION['CONFIG']['repo_directory'] ."/". $_SESSION['repo']);
+        $master_name = $gitrepo->getTip('master');
 
-    $gitrepo = new Git($CONFIG['repo_directory'] ."/". $_SESSION['repo']);
-    $master_name = $gitrepo->getTip('master');
-
-    $master = $gitrepo->getObject($master_name);
-    $tree = $master->getTree();
-    $files = $tree->listRecursive();
-
-#    print "<pre>";
-#    print_r($files);
-#    print "</pre>\n";
-
-
-    if ( count($files) > 0 ) {
+        $master = $gitrepo->getObject($master_name);
+        $tree = $master->getTree();
+        $files = $tree->listRecursive();
 ?>
-        <table class="filebrowser">
-            <thead>
-                <tr class="gradient_gray">
-                    <th style="width: 20px;"></th>
-                    <th style="width: 200px;">name</th>
-                    <th style="width: 100px;">age</th>
-                    <th>message</th>
-                </tr>
-            </thead>
-            <tbody>
-<?
-    }
-
-    $c = 0;
-
-    foreach ($files as $fl => $val) {
-
-        #if ( $c < 1 ) { sleep(1); $c++; }
-
-        $file = $fl;
-        $fullpath = '';
-
-        #print "<!-- $file -->\n";
-
-        if ( isset($filepath) && $filepath != '' ) {
-
-            # Skip any files not from this file path
-            if ( ! preg_match("|^$filepath/|", $file) ) { continue; }
-
-            # Strip off the file path
-            $file = preg_replace("|^$filepath/|", "", $file);
-
-            $fullpath = "$filepath/";
-print "<!-- $filepath -->\n";
-            # Determine the parent
-
-            if ( $c == 0 ) {
-
-                $parent = explode('/', $filepath);
-                array_pop($parent);
-
-                print "<tr><td class=''> </td><td>";
-                print "<a class='ajaxy' href='?repo=". $_SESSION['repo'] ."&nav=files&cwd=". base64_encode(implode('/', $parent)) ."'>..</a><br />\n";
-                print "</td><td></td><td></td></tr>\n";
-
-                $c++;
-            }
-            
-        }
-
-        #print "<!-- FP: $fullpath file: $file -->\n";
-
-        # Check if its a directory        
-        if ( strpos($file, "/")  ) {
-
-            $dir = strstr($file, "/", 1);
-
-            if ( $dir == $prevdir ) { continue; }
-
-            $hist = $master->getHistory($val);
-            $lhist = get_object_vars(array_pop($hist));
-
-            print "<tr><td class='dir_icon'> </td><td>";
-            print "<a class='ajaxy' href='?repo=". $_SESSION['repo'] ."&nav=files&cwd=". base64_encode($fullpath . $dir) ."'>$dir/</a><br />\n";
-            print "</td><td></td><td>". $lhist['summary'] ."</td></tr>\n";
-
-            $prevdir = $dir;
-        }
-        else {
-
-            $hist = $master->getHistory($val);
-            $lhist = get_object_vars(array_pop($hist));
-
-            print "<tr><td class='file_icon'> </td><td>";
-            print "<a class='ajaxy' href='?repo=". $_SESSION['repo'] ."&nav=files&cwd=". base64_encode($fullpath . $file) ."'>$file</a><br />\n";
-            print "</td><td></td><td>". $lhist['summary'] ."</td></tr>\n";
-        }
-    }
-
-
-?>
+                <table class="filebrowser">
+                    <thead>
+                        <tr class="gradient_gray">
+                            <th style="width: 20px;"></th>
+                            <th style="width: 200px;">name</th>
+                            <th style="width: 100px;">age</th>
+                            <th>message</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <? if ( count($files) > 0 ) { viewFileBrowserTable($files); } ?>
                     </tbody>
                 </table>
 
