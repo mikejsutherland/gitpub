@@ -14,9 +14,16 @@
             $file = $fl;
             $fullpath = '';
 
-            #print "<!-- $file -->\n";
+            #print "<!-- $filepath -->\n";
 
             if ( isset($filepath) && $filepath != '' ) {
+
+                # File view
+                if ( $filepath == $file ) {
+
+                    print "<tr>\n<td colspan='4'>\n<pre>$file</pre>\n</td>\n</tr>\n";
+                    break;
+                }
 
                 # Skip any files not from this file path
                 if ( ! preg_match("|^$filepath/|", $file) ) { continue; }
@@ -41,7 +48,7 @@
 
             }
 
-            #print "<!-- FP: $fullpath file: $file -->\n";
+            print "<!-- FP: $fullpath file: $file -->\n";
 
             # Check if its a directory        
             if ( strpos($file, "/")  ) {
