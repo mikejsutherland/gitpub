@@ -60,7 +60,7 @@
         $tree = $master->getTree();
         $files = $tree->listRecursive();
 ?>
-                <table class="filebrowser">
+                <table class="file browser">
                     <thead>
                         <tr class="gradient_gray">
                             <th style="width: 20px;"></th>
@@ -79,17 +79,43 @@
 <? } elseif ( $_SESSION['nav'] == 'commits' ) { ?>
 
 <?
-    $gitrepo = new Git($CONFIG['repo_directory'] ."/". $_SESSION['repo']);
+    $gitrepo = new Git($_SESSION['CONFIG']['repo_directory'] ."/". $_SESSION['repo']);
 
     $master_name = $gitrepo->getTip('master');
 
     $master = $gitrepo->getObject($master_name);
     $hist = $master->getHistory();
+    # Reverse the history as we want the newest displayed first
+    $hist = array_reverse($hist);
 
-    print "<pre>";
-    var_dump($hist);
-    print "</pre>\n";
+    #print "<pre>";
+    #print_r(get_object_vars(array_shift($hist)));
+    #print "</pre>\n"
 ?>
+
+                <table class="commit browser">
+                    <thead>
+                        <tr class="gradient_gray">
+                            <th>name</th>
+                            <th>timestamp</th>
+                            <th>message</th>
+                            <th>commit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <? if ( count($hist) > 0 ) { foreach($hist as $commit) {
+                            $com = get_object_vars($commit); 
+                            $details = get_object_vars($com['author']);
+                            print "<tr>\n<td>". $details['name'] ."</td>\n";
+                            print "<td>". strftime('%F %T', $details['time']) ."</td>\n";
+                            print "<td>". $com['summary'] ."</td>\n";
+                            print "<td>". sha1_hex($com['tree']) ."</td></tr>\n";
+                            #print "<pre>". print_r($com) ."</pre>\n"; 
+                        } } ?>
+
+                    </tbody>
+                </table>
 
 <? } elseif ( $_SESSION['nav'] == 'branches' ) { ?>
 
