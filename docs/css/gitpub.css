@@ -197,16 +197,25 @@ table.browser th {
     line-height: 28px;
     -webkit-font-smoothing: antialiased;
 }
-
 table.browser tbody th {
     width: 300px;
 }
-
+/*table.browser tr:hover {
+    background-color: #f4f4f4;
+}*/
 table.browser caption {
     margin: 0 0 .5em;
     font-weight: bold;
     font-size: 1.5em;
     text-align: left;
+}
+
+.small {
+    font-size: 0.7em !important;
+}
+
+.smaller {
+    font-size: 0.6em !important;
 }
 
 .footer {
