@@ -11,12 +11,21 @@
     $_SESSION['nav'] = isset($_GET['nav']) ? $_GET['nav'] : 'files'; # default view mode
 
     if ( isset($_GET['repo']) ) { $_SESSION['repo'] = $_GET['repo']; } else { $_SESSION['repo'] = ''; }
+    if ( isset($_GET['branch']) ) { $_SESSION['GIT']['branch'] = $_GET['branch']; } else { $_SESSION['GIT']['branch'] = 'master'; }
 
-    $repos = getRepos($CONFIG['repo_directory']);
+    $repos = getRepos($_SESSION['CONFIG']['repo_directory']);
     $repo_count = count($repos);
 
     $_SESSION['filepath'] = ( isset($_GET['cwd']) ) ? base64_decode($_GET['cwd']) : "";
 
+    # If provided a repo load the git object
+    #
+    if ( isset($_SESSION['repo']) && $_SESSION['repo'] !== "" ) {
+
+        $_SESSION['GIT']['repo'] = new Git($_SESSION['CONFIG']['repo_directory'] ."/". $_SESSION['repo']);
+        $_SESSION['GIT']['tip'] = $_SESSION['GIT']['repo']->getTip($_SESSION['GIT']['branch']);
+        $_SESSION['GIT']['object'] = $_SESSION['GIT']['repo']->getObject($_SESSION['GIT']['tip']);
+    }
 ?>
 
     <div class="page">
@@ -53,11 +62,7 @@
             <div id="filebrowser">
 
 <?
-        $gitrepo = new Git($_SESSION['CONFIG']['repo_directory'] ."/". $_SESSION['repo']);
-        $master_name = $gitrepo->getTip('master');
-
-        $master = $gitrepo->getObject($master_name);
-        $tree = $master->getTree();
+        $tree = $_SESSION['GIT']['object']->getTree();
         $files = $tree->listRecursive();
 ?>
                 <table class="file browser">
@@ -79,14 +84,8 @@
 <? } elseif ( $_SESSION['nav'] == 'commits' ) { ?>
 
 <?
-    $gitrepo = new Git($_SESSION['CONFIG']['repo_directory'] ."/". $_SESSION['repo']);
-
-    $master_name = $gitrepo->getTip('master');
-
-    $master = $gitrepo->getObject($master_name);
-
-    $commit_id = sha1_hex($master_name);
-    $hist = $master->getHistory();
+    $commit_id = sha1_hex($_SESSION['GIT']['tip']);
+    $hist = $_SESSION['GIT']['object']->getHistory();
     # Reverse the history as we want the newest displayed first
     $hist = array_reverse($hist);
 
@@ -110,10 +109,10 @@
                             $com = get_object_vars($commit); 
                             $details = get_object_vars($com['author']);
                             $history = get_object_vars($com['history']);
-                            print "<tr>\n<td>". $details['name'] ."</td>\n";
-                            print "<td>". strftime('%F %T', $details['time']) ."</td>\n";
+                            print "<tr>\n<td class='small'>". $details['name'] ."</td>\n";
+                            print "<td class='small'>". strftime('%F %T', $details['time']) ."</td>\n";
                             print "<td>". $com['summary'] ."</td>\n";
-                            print "<td>". $commit_id ."</td></tr>\n";
+                            print "<td class='small'>". $commit_id ."<br /><span class='smaller'>tree: ". sha1_hex($com['tree']) ."</span></td></tr>\n";
                             $commit_id = sha1_hex($com['parents'][0]);
                             # todo: add com['tree'] too!
                         } } ?>
