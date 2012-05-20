@@ -42,7 +42,13 @@
             <div class="navbar">
                 <a href="<?=$CONFIG['base_uri'];?>/?repo=<?=$_SESSION['repo'];?>"><?=$_SESSION['repo'];?></a><? if ( isset($_SESSION['filepath']) && $_SESSION['filepath'] !== "" ) { print getFileTreeNav($_SESSION['filepath']); } print "\n"; ?>
             </div>
-
+            <div class="urlbox">
+                <label>
+                <input class="repourl" value="<?='http://'.$_SERVER['HTTP_HOST'].$CONFIG['base_uri'].'/r/'.$_SESSION['repo']?>" spellcheck="false" readonly="readonly" />
+                <span class="gradient_gray">HTTP</span>
+                <span class="gradient_gray">branch: <em><?=$_SESSION['GIT']['branch'];?></em></span>
+                <br class="clear" />
+            </div>
             <div>
                 <ul id="tabs">
                     <li class="tab <?=isActiveTab('files');?>"><a href="?repo=<?=$_SESSION['repo'];?>&nav=files">Files</a></li>
