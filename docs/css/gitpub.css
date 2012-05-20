@@ -136,6 +136,7 @@ br.clear {
     padding: 0;
     margin: 0;
     line-height: 0px;
+    font-size: 0px;
 }
 
 h3 {
@@ -144,14 +145,7 @@ h3 {
     font-size: 1.5em;
     text-align: left;
 }
-
-.urlbox {
-    height: 26px;
-    margin: 0px;
-    padding: 10px 0px;
-    width: 100%;
-}
-.urlbox span {
+span.urlbox {
     display: block;
     -moz-border-bottom-colors: none;
     -moz-border-image: none;
@@ -161,7 +155,7 @@ h3 {
     border-color: #ddd;
     border-style: solid;
     border-width: 1px 0px 1px 1px;
-    font-size: 0.9em;
+    font-size: 0.6em;
     font-weight: normal;
     margin: 0px;
     padding: 2px 5px;
@@ -173,7 +167,7 @@ h3 {
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
 }
-.urlbox span em {
+span.urlbox em {
     color: #444
 }
 input.repourl {
@@ -189,7 +183,7 @@ input.repourl {
     color: #666;
     float: right;
     font-family: Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;
-    font-size: 11px;
+    font-size: 0.5em;
     height: 24px;
     padding: 0 5px;
     margin-top: 0px;
