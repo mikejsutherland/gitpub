@@ -94,57 +94,9 @@
 
             </div>
 
-<? } elseif ( $_SESSION['nav'] == 'commits' ) { ?>
+<? } elseif ( $_SESSION['nav'] == 'commits' ) { include('include/commit_browser.php'); ?>
 
-<?
-    $commit_id = sha1_hex($_SESSION['GIT']['tip']);
-    $hist = $_SESSION['GIT']['object']->getHistory();
-    # Reverse the history as we want the newest displayed first
-    $hist = array_reverse($hist);
-
-    #print "<pre>";
-    #print_r(get_object_vars(array_shift($hist)));
-    #print "</pre>\n"
-?>
-
-            <table class="commit browser">
-                <thead>
-                    <tr class="gradient_gray">
-                        <th>name</th>
-                        <th>timestamp</th>
-                        <th>message</th>
-                        <th>commit</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                        <? if ( count($hist) > 0 ) { foreach($hist as $commit) {
-                            $com = get_object_vars($commit); 
-                            $details = get_object_vars($com['author']);
-                            $history = get_object_vars($com['history']);
-                            print str_pad("", 20) . "<tr>\n";
-                            print str_pad("", 24) . "<td class='small'>". $details['name'] ."</td>\n";
-                            print str_pad("", 24) . "<td class='small'>". strftime('%F %T', $details['time']) ."</td>\n";
-                            print str_pad("", 24) . "<td>". $com['summary'] ."</td>\n";
-                            print str_pad("", 24) . "<td class='small'>\n";
-                            print str_pad("", 28) .  $commit_id ."<br />\n";
-                            print str_pad("", 28) . "<span class='smaller'>tree: ". sha1_hex($com['tree']) ."</span>\n";
-                            print str_pad("", 24) . "</td>\n";
-                            print str_pad("", 20) . "</tr>\n";
-                            $commit_id = sha1_hex($com['parents'][0]);
-                            # todo: add com['tree'] too!
-                        } } ?>
-
-                </tbody>
-            </table>
-
-<? } elseif ( $_SESSION['nav'] == 'branches' ) { ?>
-
-    what...you don't dev on master?
-
-
-
-<? } ?>
+<? } elseif ( $_SESSION['nav'] == 'branches' ) { ?> what...you don't dev on master?  <? } ?>
 
 <? } ?>
         </div>

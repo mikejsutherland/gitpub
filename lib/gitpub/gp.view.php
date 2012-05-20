@@ -1,5 +1,34 @@
 <?
 
+    # Generate the table for the commit browser
+    #
+    function viewCommitHistoryTable($hist, $commit_id) {
+
+        if ( count($hist) > 0 ) {
+
+            foreach($hist as $commit) {
+
+                $com = get_object_vars($commit);
+                $details = get_object_vars($com['author']);
+                $history = get_object_vars($com['history']);
+
+                print str_pad("", 20) . "<tr>\n";
+                print str_pad("", 24) . "<td class='small'>". $details['name'] ."</td>\n";
+                print str_pad("", 24) . "<td class='small'>". strftime('%F %T', $details['time']) ."</td>\n";
+                print str_pad("", 24) . "<td>". $com['summary'] ."</td>\n";
+                print str_pad("", 24) . "<td class='small'>\n";
+                print str_pad("", 28) .  $commit_id ."<br />\n";
+                print str_pad("", 28) . "<span class='smaller'>tree: ". sha1_hex($com['tree']) ."</span>\n";
+                print str_pad("", 24) . "</td>\n";
+                print str_pad("", 20) . "</tr>\n";
+                $commit_id = sha1_hex($com['parents'][0]);
+
+            }
+        } 
+
+        return;
+    }
+
     # Generate the table for the file browser
     #
     function viewFileBrowserTable($files) {
