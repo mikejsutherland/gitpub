@@ -31,22 +31,16 @@
     <div class="page">
         <div id="main" class="content">
 
-<? if ( ! isset($_SESSION['repo']) || $_SESSION['repo'] == '' ) { ?>
+<? 
+    if ( ! isset($_SESSION['repo']) || $_SESSION['repo'] == '' ) { 
 
-            <div class="box corners">
-                <div class="boxhead gradient_aqua">1 person hosting over <?=($repo_count-1);?>+ repositories</div>
-                <div class="boxbody">
+        include('include/repo_browser.php');
 
-                Available Git Repositories:<br />
-                <?=viewRepos($repos);?>
-
-                </div>
-            </div>
-
-<? } else { ?>
+    } else {
+?>
 
             <div class="navbar">
-                <a href="<?=$CONFIG['base_uri'];?>/?repo=<?=$_SESSION['repo'];?>"><?=$_SESSION['repo'];?></a><? if ( isset($_SESSION['filepath']) && $_SESSION['filepath'] !== "" ) { print getFileTreeNav($_SESSION['filepath']); } ?>
+                <a href="<?=$CONFIG['base_uri'];?>/?repo=<?=$_SESSION['repo'];?>"><?=$_SESSION['repo'];?></a><? if ( isset($_SESSION['filepath']) && $_SESSION['filepath'] !== "" ) { print getFileTreeNav($_SESSION['filepath']); } print "\n"; ?>
             </div>
 
             <div>
@@ -64,6 +58,15 @@
 <?
         $tree = $_SESSION['GIT']['object']->getTree();
         $files = $tree->listRecursive();
+
+        #$test = get_object_vars($tree);
+
+        #$t = $test['nodes']['lib']['object']->getTip('master');
+
+    #print "<pre>";
+    #print_r($t);
+    #print "</pre>\n"
+
 ?>
                 <table class="file browser">
                     <thead>
@@ -75,7 +78,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <? if ( count($files) > 0 ) { viewFileBrowserTable($files); } ?>
+<?
+    if ( count($files) > 0 ) { 
+        viewFileBrowserTable($files);
+    } 
+?>
                     </tbody>
                 </table>
 
@@ -94,31 +101,36 @@
     #print "</pre>\n"
 ?>
 
-                <table class="commit browser">
-                    <thead>
-                        <tr class="gradient_gray">
-                            <th>name</th>
-                            <th>timestamp</th>
-                            <th>message</th>
-                            <th>commit</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+            <table class="commit browser">
+                <thead>
+                    <tr class="gradient_gray">
+                        <th>name</th>
+                        <th>timestamp</th>
+                        <th>message</th>
+                        <th>commit</th>
+                    </tr>
+                </thead>
+                <tbody>
 
                         <? if ( count($hist) > 0 ) { foreach($hist as $commit) {
                             $com = get_object_vars($commit); 
                             $details = get_object_vars($com['author']);
                             $history = get_object_vars($com['history']);
-                            print "<tr>\n<td class='small'>". $details['name'] ."</td>\n";
-                            print "<td class='small'>". strftime('%F %T', $details['time']) ."</td>\n";
-                            print "<td>". $com['summary'] ."</td>\n";
-                            print "<td class='small'>". $commit_id ."<br /><span class='smaller'>tree: ". sha1_hex($com['tree']) ."</span></td></tr>\n";
+                            print str_pad("", 20) . "<tr>\n";
+                            print str_pad("", 24) . "<td class='small'>". $details['name'] ."</td>\n";
+                            print str_pad("", 24) . "<td class='small'>". strftime('%F %T', $details['time']) ."</td>\n";
+                            print str_pad("", 24) . "<td>". $com['summary'] ."</td>\n";
+                            print str_pad("", 24) . "<td class='small'>\n";
+                            print str_pad("", 28) .  $commit_id ."<br />\n";
+                            print str_pad("", 28) . "<span class='smaller'>tree: ". sha1_hex($com['tree']) ."</span>\n";
+                            print str_pad("", 24) . "</td>\n";
+                            print str_pad("", 20) . "</tr>\n";
                             $commit_id = sha1_hex($com['parents'][0]);
                             # todo: add com['tree'] too!
                         } } ?>
 
-                    </tbody>
-                </table>
+                </tbody>
+            </table>
 
 <? } elseif ( $_SESSION['nav'] == 'branches' ) { ?>
 

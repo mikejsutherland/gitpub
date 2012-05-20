@@ -21,7 +21,11 @@
                 # File view
                 if ( $filepath == $file ) {
 
-                    print "<tr>\n<td colspan='4'>\n<pre>$file</pre>\n</td>\n</tr>\n";
+                    print str_pad("", 24) . "<tr>\n";
+                    print str_pad("", 28) . "<td colspan='4'>\n";
+                    print str_pad("", 32) . "<pre>$file</pre>\n";
+                    print str_pad("", 28) . "</td>\n";
+                    print str_pad("", 24) . "</tr>\n";
                     break;
                 }
 
@@ -39,16 +43,19 @@
                     $parent = explode('/', $filepath);
                     array_pop($parent);
 
-                    print "<tr>\n<td class=''> </td>\n";
-                    print "<td><a class='ajaxy' href='?repo=". $_SESSION['repo'] ."&nav=files&cwd=". base64_encode(implode('/', $parent)) ."'>..</a></td>\n";
-                    print "<td></td>\n<td></td>\n</tr>\n";
+                    print str_pad("", 24) . "<tr>\n";
+                    print str_pad("", 28) . "<td class=''> </td>\n";
+                    print str_pad("", 28) . "<td><a class='ajaxy' href='?repo=". $_SESSION['repo'] ."&nav=files&cwd=". base64_encode(implode('/', $parent)) ."'>..</a></td>\n";
+                    print str_pad("", 28) . "<td></td>\n";
+                    print str_pad("", 28) . "<td></td>\n";
+                    print str_pad("", 24) . "</tr>\n";
 
                     $c++;
                 }
 
             }
 
-            print "<!-- FP: $fullpath file: $file -->\n";
+            #print "<!-- FP: $fullpath file: $file -->\n";
 
             # Check if its a directory        
             if ( strpos($file, "/")  ) {
@@ -60,9 +67,12 @@
                 #$hist = $master->getHistory($val);
                 #$lhist = get_object_vars(array_pop($hist));
 
-                print "<tr>\n<td class='dir_icon'> </td>\n";
-                print "<td><a class='ajaxy' href='?repo=". $_SESSION['repo'] ."&nav=files&cwd=". base64_encode($fullpath . $dir) ."'>$dir/</a></td>\n";
-                print "<td></td>\n<td>". $lhist['summary'] ."</td>\n</tr>\n";
+                print str_pad("", 24) . "<tr>\n";
+                print str_pad("", 28) . "<td class='dir_icon'> </td>\n";
+                print str_pad("", 28) . "<td><a class='ajaxy' href='?repo=". $_SESSION['repo'] ."&nav=files&cwd=". base64_encode($fullpath . $dir) ."'>$dir/</a></td>\n";
+                print str_pad("", 28) . "<td></td>\n";
+                print str_pad("", 28) . "<td>". $lhist['summary'] ."</td>\n";
+                print str_pad("", 24) . "</tr>\n";
 
                 $prevdir = $dir;
             }
@@ -71,9 +81,12 @@
                 #$hist = $master->getHistory($val);
                 #$lhist = get_object_vars(array_pop($hist));
 
-                print "<tr>\n<td class='file_icon'> </td>\n";
-                print "<td><a class='ajaxy' href='?repo=". $_SESSION['repo'] ."&nav=files&cwd=". base64_encode($fullpath . $file) ."'>$file</a></td>\n";
-                print "<td></td>\n<td>". $lhist['summary'] ."</td>\n</tr>\n";
+                print str_pad("", 24) . "<tr>\n";
+                print str_pad("", 28) . "<td class='file_icon'> </td>\n";
+                print str_pad("", 28) . "<td><a class='ajaxy' href='?repo=". $_SESSION['repo'] ."&nav=files&cwd=". base64_encode($fullpath . $file) ."'>$file</a></td>\n";
+                print str_pad("", 28) . "<td></td>\n";
+                print str_pad("", 28) . "<td>". $lhist['summary'] ."</td>\n";
+                print str_pad("", 24) . "</tr>\n";
             }
 
         }
@@ -117,14 +130,14 @@
 
     function viewRepos($repos) {
 
-        print "<ul>";
+        print str_pad("", 16) . "<ul>\n";
 
         foreach ($repos as $repo) {
 
-            print "<li><a href='?repo=". $repo['name'] ."'>". $repo['name'] ."</a></li>\n";
+            print str_pad("", 20) ."<li><a href='?repo=". $repo['name'] ."'>". $repo['name'] ."</a></li>\n";
         }
 
-        print "</ul>\n";
+        print str_pad("", 16) ."</ul>\n";
 
         return;
     }
