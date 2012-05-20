@@ -25,6 +25,9 @@ body {
     font-size: 1.4em;
     font-weight: normal;
     padding: 10px 0px;
+    -webkit-box-shadow: 0px 4px 5px rgba(50, 50, 50, 0.33);
+    -moz-box-shadow:    0px 4px 5px rgba(50, 50, 50, 0.33);
+    box-shadow:         0px 4px 5px rgba(50, 50, 50, 0.33);
 }
 
 .masthead a, a:active {
@@ -96,7 +99,9 @@ body {
     line-height: 28px;
     text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.2);
     -webkit-font-smoothing: antialiased;
-    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow:    0px 2px 0px rgba(0, 0, 0, 0.3);
+    box-shadow:         0px 2px 0px rgba(0, 0, 0, 0.3);
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
 }
