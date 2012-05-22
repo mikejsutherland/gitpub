@@ -26,6 +26,9 @@
     require_once('lib/gitpub/gp.repo.php');
     require_once('lib/gitpub/gp.view.php');
 
+    # XXX - test string   ?repo=gitpub&nav=files&cwd=Lmh0YWNjZXNz
+    #$_GET['repo'] = 'gitpub'; $_GET['nav'] = 'files'; $_GET['cwd'] = 'Lmh0YWNjZXNz'; #.htaccess
+
     $_SESSION['nav'] = isset($_GET['nav']) ? $_GET['nav'] : 'files'; # default view mode
     $_SESSION['repo'] = isset($_GET['repo']) ? $_GET['repo'] : '';
 
@@ -41,8 +44,17 @@
     #
     if ( isset($_SESSION['repo']) && $_SESSION['repo'] !== "" ) {
 
-        $_SESSION['GIT']['repo'] = new Git($_SESSION['CONFIG']['repo_directory'] ."/". $_SESSION['repo']);
-        $_SESSION['GIT']['tip'] = $_SESSION['GIT']['repo']->getTip($_SESSION['GIT']['branch']);
+        try {
+
+            $_SESSION['GIT']['repo'] = new Git($_SESSION['CONFIG']['repo_directory'] ."/". $_SESSION['repo']);
+            $_SESSION['GIT']['tip'] = $_SESSION['GIT']['repo']->getTip($_SESSION['GIT']['branch']);
+        }
+        catch (Exception $e) {
+
+            $error = $e;
+            include('include/error.php');
+        }
+
         $_SESSION['GIT']['object'] = $_SESSION['GIT']['repo']->getObject($_SESSION['GIT']['tip']);
     }
 
