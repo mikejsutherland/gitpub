@@ -15,7 +15,7 @@
                 print str_pad("", 20) . "<tr>\n";
                 print str_pad("", 24) . "<td class='small'>". $details['name'] ."</td>\n";
                 print str_pad("", 24) . "<td class='small'>". strftime('%F %T', $details['time']) ."</td>\n";
-                print str_pad("", 24) . "<td>". $com['summary'] ."</td>\n";
+                print str_pad("", 24) . "<td>". htmlspecialchars($com['summary'], ENT_QUOTES) ."</td>\n";
                 print str_pad("", 24) . "<td class='small'>\n";
                 print str_pad("", 28) .  $commit_id ."<br />\n";
                 print str_pad("", 28) . "<span class='smaller'>tree: ". sha1_hex($com['tree']) ."</span>\n";
@@ -31,7 +31,7 @@
 
     # Generate the table for the file browser
     #
-    function viewFileBrowserTable($files) {
+    function viewFileBrowserTable($files, $tree) {
 
         $filepath = $_SESSION['filepath'];
         $c = 0;
@@ -50,9 +50,14 @@
                 # File view
                 if ( $filepath == $file ) {
 
+                    $commit = sha1_hex($_SESSION['GIT']['tip']);
+                    #print var_dump($tree) ."\n";
+                    #$file_blob = $tree->find($file);
+                    #$file_blob = $_SESSION['GIT']['repo']->getObject($file);
+
                     print str_pad("", 24) . "<tr>\n";
                     print str_pad("", 28) . "<td colspan='4'>\n";
-                    print str_pad("", 32) . "<pre>$file</pre>\n";
+                    print str_pad("", 32) . "<pre>". showFileFromRepo($commit,$file) ."</pre>\n";
                     print str_pad("", 28) . "</td>\n";
                     print str_pad("", 24) . "</tr>\n";
                     break;

@@ -63,7 +63,7 @@
                     <tbody>
 <?
     if ( count($files) > 0 ) { 
-        viewFileBrowserTable($files);
+        viewFileBrowserTable($files, $tree);
     } 
 ?>
                     </tbody>

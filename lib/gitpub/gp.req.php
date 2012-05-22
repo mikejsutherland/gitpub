@@ -2,11 +2,12 @@
 
     # Enable for debugging output
     #
-    ini_set ("display_errors", "1");
-    error_reporting(E_ALL);
+    #ini_set ("display_errors", "1");
+    #error_reporting(E_ALL);
 
     # Include the main configuration file
-    require_once('config/gitpub.config.php');
+    include_once('config/gitpub.config.php');
+
     # Stash the configuration in the session
     $_SESSION['CONFIG'] = $CONFIG;
 

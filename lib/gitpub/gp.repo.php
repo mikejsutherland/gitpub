@@ -1,5 +1,19 @@
 <?
 
+    # Show the file as stored in the repo
+    #
+    function showFileFromRepo($commit,$file) {
+
+        #print $_SESSION['CONFIG']['git'] ." show $commit:$file\n";
+
+        $results = Array();
+
+        exec($_SESSION['CONFIG']['git'] ."/git show $commit:$file", $results);
+
+        return htmlspecialchars(implode("\n", $results)) ."\n";
+    }
+
+
     # Return a list of all repo paths given a parent directory
     #
     function getRepos($repo_directory) {
