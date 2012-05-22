@@ -318,3 +318,22 @@ table.browser caption {
     background-image: -webkit-linear-gradient(top, #fafafa, #eaeaea);
     background: -moz-linear-gradient(#fafafa, #eaeaea) repeat scroll 0 0 transparent;
 }
+
+pre {
+    overflow-x: auto;
+    width: 945px;
+    border: 0px solid red;
+}
+
+/* target IE7 and IE6 */
+*:first-child+html pre {
+    padding-bottom: 2em;
+    overflow-y: hidden;
+    overflow: visible;
+    overflow-x: auto; 
+}
+* html pre { 
+    padding-bottom: 2em;
+    overflow: visible;
+    overflow-x: auto;
+}
