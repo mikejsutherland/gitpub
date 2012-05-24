@@ -1,4 +1,5 @@
 html {
+    height: 100%;
     overflow-y: scroll;
 }
 
@@ -32,6 +33,7 @@ body {
 }
 
 .masthead a, a:active {
+    float: left;
     color: #444;
     text-decoration: none;
 }
@@ -227,6 +229,10 @@ table.browser {
     border-collapse: collapse;
     width: 100%;
     border: 1px solid #ddd;
+/*    table-layout:fixed;
+    overflow:hidden; 
+    white-space: nowrap;
+*/
 }
 table.browser td, th {
     text-align: left;
@@ -319,21 +325,29 @@ table.browser caption {
     background: -moz-linear-gradient(#fafafa, #eaeaea) repeat scroll 0 0 transparent;
 }
 
-pre {
-    overflow-x: auto;
+div.fileviewer {
     width: 945px;
-    border: 0px solid red;
-}
-
-/* target IE7 and IE6 */
-*:first-child+html pre {
-    padding-bottom: 2em;
+    overflow: auto;
     overflow-y: hidden;
-    overflow: visible;
-    overflow-x: auto; 
+    -ms-overflow-y: hidden;
 }
-* html pre { 
-    padding-bottom: 2em;
-    overflow: visible;
-    overflow-x: auto;
+pre.codeviewer {
+    border: 0px solid red;
+    margin: 0px;
+    padding: 0px;
+    font-size: 14px;
+    float: left; /* required so line highlighting gets rendered */
+    min-width: 99%; /* needed to ensure small code blocks fill the given area (almost)  */
 }
+pre.codeviewer ol {
+    background-color: #eaeaea;
+    margin: 0;
+}
+pre.codeviewer ol li {
+    padding: 1px 3px;
+}
+/*
+pre.codeviewer ol li div {
+    width: 100% !important;
+}
+*/

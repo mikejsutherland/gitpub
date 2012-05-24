@@ -16,8 +16,8 @@
 
             <!-- Display the Branch -->
             <span class="urlbox gradient_gray">branch: <em><?=$_SESSION['GIT']['branch'];?></em></span>
-            <br class="clear" />
 <? } ?>
+            <br class="clear" />
         </div>
     </div>
 
