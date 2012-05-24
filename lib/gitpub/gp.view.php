@@ -57,7 +57,7 @@
 
                     print str_pad("", 24) . "<tr>\n";
                     print str_pad("", 28) . "<td colspan='4'>\n";
-                    print str_pad("", 32) . "<pre>". showFileFromRepo($commit,$file) ."</pre>\n";
+                    print str_pad("", 32) . "<div class='fileviewer'><div class='fileviewer_container'>". showFileFromRepo($commit,$file) ."</div>\n</div>\n";
                     print str_pad("", 28) . "</td>\n";
                     print str_pad("", 24) . "</tr>\n";
                     break;
