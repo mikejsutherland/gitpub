@@ -4,13 +4,39 @@
     #
     function showFileFromRepo($commit,$file) {
 
-        #print $_SESSION['CONFIG']['git'] ." show $commit:$file\n";
+        $cmd = $_SESSION['CONFIG']['git'] ."/git --no-pager --git-dir=".
+            $_SESSION['CONFIG']['repo_directory'] .'/'.
+            $_SESSION['repo'] ." show $commit:$file";
 
-        $results = Array();
+        #print "$cmd (rc: $rc)\n";
 
-        exec($_SESSION['CONFIG']['git'] ."/git show $commit:$file", $results);
+        if ( preg_match("/\.(jpg|jpeg|png|gif|ico|bmp)$/", $file) ) {
 
-        return htmlspecialchars(implode("\n", $results)) ."\n";
+            ob_start();
+            passthru("$cmd", $rc);
+            $img = ob_get_contents();
+            ob_end_clean();
+
+            if ( $rc == 0 ) {
+
+                return "<img src='data:image/png;base64,". base64_encode($img) ."' />\n";
+            }
+            else {
+                return "error dislaying file: $file\n";
+            }
+        }
+        # Assume text
+        else {
+
+            exec("$cmd", $results, $rc);
+
+            if ( $rc == 0 ) {
+                return htmlspecialchars(implode("\n", $results));
+            }
+            else {
+                return "error displaying file: $file\n";
+            }
+        }
     }
 
 
