@@ -193,7 +193,7 @@ input.repourl {
     width: 400px;
 }
 
-ul#tabs { /* general settings */
+ul#tabs { 
     font-size: 0.9em;
     border-bottom: 1px solid #ddd; 
     list-style-type: none;
@@ -208,7 +208,7 @@ ul#tabs li {
     color: #444;
     margin-right: 4px;
 }
-ul#tabs li a { 
+ul#tabs li a, li a:active { 
     text-decoration: none;
     border-bottom: none;
     color: #444;
@@ -324,14 +324,18 @@ table.browser caption {
     background-image: -webkit-linear-gradient(top, #fafafa, #eaeaea);
     background: -moz-linear-gradient(#fafafa, #eaeaea) repeat scroll 0 0 transparent;
 }
-
 div.fileviewer {
     width: 945px;
     overflow: auto;
     overflow-y: hidden;
     -ms-overflow-y: hidden;
 }
-pre.codeviewer {
+div.fileviewer {
+    text-align: center;
+    margin: 0 auto;
+}
+pre.prettyprint { /* customizations for pretty-print */
+    text-align: left;
     border: 0px solid red;
     margin: 0px;
     padding: 0px;
@@ -339,15 +343,3 @@ pre.codeviewer {
     float: left; /* required so line highlighting gets rendered */
     min-width: 99%; /* needed to ensure small code blocks fill the given area (almost)  */
 }
-pre.codeviewer ol {
-    background-color: #eaeaea;
-    margin: 0;
-}
-pre.codeviewer ol li {
-    padding: 1px 3px;
-}
-/*
-pre.codeviewer ol li div {
-    width: 100% !important;
-}
-*/

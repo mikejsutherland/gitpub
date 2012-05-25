@@ -145,6 +145,9 @@
 					$content.stop(true,true);
 					$content.html(contentHtml).ajaxify().css('opacity',100).show(); /* you could fade in here if you'd like */
 
+                    // Customizations
+                    fileBrowserLoaded();
+
 					// Update the title
 					document.title = $data.find('.document-title:first').text();
 					try {

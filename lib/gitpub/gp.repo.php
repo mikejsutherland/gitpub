@@ -31,18 +31,7 @@
             exec("$cmd", $results, $rc);
 
             if ( $rc == 0 ) {
-
-                $language = "php";
-                $source = implode("\n", $results);
-
-                $geshi = new GeSHi($source, $language);
-                $geshi->enable_line_numbers(GESHI_FANCY_LINE_NUMBERS, 2);
-                $geshi->set_overall_class('codeviewer');
-                $geshi->set_line_style('background-color: #f8f8f8;', 'background-color: #fff;');
- 
-                return $geshi->parse_code();
-
-                #return htmlspecialchars(implode("\n", $results));
+                return "<pre class='prettyprint linenums'>". htmlspecialchars(implode("\n", $results)) ."</pre>\n";
             }
             else {
                 return "error displaying file: $file\n";

@@ -14,7 +14,4 @@
     # Load glip to interact with git repos
     require_once('lib/glip/glip.php');
 
-    # Load geshi
-    include_once('lib/geshi/geshi.php');
-
 ?>

@@ -68,9 +68,15 @@
     <!-- jquery-ui stylesheet -->
     <!-- <link rel="stylesheet" type="text/css" media="all" href="docs/include/jqueryui/css/smoothness/jquery-ui-1.8.19.custom.css" /> -->
 
+    <!-- google-code-prettify -->
+    <link rel="stylesheet" type="text/css" media="all" href="docs/include/google-code-prettify/prettify.css" />
+
     <!-- jquery & jquery-ui javascript frameworks -->
     <script rel="javascript" type="text/javascript" src="docs/include/jquery/jquery-1.7.1.min.js"></script>
     <!-- <script rel="javascript" type="text/javascript" src="docs/include/jqueryui/js/jquery-ui-1.8.19.custom.min.js"></script> -->
+
+    <!-- google-code-prettify -->
+    <script rel="javascript" type="text/javascript" src="docs/include/google-code-prettify/prettify.js"></script>
 
     <!-- history.js -->
     <script rel="javascript" type="text/javascript" src="docs/include/history.js/jquery.history.js"></script>      
