@@ -25,13 +25,22 @@
                 return "error dislaying file: $file\n";
             }
         }
-        # Assume text
+        # Hopefully this is text, if not we'll have to bail
         else {
 
             exec("$cmd", $results, $rc);
 
             if ( $rc == 0 ) {
-                return "<pre class='prettyprint linenums'>". htmlspecialchars(implode("\n", $results)) ."</pre>\n";
+
+                $str = implode("\n", $results);
+
+                # verify we have ascii data
+                if ( mb_check_encoding($str, 'ASCII') ) {
+                    return "<pre class='prettyprint linenums'>". htmlspecialchars($str) ."</pre>\n";
+                }
+                else {
+                    return "<div class='message'>This file cannot be viewed online.\n</div>\n";
+                }
             }
             else {
                 return "error displaying file: $file\n";
