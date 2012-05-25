@@ -85,6 +85,8 @@
 
     <!-- gitpub stylesheet -->
     <link rel="stylesheet" type="text/css" media="all" href="docs/css/gitpub.css" />
+    <!--[if lte IE 8]><link rel="stylesheet" type="text/css" href="docs/css/ie.gitpub.css" /><![endif]-->
+
 
     <!-- gitpub javascript library -->
     <script rel="javascript" type="text/javascript" src="docs/javascript/gitpub.js"></script>

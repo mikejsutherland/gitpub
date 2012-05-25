@@ -1,0 +1,7 @@
+#tabs li {
+    margin-bottom: 0px;
+}
+#tabs a, #tabs a:active, #tabs a:hover {
+    margin-bottom: -2px !important;
+}
+

@@ -193,46 +193,58 @@ input.repourl {
     width: 400px;
 }
 
-ul#tabs { 
+.tabbar {
+    margin: 20px 0px;
+    padding: 0px;
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+}
+
+#tabs ul {
+    display: inline;
+    font-family: tahoma,verdana,sans-serif;
+    font-size: 15px;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+}
+#tabs li {
+    float: left;
     font-size: 0.9em;
     border-bottom: 1px solid #ddd; 
     list-style-type: none;
-    padding: 3px 10px 3px 10px; 
-}
-
-ul#tabs li {
-    display: inline; 
-    padding: 3px 4px; 
-    border-bottom: 1px solid #ddd; 
-    background-color: #fff; 
-    color: #444;
+    text-align: center;
     margin-right: 4px;
 }
-ul#tabs li a, li a:active { 
-    text-decoration: none;
-    border-bottom: none;
-    color: #444;
-    padding: 10px;
+#tabs li.active {
+    font-weight: bold;
+    border-bottom: 1px solid #fff;
 }
-
-ul#tabs li.active {
+#tabs li.active a {
+    background-color: #fff;
+    border-bottom: 1px solid #fff;
+}
+#tabs a, #tabs a:active, #tabs a:hover {
+    position: relative;
+    width: 90px;
+    margin: 0px 0px -2px 0px;
+    float: left;
+    background-color: #eee;
+    border-right: 1px solid #ddd;
     border-top: 1px solid #ddd;
     border-left: 1px solid #ddd;
-    border-right: 1px solid #ddd;
-    border-bottom: 1px solid #fff;
+    border-bottom: 1px solid #ddd;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
-    font-weight: bold;
+    padding: 5px 4px 5px 10px;
+    text-decoration: none;
+    color: #444;
 }
 
 table.browser {
     border-collapse: collapse;
     width: 100%;
     border: 1px solid #ddd;
-/*    table-layout:fixed;
-    overflow:hidden; 
-    white-space: nowrap;
-*/
 }
 table.browser td, th {
     text-align: left;
