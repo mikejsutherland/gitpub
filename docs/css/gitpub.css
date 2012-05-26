@@ -1,23 +1,20 @@
 html {
     overflow-y: scroll;
 }
-
 body { 
     font-family: "Segoe UI", Frutiger,Tahoma,Helvetica,"Helvetica Neue", Arial, sans-serif;
     text-align: center;
     padding: 0;
     margin: 0;
-    color: #444;
+    color: #5b5b5b;
     background-color: #fff;
 }
-
 .content {
     text-align: left;
     width: 960px;
     margin: 0 auto;
     padding: 0px 10px;
 }
-
 .masthead {
     text-align: left;
     border-bottom: 1px solid #cacaca;
@@ -30,17 +27,14 @@ body {
     -moz-box-shadow:    0px 4px 5px rgba(50, 50, 50, 0.33);
     box-shadow:         0px 4px 5px rgba(50, 50, 50, 0.33);
 }
-
-.masthead a, a:active {
+.masthead a, .masthead a:active {
     float: left;
-    color: #444;
+    color: #398bc5;
     text-decoration: none;
 }
-
 .masthead a:hover {
-    color: #398bc5;
+    color: #5b5b5b;
 }
-
 .navbar {
     text-align: left;
     font-size: 1.0em;
@@ -51,29 +45,24 @@ body {
     line-height: 28px;
     -webkit-font-smoothing: antialiased;
 }
-
-.navbar a, a:active, a:hover {
+.navbar a, .navbar a:active, .navbar a:hover {
     color: #398bc5;
     text-decoration: none;
 }
-
 .loading {
     z-index: 9999;
     background:#fff url('../images/ajax-loader.gif') no-repeat center center;
     border: 1px solid #ddd;
 }
-
 .dir_icon {
     background:#fff url('../images/dir_icon.png') no-repeat center center;
 }
 .file_icon {
     background:#fff url('../images/file_icon.gif') no-repeat center center;
 }
-
 .box {
     background-color: #e7eef1;
 }
-
 .boxbody {
     color: #23566d;
     padding: 10px;
@@ -81,7 +70,7 @@ body {
     border-bottom-right-radius: 3px;
     box-shadow: 0 2px 0 rgba(0, 0, 0, 0.15);
 }
-.boxbody ul li a, a:visited, a:active {
+.boxbody ul li a, .boxbody ul li a:visited, .boxbody ul li a:active {
     color: #23566d;
     text-decoration: none;
 }
@@ -89,7 +78,6 @@ body {
     color: #23566d;
     text-decoration: underline;
 }
-
 .boxhead {
     color: #fff;
     padding: 10px;
@@ -107,31 +95,24 @@ body {
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
 }
-
 .page {
     margin-top: 25px;
 }
-
 .left {
     float: left!important;
 }
-
 .right {
     float: right!important;
 }
-
 .blue {
     color: #66ccff;
 }
-
 .red {
     color: #ff3333;
 }
-
 .green {
     color: #00cc00;
 }
-
 br.clear {
     clear: both;
     height: 0px;
@@ -140,7 +121,6 @@ br.clear {
     line-height: 0px;
     font-size: 0px;
 }
-
 h3 {
     margin: 0 0 .5em;
     font-weight: bold;
@@ -170,7 +150,7 @@ span.urlbox {
     border-bottom-right-radius: 3px;
 }
 span.urlbox em {
-    color: #444
+    color: #5b5b5b
 }
 input.repourl {
     display: block;
@@ -191,14 +171,12 @@ input.repourl {
     margin-top: 0px;
     width: 400px;
 }
-
 .tabbar {
     margin: 20px 0px;
     padding: 0px;
     width: 100%;
     border-bottom: 1px solid #ddd;
 }
-
 #tabs ul {
     display: inline;
     font-family: tahoma,verdana,sans-serif;
@@ -222,13 +200,14 @@ input.repourl {
 #tabs li.active a {
     background-color: #fff;
     border-bottom: 1px solid #fff;
+    color: #5b5b5b;
 }
-#tabs a, #tabs a:active, #tabs a:hover {
+#tabs a, #tabs a:active {
     position: relative;
     width: 90px;
     margin: 0px 0px -2px 0px;
     float: left;
-    background-color: #eee;
+    background-color: #f5f5f5;
     border-right: 1px solid #ddd;
     border-top: 1px solid #ddd;
     border-left: 1px solid #ddd;
@@ -237,15 +216,18 @@ input.repourl {
     border-top-right-radius: 3px;
     padding: 5px 4px 5px 10px;
     text-decoration: none;
-    color: #444;
+    /*color: #5b5b5b;*/
+    color: #aeaeae;
 }
-
+#tabs a:hover {
+    color: #5b5b5b;
+}
 table.browser {
     border-collapse: collapse;
     width: 100%;
     border: 1px solid #ddd;
 }
-table.browser td, th {
+table.browser td, table.browser th {
     text-align: left;
     padding: 5px 5px;
     font-size: 0.8em;
@@ -253,7 +235,7 @@ table.browser td, th {
     border-bottom: 1px solid #ddd;
     vertical-align: top;
 }
-table.browser td a, a:visited, a:active {
+table.browser td a, table.browser td a:visited, table.browser td a:active {
     color: #398bc5;
     text-decoration: none;
 }
@@ -276,15 +258,12 @@ table.browser caption {
     font-size: 1.5em;
     text-align: left;
 }
-
 .small {
     font-size: 0.7em !important;
 }
-
 .smaller {
     font-size: 0.6em !important;
 }
-
 .footer {
     text-align: left;
     border-top: 1px solid #cacaca;
@@ -296,33 +275,30 @@ table.browser caption {
     padding: 20px 20px;
     margin: 60px 0px;
     min-height: 100px;
-    color: #444;
+    color: #5b5b5b;
 }
-
 .footer .section {
     width: 200px;
     margin: 0px 6px;
-    /*border: 1px solid red;*/
 }
-
 .footer ul {
     margin: 8px 0px;
     border-top: 1px solid #cacaca;
     list-style-type: none;
     padding: 0;
 }
-
 .footer ul li {
     font-weight: normal;
     padding: 4px 0px 0px 0px;
     margin: 0px;
 }
-
-.footer a, a:active, a:hover {
+.footer a, .footer a:active {
     color: #398bc5;
     text-decoration: none;
 }
-
+.footer a:hover {
+    text-decoration: underline;
+}
 .gradient_aqua {
     background-color: #496272;
     background: -webkit-linear-gradient(#839BA9,#405A6A);
@@ -354,11 +330,9 @@ pre.prettyprint { /* customizations for pretty-print */
     float: left; /* required so line highlighting gets rendered */
     min-width: 99%; /* needed to ensure small code blocks fill the given area (almost)  */
 }
-
 .message {
     text-align: center;
     padding: 30px;
     color: #398bc5;
     font-size: 16px;
-
 }
