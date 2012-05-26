@@ -1,7 +1,5 @@
 <?
 
-    print "<div class='error'><pre>$error\n</pre>\n</div>\n";
-
-    exit(1);
+    print "<div class='error message'><pre>$error\n</pre>\n</div>\n";
 
 ?>
