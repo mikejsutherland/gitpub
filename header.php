@@ -22,6 +22,13 @@
 
     session_start(); 
 
+    $thispath = realpath(dirname(__FILE__).DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR;
+
+    require_once($thispath . 'config/gitpub.config.php');
+    require_once($thispath . 'lib/gitpub/gitpub.class.php');
+
+    $gp = new GitPub($CONFIG);
+
     require_once('lib/gitpub/gp.req.php');
     require_once('lib/gitpub/gp.repo.php');
     require_once('lib/gitpub/gp.view.php');
@@ -33,7 +40,12 @@
     $_SESSION['repo'] = isset($_GET['repo']) ? $_GET['repo'] : '';
 
     #if ( isset($_GET['repo']) ) { $_SESSION['repo'] = $_GET['repo']; } else { $_SESSION['repo'] = ''; }
-    if ( isset($_GET['branch']) ) { $_SESSION['GIT']['branch'] = $_GET['branch']; } else { $_SESSION['GIT']['branch'] = 'master'; }
+    if ( isset($_GET['branch']) && ! empty($_GET['branch']) ) { 
+        $_SESSION['GIT']['branch'] = $_GET['branch']; 
+    }
+    elseif ( empty($_SESSION['GIT']['branch']) ) { 
+        $_SESSION['GIT']['branch'] = 'master';
+    }
 
     $repos = getRepos($_SESSION['CONFIG']['repo_directory']);
     $repo_count = count($repos);

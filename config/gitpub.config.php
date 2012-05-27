@@ -10,4 +10,9 @@
     ## Git binary ##
     $CONFIG['git'] = '/usr/local/git/bin';
 
+
+    # Used by the gitpub class
+    $CONFIG['projects_dir'] = '/Volumes/Development/git';
+    $CONFIG['git_path'] = '/usr/local/git/bin';
+
 ?>
