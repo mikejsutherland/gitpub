@@ -161,14 +161,14 @@
 
     function viewRepos($repos) {
 
-        print str_pad("", 16) . "<ul>\n";
+        print str_pad("", 20) . "<ul>\n";
 
         foreach ($repos as $repo) {
 
-            print str_pad("", 20) ."<li><a href='?repo=". $repo['name'] ."'>". $repo['name'] ."</a></li>\n";
+            print str_pad("", 24) ."<li><a href='?repo=". $repo['name'] ."'>". $repo['name'] ."</a></li>\n";
         }
 
-        print str_pad("", 16) ."</ul>\n";
+        print str_pad("", 20) ."</ul>\n";
 
         return;
     }

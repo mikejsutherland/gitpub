@@ -27,8 +27,8 @@
 <? 
     if ( ! isset($_SESSION['repo']) || $_SESSION['repo'] == '' ) { 
 
-        $gp->setRepos();
-        #include('include/repo_browser.php');
+        #$gp->setRepos();
+        include('include/repo_browser.php');
 
     } else {
 ?>
