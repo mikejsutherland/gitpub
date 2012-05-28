@@ -19,6 +19,16 @@
             <br class="clear" />
         </div>
     </div>
+    <div class="subfooter">
+        <div class="content">
+            <div class="section left stamp">&lt;/futile&gt;</div>
+            <div class="section left">
+                gitpub -- copyright &copy; 2012 - codesmak.com<br />
+                an exercise in futility...
+            </div>
+            <br class="clear" />
+        </div>
+    </div>
 
 </body>
 </html>

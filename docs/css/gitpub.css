@@ -273,7 +273,7 @@ table.browser caption {
     font-size: 0.7em;
     font-weight: bold;
     padding: 20px 20px;
-    margin: 60px 0px;
+    margin: 60px 0px 20px 0px;
     min-height: 100px;
     color: #5b5b5b;
 }
@@ -298,6 +298,17 @@ table.browser caption {
 }
 .footer a:hover {
     text-decoration: underline;
+}
+.subfooter {
+    color: #c5c5bf;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+.subfooter .section {
+    margin: 0px 6px;
+}
+.subfooter .stamp {
+    font-size: 24px;
 }
 .gradient_aqua {
     background-color: #496272;
