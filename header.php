@@ -39,6 +39,8 @@
     $_SESSION['nav'] = isset($_GET['nav']) ? $_GET['nav'] : 'files'; # default view mode
     $_SESSION['repo'] = isset($_GET['repo']) ? $_GET['repo'] : '';
 
+    $gp->setRepo($_SESSION['repo']);
+
     #if ( isset($_GET['repo']) ) { $_SESSION['repo'] = $_GET['repo']; } else { $_SESSION['repo'] = ''; }
     if ( isset($_GET['branch']) && ! empty($_GET['branch']) ) { 
         $_SESSION['GIT']['branch'] = $_GET['branch']; 
@@ -78,30 +80,30 @@
     <title>GitPub - Were The Code Flows</title>
 
     <!-- jquery-ui stylesheet -->
-    <!-- <link rel="stylesheet" type="text/css" media="all" href="docs/include/jqueryui/css/smoothness/jquery-ui-1.8.19.custom.css" /> -->
+    <!-- <link rel="stylesheet" type="text/css" media="all" href="<?=$CONFIG['base_uri'];?>/docs/include/jqueryui/css/smoothness/jquery-ui-1.8.19.custom.css" /> -->
 
     <!-- google-code-prettify -->
-    <link rel="stylesheet" type="text/css" media="all" href="docs/include/google-code-prettify/prettify.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="<?=$CONFIG['base_uri'];?>/docs/include/google-code-prettify/prettify.css" />
 
     <!-- jquery & jquery-ui javascript frameworks -->
-    <script rel="javascript" type="text/javascript" src="docs/include/jquery/jquery-1.7.1.min.js"></script>
-    <!-- <script rel="javascript" type="text/javascript" src="docs/include/jqueryui/js/jquery-ui-1.8.19.custom.min.js"></script> -->
+    <script rel="javascript" type="text/javascript" src="<?=$CONFIG['base_uri'];?>/docs/include/jquery/jquery-1.7.1.min.js"></script>
+    <!-- <script rel="javascript" type="text/javascript" src="<?=$CONFIG['base_uri'];?>/docs/include/jqueryui/js/jquery-ui-1.8.19.custom.min.js"></script> -->
 
     <!-- google-code-prettify -->
-    <script rel="javascript" type="text/javascript" src="docs/include/google-code-prettify/prettify.js"></script>
+    <script rel="javascript" type="text/javascript" src="<?=$CONFIG['base_uri'];?>/docs/include/google-code-prettify/prettify.js"></script>
 
     <!-- history.js -->
-    <script rel="javascript" type="text/javascript" src="docs/include/history.js/jquery.history.js"></script>      
-    <script rel="javascript" type="text/javascript" src="docs/include/history.js/jquery.scrollto.min.js"></script>
-    <script rel="javascript" type="text/javascript" src="docs/include/history.js/ajaxify-html5.js"></script>
+    <script rel="javascript" type="text/javascript" src="<?=$CONFIG['base_uri'];?>/docs/include/history.js/jquery.history.js"></script>      
+    <script rel="javascript" type="text/javascript" src="<?=$CONFIG['base_uri'];?>/docs/include/history.js/jquery.scrollto.min.js"></script>
+    <script rel="javascript" type="text/javascript" src="<?=$CONFIG['base_uri'];?>/docs/include/history.js/ajaxify-html5.js"></script>
 
     <!-- gitpub stylesheet -->
-    <link rel="stylesheet" type="text/css" media="all" href="docs/css/gitpub.css" />
-    <!--[if lte IE 8]><link rel="stylesheet" type="text/css" href="docs/css/ie.gitpub.css" /><![endif]-->
+    <link rel="stylesheet" type="text/css" media="all" href="<?=$CONFIG['base_uri'];?>/docs/css/gitpub.css" />
+    <!--[if lte IE 8]><link rel="stylesheet" type="text/css" href="<?=$CONFIG['base_uri'];?>/docs/css/ie.gitpub.css" /><![endif]-->
 
 
     <!-- gitpub javascript library -->
-    <script rel="javascript" type="text/javascript" src="docs/javascript/gitpub.js"></script>
+    <script rel="javascript" type="text/javascript" src="<?=$CONFIG['base_uri'];?>/docs/javascript/gitpub.js"></script>
 
 </head>
 <body>

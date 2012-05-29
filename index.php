@@ -27,8 +27,7 @@
 <? 
     if ( ! isset($_SESSION['repo']) || $_SESSION['repo'] == '' ) { 
 
-        #$gp->setRepos();
-        include('include/repo_browser.php');
+        include('views/repos.php');
 
     } else {
 ?>
@@ -38,9 +37,9 @@
             </div>
             <div class="tabbar">
                 <ul id="tabs">
-                    <li class="tab <?=isActiveTab('files');?>"><a href="?repo=<?=$_SESSION['repo'];?>&nav=files">Files</a></li>
-                    <li class="tab <?=isActiveTab('commits');?>"><a href="?repo=<?=$_SESSION['repo'];?>&nav=commits">Commits</a></li>
-                    <li class="tab <?=isActiveTab('branches');?>"><a href="?repo=<?=$_SESSION['repo'];?>&nav=branches">Branches</a></li>
+                    <li class="tab <?=isActiveTab('files');?>"><a href="<?=$CONFIG['base_uri']."/".$_SESSION['repo'].'/files/'?>">Files</a></li>
+                    <li class="tab <?=isActiveTab('commits');?>"><a href="<?=$CONFIG['base_uri']."/".$_SESSION['repo'].'/commits/'?>">Commits</a></li>
+                    <li class="tab <?=isActiveTab('branches');?>"><a href="<?=$CONFIG['base_uri']."/".$_SESSION['repo'].'/branches/'?>">Branches</a></li>
                 </ul>
                 <br class="clear" />
             </div>
@@ -82,7 +81,7 @@
 
             </div>
 
-<? } elseif ( $_SESSION['nav'] == 'commits' ) { include('include/commit_browser.php'); ?>
+<? } elseif ( $_SESSION['nav'] == 'commits' ) { include('views/commits.php'); ?>
 
 <? } elseif ( $_SESSION['nav'] == 'branches' ) { ?> what...you don't dev on master?  <? } ?>
 
