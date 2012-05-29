@@ -28,6 +28,8 @@
         public function setRepo($repo) {
 
             $this->repo = $repo;
+            $this->setCommitId();
+            $this->tip = $this->commit;
         }
 
         public function setBranch($branch) {
@@ -87,13 +89,30 @@
             $this->abbr_commit = substr($id, 0, 7);
         }
 
-        public function getFiles() {
+        public function getTree($commit = null) {
 
-            # ls-files 
+            if ( empty($commit) ) {
+                $commit = $this->tip;
+            }
 
-            $this->run("ls-files");
+            $this->run("show $commit:");
 
-            return explode("\n", $this->cmd['results']);
+            $results = explode("\n", $this->cmd['results']);
+            $files = array();
+
+            foreach ($results as $line) {
+
+                if ( preg_match("/^tree.+/", $line) ) {
+                    continue;
+                }
+                elseif ( empty($line) || $line == "" ) {
+                    continue;
+                }
+
+                array_push($files, $line);
+            }
+
+            return $files;
         }
 
         public function getCommitLog($start = 0, $max = null) {

@@ -36,10 +36,13 @@
     # XXX - test string   ?repo=gitpub&nav=files&cwd=Lmh0YWNjZXNz
     #$_GET['repo'] = 'gitpub'; $_GET['nav'] = 'files'; $_GET['cwd'] = 'Lmh0YWNjZXNz'; #.htaccess
 
-    $_SESSION['nav'] = isset($_GET['nav']) ? $_GET['nav'] : 'files'; # default view mode
+    // Set the repo
     $_SESSION['repo'] = isset($_GET['repo']) ? $_GET['repo'] : '';
+    // Set the view
+    $_SESSION['nav'] = isset($_GET['nav']) ? $_GET['nav'] : 'files'; # default view mode
+    // Set the object
+    $_SESSION['obj'] = isset($_GET['o']) ? base64_decode($_GET['o']) : ""; 
 
-    $gp->setRepo($_SESSION['repo']);
 
     #if ( isset($_GET['repo']) ) { $_SESSION['repo'] = $_GET['repo']; } else { $_SESSION['repo'] = ''; }
     if ( isset($_GET['branch']) && ! empty($_GET['branch']) ) { 
@@ -52,24 +55,27 @@
     $repos = getRepos($_SESSION['CONFIG']['repo_directory']);
     $repo_count = count($repos);
 
-    $_SESSION['filepath'] = ( isset($_GET['cwd']) ) ? base64_decode($_GET['cwd']) : "";
+    $_SESSION['filepath'] = ( isset($_GET['o']) ) ? base64_decode($_GET['o']) : "";
 
     # If provided a repo load the git object
     #
-    if ( isset($_SESSION['repo']) && $_SESSION['repo'] !== "" ) {
+    if ( isset($_SESSION['repo']) && ! empty($_SESSION['repo']) ) {
 
-        try {
+        // Set the repo
+        $gp->setRepo($_SESSION['repo']);
 
-            $_SESSION['GIT']['repo'] = new Git($_SESSION['CONFIG']['repo_directory'] ."/". $_SESSION['repo']);
-            $_SESSION['GIT']['tip'] = $_SESSION['GIT']['repo']->getTip($_SESSION['GIT']['branch']);
-        }
-        catch (Exception $e) {
+        #try {
 
-            $error = $e;
-            include('include/error.php');
-        }
+        #    $_SESSION['GIT']['repo'] = new Git($_SESSION['CONFIG']['repo_directory'] ."/". $_SESSION['repo']);
+            #$_SESSION['GIT']['tip'] = $_SESSION['GIT']['repo']->getTip($_SESSION['GIT']['branch']);
+        #}
+        #catch (Exception $e) {
 
-        $_SESSION['GIT']['object'] = $_SESSION['GIT']['repo']->getObject($_SESSION['GIT']['tip']);
+        #    $error = $e;
+        #    include('include/error.php');
+        #}
+
+        #$_SESSION['GIT']['object'] = $_SESSION['GIT']['repo']->getObject($_SESSION['GIT']['tip']);
     }
 
 ?>

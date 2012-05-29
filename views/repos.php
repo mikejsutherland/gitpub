@@ -1,16 +1,17 @@
-<? 
+<?  if ( count($gp->repos) > 0 ) { ?><?="\n";?>
 
-    if ( count($gp->repos) > 0 ) {
-
-?>
             <div class="box corners">
                 <div class="boxhead gradient_aqua">1 person hosting over <?=(count($gp->repos)-1);?>+ repositories</div>
                 <div class="boxbody">
-                    Available Git Repositories:<br /><?="\n"; viewRepos($gp->repos);?>
+                    Available Git Repositories:<br />
+                    <ul>
+                        <? foreach ($gp->repos as $repo) { ?><?="\n";?>
+                        <li><a href='<?=$CONFIG['base_uri'] ."/". $repo['name'];?>/'><?=$repo['name'];?></a></li>
+                        <? } ?><?="\n";?>
+                    </ul>
                 </div>
             </div>
-<? 
-
+<?
     } else { 
 
         if ( empty($gp->projectsdir) ) {

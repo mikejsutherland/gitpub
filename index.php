@@ -30,62 +30,22 @@
         include('views/repos.php');
 
     } else {
+
+        include('views/tabs.php');
+
+        if ( $_SESSION['nav'] == 'files' ) { 
+            include('views/files.php');
+        }
+        elseif ( $_SESSION['nav'] == 'commits' ) {
+            include('views/commits.php'); 
+        }
+        elseif ( $_SESSION['nav'] == 'branches' ) { 
+            ?> what...you don't dev on master? <?
+        }
+
+    }
 ?>
-
-            <div class="navbar">
-                <a href="<?=$CONFIG['base_uri'];?>/?repo=<?=$_SESSION['repo'];?>"><?=$_SESSION['repo'];?></a><? if ( isset($_SESSION['filepath']) && $_SESSION['filepath'] !== "" ) { print getFileTreeNav($_SESSION['filepath']); } print "\n"; ?>
-            </div>
-            <div class="tabbar">
-                <ul id="tabs">
-                    <li class="tab <?=isActiveTab('files');?>"><a href="<?=$CONFIG['base_uri']."/".$_SESSION['repo'].'/files/'?>">Files</a></li>
-                    <li class="tab <?=isActiveTab('commits');?>"><a href="<?=$CONFIG['base_uri']."/".$_SESSION['repo'].'/commits/'?>">Commits</a></li>
-                    <li class="tab <?=isActiveTab('branches');?>"><a href="<?=$CONFIG['base_uri']."/".$_SESSION['repo'].'/branches/'?>">Branches</a></li>
-                </ul>
-                <br class="clear" />
-            </div>
-
-<? if ( $_SESSION['nav'] == 'files' ) { ?>
-
-            <div id="filebrowser">
-
-<?
-        $tree = $_SESSION['GIT']['object']->getTree();
-        $files = $tree->listRecursive();
-
-        #$test = get_object_vars($tree);
-
-        #$t = $test['nodes']['lib']['object']->getTip('master');
-
-    #print "<pre>";
-    #print_r($t);
-    #print "</pre>\n"
-
-?>
-                <table class="file browser">
-                    <thead>
-                        <tr class="gradient_gray">
-                            <th style="width: 20px;"></th>
-                            <th style="width: 200px;">name</th>
-                            <th style="width: 100px;">age</th>
-                            <th>message</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-<?
-    if ( count($files) > 0 ) { 
-        viewFileBrowserTable($files, $tree);
-    } 
-?>
-                    </tbody>
-                </table>
-
-            </div>
-
-<? } elseif ( $_SESSION['nav'] == 'commits' ) { include('views/commits.php'); ?>
-
-<? } elseif ( $_SESSION['nav'] == 'branches' ) { ?> what...you don't dev on master?  <? } ?>
-
-<? } ?>
+ 
         </div>
     </div>
 

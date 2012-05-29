@@ -31,26 +31,24 @@
 
     # Generate the table for the file browser
     #
-    function viewFileBrowserTable($files, $tree) {
+    function viewFileBrowserTable($files) {
 
-        $filepath = $_SESSION['filepath'];
+        $filepath = $_SESSION['obj'];
         $c = 0;
 
-        foreach ($files as $fl => $val) {
+        foreach ($files as $fl) {
 
             #if ( $c < 1 ) { sleep(1); $c++; }
 
             $file = $fl;
             $fullpath = '';
 
-            #print "<!-- $filepath -->\n";
+            #print "<!-- $filepath : $file -->\n";
 
             if ( isset($filepath) && $filepath != '' ) {
 
                 # File view
                 if ( $filepath == $file ) {
-
-                    $commit = sha1_hex($_SESSION['GIT']['tip']);
 
                     print str_pad("", 24) . "<tr>\n";
                     print str_pad("", 28) . "<td colspan='4'>\n";
@@ -76,7 +74,8 @@
 
                     print str_pad("", 24) . "<tr>\n";
                     print str_pad("", 28) . "<td class=''> </td>\n";
-                    print str_pad("", 28) . "<td><a class='ajaxy' href='?repo=". $_SESSION['repo'] ."&nav=files&cwd=". base64_encode(implode('/', $parent)) ."'>..</a></td>\n";
+                    print str_pad("", 28) . "<td><a class='ajaxy' href='". $CONFIG['base_uri'] ."/". $_SESSION['repo'] .'/files/'.
+                        base64_encode(implode('/', $parent)) ."/'>..</a></td>\n";
                     print str_pad("", 28) . "<td></td>\n";
                     print str_pad("", 28) . "<td></td>\n";
                     print str_pad("", 24) . "</tr>\n";
@@ -95,12 +94,10 @@
 
                 if ( $dir == $prevdir ) { continue; }
 
-                #$hist = $master->getHistory($val);
-                #$lhist = get_object_vars(array_pop($hist));
-
                 print str_pad("", 24) . "<tr>\n";
                 print str_pad("", 28) . "<td class='dir_icon'> </td>\n";
-                print str_pad("", 28) . "<td><a class='ajaxy' href='?repo=". $_SESSION['repo'] ."&nav=files&cwd=". base64_encode($fullpath . $dir) ."'>$dir/</a></td>\n";
+                print str_pad("", 28) . "<td><a class='ajaxy' href='". $CONFIG['base_uri'] ."/". $_SESSION['repo'] .'/files/'.
+                    base64_encode($fullpath . $dir) ."/'>$dir/</a></td>\n";
                 print str_pad("", 28) . "<td></td>\n";
                 print str_pad("", 28) . "<td>". $lhist['summary'] ."</td>\n";
                 print str_pad("", 24) . "</tr>\n";
@@ -109,12 +106,10 @@
             }
             else {
 
-                #$hist = $master->getHistory($val);
-                #$lhist = get_object_vars(array_pop($hist));
-
                 print str_pad("", 24) . "<tr>\n";
                 print str_pad("", 28) . "<td class='file_icon'> </td>\n";
-                print str_pad("", 28) . "<td><a class='ajaxy' href='?repo=". $_SESSION['repo'] ."&nav=files&cwd=". base64_encode($fullpath . $file) ."'>$file</a></td>\n";
+                print str_pad("", 28) . "<td><a class='ajaxy' href='". $CONFIG['base_uri'] ."/". $_SESSION['repo'] .'/files/'.
+                    base64_encode($fullpath . $file) ."/'>$file</a></td>\n";
                 print str_pad("", 28) . "<td></td>\n";
                 print str_pad("", 28) . "<td>". $lhist['summary'] ."</td>\n";
                 print str_pad("", 24) . "</tr>\n";
