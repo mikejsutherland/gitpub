@@ -87,11 +87,75 @@
             $this->abbr_commit = substr($id, 0, 7);
         }
 
-        public function getCommitLog($start = 0, $max = 10) {
+        public function getFiles() {
+
+            # ls-files 
+
+            $this->run("ls-files");
+
+            return explode("\n", $this->cmd['results']);
+        }
+
+        public function getCommitLog($start = 0, $max = null) {
 
             # --max-count=<number> Limit the number of commits to output.
             # --skip=<number> Skip number commits before starting to show the commit output.
-            $this->run('log', array("--skip=$start","--max-count=$max"));
+
+            $args = array("--skip=$start");
+
+            if ( isset($max) ) { 
+                array_push($args, "--max-count=$max");
+            }
+
+            $this->run('log', $args); 
+
+
+            $results = explode("\n", $this->cmd['results']);
+            $commits = array();
+            $commit_info = array();
+
+            foreach ($results as $line) {
+
+                if ( preg_match("/^commit\s+(.+)$/i", $line, $matches) ) {
+
+                    if ( isset($commit_info) && count($commit_info) > 0 ) {
+
+                        array_push($commits, $commit_info);
+                        unset($commit_info);
+                    }
+                        
+                    $commit_info = array();
+                    $commit_info['commit'] = $matches[1];
+                }
+                elseif ( preg_match("/^Author:\s+(.+)$/i", $line, $matches) ) {
+
+                    $commit_info['author'] = $matches[1];
+                }
+                elseif ( preg_match("/^Date:\s+(.+)$/i", $line, $matches) ) {
+
+                    $commit_info['date'] = $matches[1];
+                }
+                elseif ( empty($line) || $line == "" ) { 
+
+                    continue;
+                }
+                else {
+
+                    if ( ! isset($commit_info['summary']) ) {
+
+                        $commit_info['summary'] = array();
+                    }
+
+                    array_push($commit_info['summary'], ltrim($line));
+                }
+            }
+
+            if ( count($commit_info) > 0 ) {
+
+                array_push($commits, $commit_info);
+            }
+
+            return $commits;
         }
 
         // internal functions
@@ -130,6 +194,11 @@
             ob_end_clean();
 
             $this->cmd = $res;
+
+            if ( $res['rc'] !== 0 ) {
+
+                throw new Exception("Error running command: '$gitcmd', rc: ". $res['rc'] ."\n");
+            }
         }
 
     }

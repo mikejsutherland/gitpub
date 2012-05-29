@@ -2,29 +2,29 @@
 
     # Generate the table for the commit browser
     #
-    function viewCommitHistoryTable($hist, $commit_id) {
+    function viewCommitHistoryTable($commits) {
 
-        if ( count($hist) > 0 ) {
+        if ( count($commits) > 0 ) {
 
-            foreach($hist as $commit) {
+            foreach($commits as $commit) {
 
-                $com = get_object_vars($commit);
-                $details = get_object_vars($com['author']);
-                $history = get_object_vars($com['history']);
+                #$com = get_object_vars($commit);
+                #$details = get_object_vars($com['author']);
+                #$history = get_object_vars($com['history']);
 
                 print str_pad("", 20) . "<tr>\n";
-                print str_pad("", 24) . "<td class='small'>". $details['name'] ."</td>\n";
-                print str_pad("", 24) . "<td class='small'>". strftime('%F %T', $details['time']) ."</td>\n";
-                print str_pad("", 24) . "<td>". htmlspecialchars($com['summary'], ENT_QUOTES) ."</td>\n";
-                print str_pad("", 24) . "<td class='small'>\n";
-                print str_pad("", 28) .  $commit_id ."<br />\n";
-                print str_pad("", 28) . "<span class='smaller'>tree: ". sha1_hex($com['tree']) ."</span>\n";
-                print str_pad("", 24) . "</td>\n";
+                print str_pad("", 24) . "<td class='small'>". $commit['author'] ."</td>\n";
+                print str_pad("", 24) . "<td class='small'>". $commit['date'] ."</td>\n";
+                print str_pad("", 24) . "<td>". htmlspecialchars($commit['summary'][0], ENT_QUOTES) ."</td>\n";
+                print str_pad("", 24) . "<td class='small'>". $commit['commit'] ."</td>\n";
                 print str_pad("", 20) . "</tr>\n";
-                $commit_id = sha1_hex($com['parents'][0]);
 
             }
         } 
+        else {
+
+
+        }
 
         return;
     }
