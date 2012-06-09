@@ -52,7 +52,7 @@
         $_SESSION['GIT']['branch'] = 'master';
     }
 
-    $repos = getRepos($_SESSION['CONFIG']['repo_directory']);
+    $repos = getRepos($CONFIG['repo_directory']);
     $repo_count = count($repos);
 
     $_SESSION['filepath'] = ( isset($_GET['o']) ) ? base64_decode($_GET['o']) : "";
