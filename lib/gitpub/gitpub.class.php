@@ -52,7 +52,7 @@
                 $this_path = $projects_dir . "/$dir";
 
                 # Skip current, parent and anything that doesn't contain a .git subdir
-                if ( $dir == '.' || $dir == '..' || ! $this->isGitRepo($this_path) ) { continue; }
+                if ( $dir == '.' || $dir == '..' || ! is_dir("$this_path") || ! $this->isGitRepo($this_path) ) { continue; }
 
                 # Stash the repo info
                 $repo['name'] = $dir;
@@ -216,7 +216,7 @@
 
             if ( $res['rc'] !== 0 ) {
 
-                throw new Exception("Error running command: '$gitcmd', rc: ". $res['rc'] ."\n");
+                throw new Exception("Error running command: '". $res['cmd'] ."', rc: ". $res['rc'] ."\n");
             }
         }
 
