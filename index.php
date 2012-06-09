@@ -40,7 +40,8 @@
             include('views/commits.php'); 
         }
         elseif ( $_SESSION['nav'] == 'branches' ) { 
-            ?> what...you don't dev on master? <?
+            $error = "what...you don't dev on master?";
+            include('include/error.php');
         }
 
     }
