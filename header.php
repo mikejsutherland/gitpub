@@ -37,7 +37,7 @@
     #$_GET['repo'] = 'gitpub'; $_GET['nav'] = 'files'; $_GET['cwd'] = 'Lmh0YWNjZXNz'; #.htaccess
 
     // Set the repo
-    $_SESSION['repo'] = isset($_GET['repo']) ? $_GET['repo'] : '';
+    $_SESSION['repo'] = isset($_GET['repo']) ? $_GET['repo'] : null;
     // Set the view
     $_SESSION['nav'] = isset($_GET['nav']) ? $_GET['nav'] : 'files'; # default view mode
     // Set the object
