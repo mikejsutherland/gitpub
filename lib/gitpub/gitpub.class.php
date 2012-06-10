@@ -171,10 +171,10 @@
             # --max-count=<number> Limit the number of commits to output.
             # --skip=<number> Skip number commits before starting to show the commit output.
 
-            $args = array("--skip=$start");
+            $args = array("--skip=$start", "--date=raw");
 
             if ( isset($max) ) { 
-                array_push($args, "--max-count=$max", "--date=raw");
+                array_push($args, "--max-count=$max");
             }
 
             $this->run('log', $args); 

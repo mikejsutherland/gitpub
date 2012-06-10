@@ -17,7 +17,7 @@
 		// Prepare Variables
 		var
 			/* Application Specific Variables */
-			contentSelector = '#filebrowser,article:first,.article:first,.post:first',
+			contentSelector = '#filebrowser,#commitbrowser,article:first,.article:first,.post:first',
 			$content = $(contentSelector).filter(':first'),
 			contentNode = $content.get(0),
 			$menu = $('#menu,#nav,nav:first,.nav:first').filter(':first'),

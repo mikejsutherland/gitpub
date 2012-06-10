@@ -346,6 +346,9 @@ pre.prettyprint { /* customizations for pretty-print */
     float: left; /* required so line highlighting gets rendered */
     min-width: 99%; /* needed to ensure small code blocks fill the given area (almost)  */
 }
+.error {
+    border: 1px solid #ddd;
+}
 .message {
     text-align: center;
     padding: 30px;
