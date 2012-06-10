@@ -27,9 +27,16 @@
 
         public function setRepo($repo) {
 
+            // Set the name of the repo
             $this->repo = $repo;
+            // Set the path of the repo
             $this->repodir = $this->opts['projects_dir'] ."/". $repo;
+            if ( $this->_isLocal() ) {
+                $this->repodir .= "/.git";
+            }
+            // Set the top commit id
             $this->setCommitId();
+            // Set the tip (top commit id)
             $this->tip = $this->commit;
         }
 
@@ -225,7 +232,25 @@
         //
         public function isGitRepo($dir) {
 
-            return is_dir($dir .'/refs');
+            return ( $this->_isRemote($dir) || $this->_isLocal($dir) );
+        }
+
+        protected function _isRemote($dir = null) {
+
+            if ( empty($dir) ) {
+                $dir = $this->repodir;
+            }
+
+            return is_dir($dir ."/refs");
+        }
+
+        protected function _isLocal($dir = null) {
+
+            if ( empty($dir) ) {
+                $dir = $this->repodir;
+            }
+
+            return is_dir($dir ."/.git/refs");
         }
 
         protected function _chopPath($path) {
@@ -243,7 +268,7 @@
 
             // Define the command to be executed
             $res['cmd'] = $this->_chopPath($this->opts['git_path']) . "/git --no-pager --git-dir=" .
-                $this->projectsdir . "/" . $this->repo . implode(" ", $switches) . 
+                $this->repodir . implode(" ", $switches) . 
                 " $gitcmd ". implode(" ", $args)
             ;            
             //print "DEBUG : ". $res['cmd'] ."\n";
