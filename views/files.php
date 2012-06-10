@@ -3,15 +3,16 @@
                 <div class="navbar">
 <?
 
+    $navlinks = "<a class='ajaxy' href='". $CONFIG['base_uri'] ."/?repo=". $_SESSION['repo'] ."&nav=files'>". $_SESSION['repo'] ."</a>";
+
     if ( ! empty($_SESSION['obj']) ) { 
 
         $pathsegments = explode('/', preg_replace("/\/$/", "", $_SESSION['obj']));
         $pathpieces = count($pathsegments);
-        $navlinks = "";
 
         if ( $pathpieces > 0 ) {
 
-            #$navlinks .= "/";
+            $navlinks .= "/";
             $c = 0;
 
             $base = Array();
@@ -21,19 +22,27 @@
                 array_push($base, $piece);
                 $c++;
 
-                $navlinks .= "<a class='ajaxy' href='". $CONFIG['base_uri']
-                    ."/?repo=". $_SESSION['repo']
-                    ."&nav=files&o=". base64_encode(implode('/',$base) ."/")
-                    ."'>$piece</a>";
-
                 if ( $c < $pathpieces ) {
+
+                    $navlinks .= "<a class='ajaxy' href='". $CONFIG['base_uri']
+                        ."/?repo=". $_SESSION['repo']
+                        ."&nav=files&o=". base64_encode(implode('/',$base) ."/")
+                        ."'>$piece</a>";
+
                     $navlinks .= "/";
+                }
+                else {
+
+                    $navlinks .= "<a class='ajaxy' href='". $CONFIG['base_uri']
+                        ."/?repo=". $_SESSION['repo']
+                        ."&nav=files&o=". base64_encode(implode('/',$base))
+                        ."'>$piece</a>";
                 }
             }
         }
-
-        print "$navlinks\n";
     }
+
+    print "$navlinks\n";
 ?>
 
                 </div>
