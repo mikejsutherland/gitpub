@@ -84,6 +84,7 @@
 
 <head>
     <title>GitPub - Were The Code Flows</title>
+    <base href="<?=$CONFIG['base_uri'];?>" target="_self" />
 
     <!-- jquery-ui stylesheet -->
     <!-- <link rel="stylesheet" type="text/css" media="all" href="<?=$CONFIG['base_uri'];?>/docs/include/jqueryui/css/smoothness/jquery-ui-1.8.19.custom.css" /> -->
