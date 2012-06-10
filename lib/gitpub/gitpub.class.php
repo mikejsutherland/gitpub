@@ -28,6 +28,7 @@
         public function setRepo($repo) {
 
             $this->repo = $repo;
+            $this->repodir = $this->opts['projects_dir'] ."/". $repo;
             $this->setCommitId();
             $this->tip = $this->commit;
         }
@@ -42,7 +43,7 @@
             $this->projectsdir = $dir;
         }
 
-        public function setRepos($projects_dir) { # = $this->repodir) {
+        public function setRepos($projects_dir) { 
 
             $repos = array();
             $dirs = scandir($projects_dir, NULL);
@@ -87,6 +88,15 @@
         public function setAbbrCommitId($id) {
 
             $this->abbr_commit = substr($id, 0, 7);
+        }
+
+        public function getDescription($dir) {
+
+            if ( empty($dir) ) {
+                $dir = $this->repodir;
+            }
+
+            return file_get_contents($dir ."/description", NULL);
         }
 
         public function getFile($file, $commit = null) {
