@@ -1,6 +1,7 @@
             <div class="navbar">
-                <a href="<?=$CONFIG['base_uri']."/".$_SESSION['repo'];?>/"><?=$_SESSION['repo'];?></a><? if ( isset($_SESSION['obj']) && $_SESSION['obj'] !== "" ) { print getFileTreeNav($_SESSION['obj']); } print "\n"; ?>
+                Project: <a href="<?=$CONFIG['base_uri']."/".$_SESSION['repo'];?>/"><?=$_SESSION['repo'];?></a>
             </div>
+            
             <div class="tabbar">
                 <ul id="tabs">
                     <li class="tab <?=isActiveTab('files');?>"><a href="<?=$CONFIG['base_uri']."/".$_SESSION['repo'].'/files/'?>">Files</a></li>
