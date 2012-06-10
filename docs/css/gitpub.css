@@ -118,8 +118,11 @@ body {
 .right {
     float: right!important;
 }
+.grey {
+    color: #aeaeae;
+}
 .blue {
-    color: #66ccff;
+    color: #398bc5;
 }
 .red {
     color: #ff3333;
@@ -256,6 +259,9 @@ table.browser th {
 }
 table.browser tbody th {
     width: 300px;
+}
+table.browser tr.hl {
+    background-color: #f7fbfc; /*#f8f8f8;*/
 }
 .small {
     font-size: 11px !important;

@@ -174,7 +174,7 @@
             $args = array("--skip=$start");
 
             if ( isset($max) ) { 
-                array_push($args, "--max-count=$max");
+                array_push($args, "--max-count=$max", "--date=raw");
             }
 
             $this->run('log', $args); 
@@ -197,15 +197,24 @@
                     $commit_info = array();
                     $commit_info['commit'] = $matches[1];
                 }
-                elseif ( preg_match("/^Author:\s+(.+)$/i", $line, $matches) ) {
+                elseif ( preg_match("/^Author:\s+(.+)\s+<(.*)>$/i", $line, $matches) ) {
 
                     $commit_info['author'] = $matches[1];
+                    $commit_info['email'] = $matches[2];
                 }
                 elseif ( preg_match("/^Date:\s+(.+)$/i", $line, $matches) ) {
 
                     $commit_info['date'] = $matches[1];
+
+                    if ( preg_match("/^(\d+)\s+([-+0-9]+)$/", $commit_info['date'], $matches) ) {
+
+                        $commit_info['date'] = date("M j, Y", $matches[1]);
+                        $commit_info['time'] = date("H:i:s", $matches[1]);
+                        $commit_info['epoch'] = $matches[1];
+                        $commit_info['tz'] = $matches[2];
+                    }
                 }
-                elseif ( empty($line) || $line == "" ) { 
+                elseif ( empty($line) || preg_match("/^\s*$/", $line) ) { 
 
                     continue;
                 }

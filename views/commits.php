@@ -1,37 +1,55 @@
 <?
-    #$commit_id = sha1_hex($_SESSION['GIT']['tip']);
-    #$hist = $_SESSION['GIT']['object']->getHistory();
-    # Reverse the history as we want the newest displayed first
-    #$hist = array_reverse($hist);
-
-    #print "<pre>";
-    #print_r(get_object_vars(array_shift($hist)));
-    #print "</pre>\n"
 
     $commits = $gp->getCommitLog($_GET['offset'], 15);
 
     if ( count($commits) > 0 ) {
 
+        $c = false;
+        $prevts = null;
+
+        foreach($commits as $commit) {
+
+            if ( $prevts !== $commit['date'] ) {
+
+                $c = false;
+                $prevts = $commit['date'];
+
+                if ( ! empty($prevts) ) {
+?>
+                </tbody>
+            </table>
+            <br />
+
+<?
+                }
 ?>
 
             <table class="commit browser">
                 <thead>
                     <tr class="gradient_gray">
-                        <th>name</th>
-                        <th>timestamp</th>
-                        <th>message</th>
-                        <th>commit</th>
+                        <th><?=$commit['date'];?></th>
                     </tr>
                 </thead>
                 <tbody>
 
-<?      foreach($commits as $commit) { ?>
+<?
+            }
+?>
 
-                    <tr>
-                        <td class='small'><?=htmlspecialchars($commit['author'], ENT_QUOTES);?></td>
-                        <td class='small'><?=$commit['date'];?></td>
-                        <td><?=htmlspecialchars($commit['summary'][0], ENT_QUOTES);?></td>
-                        <td class='small'><?=substr($commit['commit'], 0, 7);?></td>
+                    <tr class="<?=(($c = !$c)?'hl':'');?>">
+                        <td>
+                            <div class="right">
+                                <?=substr($commit['commit'], 0, 7);?>
+                            </div>
+                            <div class="left">
+                                <strong><?=htmlspecialchars($commit['summary'][0], ENT_QUOTES);?></strong><br />
+                                <span class="small">
+                                    <span class="blue"><?=htmlspecialchars($commit['author'], ENT_QUOTES);?></span>
+                                    <span class="grey"> -- <?=((isset($commit['epoch']))?relativeDate($commit['epoch']):$commit['date']);?></span>
+                                </span>
+                            </div>
+                            <br class="clear" />
+                        </td>
                     </tr>
 <?
         }
