@@ -200,7 +200,7 @@
 
                         array_push($diff_info['meta'], htmlspecialchars($line));
                     }
-                    elseif ( preg_match("/^index\s+[a-zA-z0-9]{7,}\.\.[a-zA-z0-9]{7,}|^[-+]{3}\s[ab]{1}\/|^new file mode/", $line) ) {
+                    elseif ( preg_match("/^index\s+[a-zA-z0-9]{7,}\.\.[a-zA-z0-9]{7,}|^[-+]{3}\s.+|^[a-zA-Z0-9]+ file mode/", $line) ) {
 
                         array_push($diff_info['meta'], htmlspecialchars($line));
                     }
