@@ -1,5 +1,5 @@
             <div class="navbar">
-                Project: <a href="<?=$CONFIG['base_uri']."/?repo=".$_SESSION['repo'];?>/"><?=$_SESSION['repo'];?></a><br />
+                Project: <a href="<?=$CONFIG['base_uri']."/?repo=".$_SESSION['repo'];?>"><?=$_SESSION['repo'];?></a><br />
                 <span class="small"><?=$gp->getDescription();?></span>
             </div>
             
