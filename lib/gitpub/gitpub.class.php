@@ -97,7 +97,7 @@
 
             $this->run("show $commit:$file");
 
-            if ( preg_match("/\.(jpg|jpeg|png|gif|ico|bmp)$/", $file) ) {
+            if ( preg_match("/\.(jpg|jpeg|png|gif|ico|bmp)$/i", $file) ) {
 
                 return "<img src='data:image/png;base64,". base64_encode($this->cmd['results']) ."' />\n";
             }
@@ -110,7 +110,7 @@
                 if ( mb_check_encoding($str, 'ASCII') ) {
 
                     # plain text (non code)
-                    if ( preg_match("/\.(txt)$/", $file) ) {
+                    if ( preg_match("/\.(txt)$/i", $file) ) {
                         return "<pre class='prettyprint linenums nocode'>". htmlspecialchars($str) ."</pre>\n";
                     }
                     else {
