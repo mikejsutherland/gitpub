@@ -20,7 +20,7 @@ body {
     border-bottom: 1px solid #cacaca;
     background-color: #f1f1f1;
     cursor: pointer;
-    font-size: 1.4em;
+    font-size: 22px;
     font-weight: normal;
     padding: 10px 0px;
     -webkit-box-shadow: 0px 4px 5px rgba(50, 50, 50, 0.33);
@@ -35,9 +35,23 @@ body {
 .masthead a:hover {
     color: #5b5b5b;
 }
+.projbar {
+    text-align: left;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 0px 0px;
+    color: #cacaca;
+    letter-spacing: 0;
+    line-height: 28px;
+    -webkit-font-smoothing: antialiased;
+}
+.projbar a, .projbar a:active, .projbar a:hover {
+    color: #398bc5;
+    text-decoration: none;
+}
 .navbar {
     text-align: left;
-    font-size: 1.0em;
+    font-size: 14px;
     font-weight: bold;
     padding: 0px 0px;
     color: #cacaca;
@@ -121,12 +135,6 @@ br.clear {
     line-height: 0px;
     font-size: 0px;
 }
-h3 {
-    margin: 0 0 .5em;
-    font-weight: bold;
-    font-size: 1.5em;
-    text-align: left;
-}
 span.urlbox {
     display: block;
     -moz-border-bottom-colors: none;
@@ -137,7 +145,7 @@ span.urlbox {
     border-color: #ddd;
     border-style: solid;
     border-width: 1px 0px 1px 1px;
-    font-size: 0.6em;
+    font-size: 14px;
     font-weight: normal;
     margin: 0px;
     padding: 2px 5px;
@@ -165,7 +173,7 @@ input.repourl {
     color: #666;
     float: right;
     font-family: Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;
-    font-size: 0.5em;
+    font-size: 11px;
     height: 24px;
     padding: 0 5px;
     margin-top: 0px;
@@ -187,7 +195,7 @@ input.repourl {
 }
 #tabs li {
     float: left;
-    font-size: 0.9em;
+    font-size: 14px;
     border-bottom: 1px solid #ddd; 
     list-style-type: none;
     text-align: center;
@@ -230,7 +238,7 @@ table.browser {
 table.browser td, table.browser th {
     text-align: left;
     padding: 5px 5px;
-    font-size: 0.8em;
+    font-size: 14px;
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
     vertical-align: top;
@@ -249,20 +257,11 @@ table.browser th {
 table.browser tbody th {
     width: 300px;
 }
-/*table.browser tr:hover {
-    background-color: #f4f4f4;
-}*/
-table.browser caption {
-    margin: 0 0 .5em;
-    font-weight: bold;
-    font-size: 1.5em;
-    text-align: left;
-}
 .small {
-    font-size: 0.7em !important;
+    font-size: 11px !important;
 }
 .smaller {
-    font-size: 0.6em !important;
+    font-size: 9px !important;
 }
 .footer {
     text-align: left;
@@ -270,7 +269,7 @@ table.browser caption {
     border-bottom: 1px solid #cacaca;
     background-color: #f1f1f1;
     cursor: pointer;
-    font-size: 0.7em;
+    font-size: 11px;
     font-weight: bold;
     padding: 20px 20px;
     margin: 60px 0px 20px 0px;
