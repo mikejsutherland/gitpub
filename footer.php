@@ -3,7 +3,6 @@
             <div class="section right">
                 Thanks ;)
                 <ul>
-                    <li><a href="http://fimml.at/#glip" target="_blank">Glip - php library for git</a></li>
                     <li><a href="http://git-scm.com/" target="_blank">Git - distributed version control system</a></li>
                     <li><a href="https://github.com/" target="_blank">Github - social coding</a></li>
                     <li><a href="http://php.net/" target="_blank">PHP</a></li>

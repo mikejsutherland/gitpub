@@ -8,7 +8,6 @@
 
     # Load the config file so we know where the repo's are
     include_once('config/gitpub.config.php');
-    include_once('lib/gitpub/gp.req.php');
 
     debug($_GET['l']);
 

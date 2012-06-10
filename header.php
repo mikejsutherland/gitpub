@@ -26,12 +26,9 @@
 
     require_once($thispath . 'config/gitpub.config.php');
     require_once($thispath . 'lib/gitpub/gitpub.class.php');
+    require_once($thispath . 'lib/gitpub/gitpub.extras.php');
 
     $gp = new GitPub($CONFIG);
-
-    require_once('lib/gitpub/gp.req.php');
-    require_once('lib/gitpub/gp.repo.php');
-    require_once('lib/gitpub/gp.view.php');
 
     # XXX - test string   ?repo=gitpub&nav=files&cwd=Lmh0YWNjZXNz
     #$_GET['repo'] = 'gitpub'; $_GET['nav'] = 'files'; $_GET['o'] = 'ZG9jcy9pbmNsdWRlL2hpc3RvcnkuanMvYWpheGlmeS1odG1sNS5qcw=='; 
@@ -44,7 +41,6 @@
     $_SESSION['obj'] = isset($_GET['o']) ? base64_decode($_GET['o']) : ""; 
 
 
-    #if ( isset($_GET['repo']) ) { $_SESSION['repo'] = $_GET['repo']; } else { $_SESSION['repo'] = ''; }
     if ( isset($_GET['branch']) && ! empty($_GET['branch']) ) { 
         $_SESSION['GIT']['branch'] = $_GET['branch']; 
     }
@@ -52,30 +48,10 @@
         $_SESSION['GIT']['branch'] = 'master';
     }
 
-    $repos = getRepos($CONFIG['repo_directory']);
-    $repo_count = count($repos);
+    // Set the repo
+    if ( ! empty($_SESSION['repo']) ) {
 
-    #$_SESSION['filepath'] = ( isset($_GET['o']) ) ? base64_decode($_GET['o']) : "";
-
-    # If provided a repo load the git object
-    #
-    if ( isset($_SESSION['repo']) && ! empty($_SESSION['repo']) ) {
-
-        // Set the repo
         $gp->setRepo($_SESSION['repo']);
-
-        #try {
-
-        #    $_SESSION['GIT']['repo'] = new Git($_SESSION['CONFIG']['repo_directory'] ."/". $_SESSION['repo']);
-            #$_SESSION['GIT']['tip'] = $_SESSION['GIT']['repo']->getTip($_SESSION['GIT']['branch']);
-        #}
-        #catch (Exception $e) {
-
-        #    $error = $e;
-        #    include('include/error.php');
-        #}
-
-        #$_SESSION['GIT']['object'] = $_SESSION['GIT']['repo']->getObject($_SESSION['GIT']['tip']);
     }
 
 ?>
@@ -86,15 +62,11 @@
     <title>GitPub - Were The Code Flows</title>
     <base href="<?=$CONFIG['base_uri'];?>" target="_self" />
 
-    <!-- jquery-ui stylesheet -->
-    <!-- <link rel="stylesheet" type="text/css" media="all" href="<?=$CONFIG['base_uri'];?>/docs/include/jqueryui/css/smoothness/jquery-ui-1.8.19.custom.css" /> -->
-
     <!-- google-code-prettify -->
     <link rel="stylesheet" type="text/css" media="all" href="<?=$CONFIG['base_uri'];?>/docs/include/google-code-prettify/prettify.css" />
 
-    <!-- jquery & jquery-ui javascript frameworks -->
+    <!-- jquery javascript frameworks -->
     <script rel="javascript" type="text/javascript" src="<?=$CONFIG['base_uri'];?>/docs/include/jquery/jquery-1.7.1.min.js"></script>
-    <!-- <script rel="javascript" type="text/javascript" src="<?=$CONFIG['base_uri'];?>/docs/include/jqueryui/js/jquery-ui-1.8.19.custom.min.js"></script> -->
 
     <!-- google-code-prettify -->
     <script rel="javascript" type="text/javascript" src="<?=$CONFIG['base_uri'];?>/docs/include/google-code-prettify/prettify.js"></script>
@@ -106,7 +78,6 @@
     <!-- gitpub stylesheet -->
     <link rel="stylesheet" type="text/css" media="all" href="<?=$CONFIG['base_uri'];?>/docs/css/gitpub.css" />
     <!--[if lte IE 8]><link rel="stylesheet" type="text/css" href="<?=$CONFIG['base_uri'];?>/docs/css/ie.gitpub.css" /><![endif]-->
-
 
     <!-- gitpub javascript library -->
     <script rel="javascript" type="text/javascript" src="<?=$CONFIG['base_uri'];?>/docs/javascript/gitpub.js"></script>
