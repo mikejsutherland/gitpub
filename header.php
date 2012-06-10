@@ -31,7 +31,11 @@
     $gp = new GitPub($CONFIG);
 
     # XXX - test string   ?repo=gitpub&nav=files&cwd=Lmh0YWNjZXNz
-    #$_GET['repo'] = 'gitpub'; $_GET['nav'] = 'files'; $_GET['o'] = 'ZG9jcy9pbmNsdWRlL2hpc3RvcnkuanMvYWpheGlmeS1odG1sNS5qcw=='; 
+    #$_GET['repo'] = 'gitpub';
+    #$_GET['nav'] = 'commits'; 
+    #$_GET['o'] = 'ZG9jcy9pbmNsdWRlL2hpc3RvcnkuanMvYWpheGlmeS1odG1sNS5qcw=='; 
+    #$_GET['commit'] = 'd1fac222aefe71a939f23c0dfa7932a4a8c7ad91';
+    #$_GET['commit'] = '1kjasd87';
 
     // Set the repo
     $_SESSION['repo'] = isset($_GET['repo']) ? $_GET['repo'] : null;
@@ -39,7 +43,8 @@
     $_SESSION['nav'] = isset($_GET['nav']) ? $_GET['nav'] : 'files'; # default view mode
     // Set the object
     $_SESSION['obj'] = isset($_GET['o']) ? base64_decode($_GET['o']) : ""; 
-
+    // Set the commit id
+    $_SESSION['commit'] = isset($_GET['commit']) ? $_GET['commit'] : null;
 
     if ( isset($_GET['branch']) && ! empty($_GET['branch']) ) { 
         $_SESSION['GIT']['branch'] = $_GET['branch']; 

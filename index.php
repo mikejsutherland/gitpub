@@ -37,7 +37,17 @@
             include('views/files.php');
         }
         elseif ( $_SESSION['nav'] == 'commits' ) {
-            include('views/commits.php'); 
+
+            // Commit diff
+            if ( ! empty($_SESSION['commit']) ) {
+
+                include('views/commitdiff.php');
+            }
+            // Commit browser
+            else {
+
+                include('views/commits.php');
+            }
         }
         elseif ( $_SESSION['nav'] == 'branches' ) { 
             $error = "what...you don't dev on master?";

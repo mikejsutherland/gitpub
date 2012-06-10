@@ -355,3 +355,25 @@ pre.prettyprint { /* customizations for pretty-print */
     color: #398bc5;
     font-size: 16px;
 }
+pre.diff {
+    text-align: left;
+    margin: 0px;
+    padding: 0px;
+    font-size: 14px;
+    background-color: #f8f8f8;
+    float: left; /* required so line highlighting gets rendered */
+    min-width: 99%; /* needed to ensure small code blocks fill the given area (almost)  */
+}
+pre.diff span {
+    float: left; /* required so line highlighting gets rendered */
+    min-width: 100%; /* needed to ensure small code blocks fill the given area (almost)  */
+}
+.info {
+    background-color: #eaf2f5;
+}
+.add {
+    background-color: #ddffdd;
+}
+.remove {
+    background-color: #ffdddd;
+}

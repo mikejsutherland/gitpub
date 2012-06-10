@@ -166,6 +166,111 @@
             return $files;
         }
 
+        public function getCommitDiff($commit = null) {
+
+            if ( empty($commit) ) {
+                $commit = $this->tip;
+            }
+
+            $args = array("--date=raw");
+
+            $this->run("show $commit", $args);
+
+            $results = explode("\n", $this->cmd['results']);
+            $commit = array();
+            $commit_info = array();
+            $diff_info = array();
+
+            foreach ($results as $line) {
+
+                // Process the file diffs
+                if ( isset($commit['diffs']) ) {
+
+                    if ( preg_match("/^diff --git.+\sb\/(.+)$/", $line, $matches) ) {
+
+                        if ( isset($diff_info) && count($diff_info) > 0 ) {
+
+                            array_push($commit['diffs'], $diff_info);
+                            unset($diff_info);
+                            $diff_info = array();
+                            $diff_info['meta'] = array();
+                            $diff_info['diff'] = array();
+                            $diff_info['file'] = $matches[1];
+                        }
+
+                        array_push($diff_info['meta'], htmlspecialchars($line));
+                    }
+                    elseif ( preg_match("/^index\s+[a-zA-z0-9]{7,}\.\.[a-zA-z0-9]{7,}|^[-+]{3}\s[ab]{1}\/|^new file mode/", $line) ) {
+
+                        array_push($diff_info['meta'], htmlspecialchars($line));
+                    }
+                    elseif ( preg_match("/^@@\s/", $line) ) {
+
+                        array_push($diff_info['diff'], htmlspecialchars($line));
+                    }
+                    else {
+
+                        array_push($diff_info['diff'], htmlspecialchars($line));
+                    }
+                } 
+                // Process the commit message section
+                else {
+                
+                    if ( preg_match("/^commit\s+(.+)$/i", $line, $matches) ) {
+
+                        $commit_info = array();
+                        $commit_info['commit'] = $matches[1];
+                    }
+                    elseif ( preg_match("/^Author:\s+(.+)\s+<(.*)>$/i", $line, $matches) ) {
+
+                        $commit_info['author'] = $matches[1];
+                        $commit_info['email'] = $matches[2];
+                    }
+                    elseif ( preg_match("/^Date:\s+(.+)$/i", $line, $matches) ) {
+
+                        $commit_info['date'] = $matches[1];
+
+                        if ( preg_match("/^(\d+)\s+([-+0-9]+)$/", $commit_info['date'], $matches) ) {
+
+                            $commit_info['date'] = date("M j, Y", $matches[1]);
+                            $commit_info['time'] = date("H:i:s", $matches[1]);
+                            $commit_info['epoch'] = $matches[1];
+                            $commit_info['tz'] = $matches[2];
+                        }
+                    }
+                    elseif ( empty($line) || preg_match("/^\s*$/", $line) ) {
+
+                        continue;
+                    }
+                    elseif ( preg_match("/^diff --git.+\s[b]\/(.+)$/", $line, $matches) ) {
+
+                        $commit['commit_info'] = $commit_info;
+                        $commit['diffs'] = array();
+                        $diff_info['meta'] = array();
+                        $diff_info['diff'] = array();
+                        $diff_info['file'] = $matches[1];
+                        array_push($diff_info['meta'], htmlspecialchars($line)); 
+                    }
+                    else {
+
+                        if ( ! isset($commit_info['summary']) ) {
+
+                            $commit_info['summary'] = array();
+                        }
+
+                        array_push($commit_info['summary'], ltrim($line));
+                    }
+                }
+            }
+
+            if ( count($diff_info) > 0 ) {
+
+                array_push($commit['diffs'], $diff_info);
+            }
+
+            return $commit;
+        }
+
         public function getCommitLog($start = 0, $max = null) {
 
             # --max-count=<number> Limit the number of commits to output.
@@ -178,7 +283,6 @@
             }
 
             $this->run('log', $args); 
-
 
             $results = explode("\n", $this->cmd['results']);
             $commits = array();
@@ -280,7 +384,7 @@
                 $this->repodir . implode(" ", $switches) . 
                 " $gitcmd ". implode(" ", $args)
             ;            
-            //print "DEBUG : ". $res['cmd'] ."\n";
+            #print "DEBUG : ". $res['cmd'] ."\n";
 
             // Enable output buffering
             ob_start();

@@ -3,7 +3,7 @@
 <?
 
     $offset_inc = 10;
-    $offset = ( ! empty($_SESSION['obj']) ) ? $_SESSION['obj'] : 0;
+    $offset = ( ! empty($_GET['offset']) ) ? $_GET['offset'] : 0;
     if ( $offset < 0 ) { $offset = 0; }
 
     $next = $offset + $offset_inc;
@@ -14,7 +14,7 @@
     // Navigated too far
     if ( $offset > 0 && count($commits) == 0 ) {
 
-        print "<div class='navbar'><a class='ajaxy' href='".$CONFIG['base_uri']."/?repo=".$_SESSION['repo']."&nav=commits&o=".base64_encode($prev)."'>Previous</a></div>";
+        print "<div class='navbar'><a class='ajaxy' href='".$CONFIG['base_uri']."/?repo=".$_SESSION['repo']."&nav=commits&offset=$prev'>Previous</a></div>";
         $error = "There are no more commits to view.\n";
         include($thispath ."include/error.php");
     }
@@ -26,9 +26,9 @@
         print "<div class='navbar'>";
         if ( $offset > 0 ) {
 
-            print "<a class='ajaxy' href='".$CONFIG['base_uri']."/?repo=".$_SESSION['repo']."&nav=commits&o=".base64_encode($prev)."'>Previous</a>|";
+            print "<a class='ajaxy' href='".$CONFIG['base_uri']."/?repo=".$_SESSION['repo']."&nav=commits&offset=$prev'>Previous</a>|";
         }
-        print "<a class='ajaxy' href='".$CONFIG['base_uri']."/?repo=".$_SESSION['repo']."&nav=commits&o=".base64_encode($next)."'>Next</a>";
+        print "<a class='ajaxy' href='".$CONFIG['base_uri']."/?repo=".$_SESSION['repo']."&nav=commits&offset=$next'>Next</a>";
         print "<br class='clear' /></div>";
 
         foreach($commits as $commit) {
@@ -65,7 +65,7 @@
                         <tr class="<?=(($c = !$c)?'hl':'');?>">
                             <td>
                                 <div class="right">
-                                    <?=substr($commit['commit'], 0, 7);?>
+                                    <a href='<?=$CONFIG['base_uri']."/?repo=".$_SESSION['repo']."&nav=commits&commit=".$commit['commit'];?>'><?=substr($commit['commit'], 0, 7);?></a>
                                 </div>
                                 <div class="left">
                                     <strong><?=htmlspecialchars($commit['summary'][0], ENT_QUOTES);?></strong><br />
