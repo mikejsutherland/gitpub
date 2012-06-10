@@ -124,6 +124,9 @@ body {
 .blue {
     color: #398bc5;
 }
+.black {
+    color: #5b5b5b;
+}
 .red {
     color: #ff3333;
 }
@@ -250,12 +253,17 @@ table.browser td a, table.browser td a:visited, table.browser td a:active {
     color: #398bc5;
     text-decoration: none;
 }
-table.browser td a:hover {
+table.browser td a:hover, table.browser th a:hover {
     text-decoration: underline;
 }
 table.browser th {
     line-height: 28px;
     -webkit-font-smoothing: antialiased;
+}
+table.browser th a, table.browser th a:visited, table.browser th a:active {
+    color: #398bc5;
+    font-weight: normal;
+    text-decoration: none;
 }
 table.browser tbody th {
     width: 300px;

@@ -42,6 +42,11 @@
         }
     }
 
+    if ( ! empty($_SESSION['commit']) ) {
+
+        $navlinks .= " @ <span class=''>". substr($_SESSION['commit'], 0, 7) ."</span>";
+    }
+    
     print "$navlinks\n";
 ?>
 
@@ -65,7 +70,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><div class='fileviewer'><?=$gp->getFile($_SESSION['obj']);?></div></td>
+                            <td><div class='fileviewer'><?=$gp->getFile($_SESSION['obj'], $_SESSION['commit']);?></div></td>
                         </tr>
                     </tbody>
                 </table>
@@ -75,7 +80,7 @@
     // Display file tree
     else {
 
-        $files = $gp->getTree($_SESSION['obj']);
+        $files = $gp->getTree($_SESSION['obj'], $_SESSION['commit']);
 
         if ( count($files) > 0 ) {
 

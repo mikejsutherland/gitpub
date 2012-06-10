@@ -49,7 +49,13 @@
                 <table class="file browser">
                     <thead>
                         <tr class="gradient_gray">
-                            <th><?=$filediff['file'];?></th>
+                            <th>
+                                <?=$filediff['file'];?>
+                                <span class="right blue">
+                                    <a href='<?=$CONFIG['base_uri']."/?repo=".$_SESSION['repo']."&nav=files&o=".base64_encode($filediff['file'])."&commit=".$diffs['commit_info']['commit'];?>'>View file @ <?=substr($diffs['commit_info']['commit'], 0, 7);?></a>
+                                </span>
+                                <br />
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
