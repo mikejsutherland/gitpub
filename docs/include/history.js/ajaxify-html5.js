@@ -26,11 +26,7 @@
 			menuChildrenSelector = '> li,> ul > li',
 			/* Application Generic Variables */
 			$body = $(document.body),
-			rootUrl = History.getRootUrl(),
-			scrollOptions = {
-				duration: 800,
-				easing:'swing'
-			};
+			rootUrl = History.getRootUrl()
 		
 		// Ensure Content
 		if ( $content.length === 0 ) {
@@ -145,9 +141,6 @@
 					$content.stop(true,true);
 					$content.html(contentHtml).ajaxify().css('opacity',100).show(); /* you could fade in here if you'd like */
 
-                    // Customizations
-                    fileBrowserLoaded();
-
 					// Update the title
 					document.title = $data.find('.document-title:first').text();
 					try {
@@ -163,7 +156,6 @@
 					});
 
 					// Complete the change
-					if ( $body.ScrollTo||false ) { $body.ScrollTo(scrollOptions); } /* http://balupton.com/projects/jquery-scrollto */
 					$body.removeClass('loading');
 	
 					// Inform Google Analytics of the change
@@ -180,6 +172,11 @@
 				error: function(jqXHR, textStatus, errorThrown){
 					document.location.href = url;
 					return false;
+				},
+				complete: function(jqXHR, textStatus){
+
+					// Customizations
+					fileBrowserLoaded();
 				}
 			}); // end ajax
 

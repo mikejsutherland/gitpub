@@ -34,7 +34,7 @@
     require_once('lib/gitpub/gp.view.php');
 
     # XXX - test string   ?repo=gitpub&nav=files&cwd=Lmh0YWNjZXNz
-    #$_GET['repo'] = 'gitpub'; $_GET['nav'] = 'files'; $_GET['cwd'] = 'Lmh0YWNjZXNz'; #.htaccess
+    #$_GET['repo'] = 'gitpub'; $_GET['nav'] = 'files'; $_GET['o'] = 'ZG9jcy9pbmNsdWRlL2hpc3RvcnkuanMvYWpheGlmeS1odG1sNS5qcw=='; 
 
     // Set the repo
     $_SESSION['repo'] = isset($_GET['repo']) ? $_GET['repo'] : null;
@@ -55,7 +55,7 @@
     $repos = getRepos($CONFIG['repo_directory']);
     $repo_count = count($repos);
 
-    $_SESSION['filepath'] = ( isset($_GET['o']) ) ? base64_decode($_GET['o']) : "";
+    #$_SESSION['filepath'] = ( isset($_GET['o']) ) ? base64_decode($_GET['o']) : "";
 
     # If provided a repo load the git object
     #
@@ -100,7 +100,6 @@
 
     <!-- history.js -->
     <script rel="javascript" type="text/javascript" src="<?=$CONFIG['base_uri'];?>/docs/include/history.js/jquery.history.js"></script>      
-    <script rel="javascript" type="text/javascript" src="<?=$CONFIG['base_uri'];?>/docs/include/history.js/jquery.scrollto.min.js"></script>
     <script rel="javascript" type="text/javascript" src="<?=$CONFIG['base_uri'];?>/docs/include/history.js/ajaxify-html5.js"></script>
 
     <!-- gitpub stylesheet -->
