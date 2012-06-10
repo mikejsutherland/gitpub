@@ -90,7 +90,7 @@
             $this->abbr_commit = substr($id, 0, 7);
         }
 
-        public function getDescription($dir) {
+        public function getDescription($dir = null) {
 
             if ( empty($dir) ) {
                 $dir = $this->repodir;
