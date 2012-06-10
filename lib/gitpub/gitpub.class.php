@@ -89,13 +89,47 @@
             $this->abbr_commit = substr($id, 0, 7);
         }
 
-        public function getTree($commit = null) {
+        public function getFile($file, $commit = null) {
 
             if ( empty($commit) ) {
                 $commit = $this->tip;
             }
 
-            $this->run("show $commit:");
+            $this->run("show $commit:$file");
+
+            if ( preg_match("/\.(jpg|jpeg|png|gif|ico|bmp)$/", $file) ) {
+
+                return "<img src='data:image/png;base64,". base64_encode($this->cmd['results']) ."' />\n";
+            }
+            else {
+
+                #$str = implode("\n", $this->cmd['results']);
+                $str = $this->cmd['results'];
+
+                # verify we have ascii data
+                if ( mb_check_encoding($str, 'ASCII') ) {
+
+                    # plain text (non code)
+                    if ( preg_match("/\.(txt)$/", $file) ) {
+                        return "<pre class='prettyprint linenums nocode'>". htmlspecialchars($str) ."</pre>\n";
+                    }
+                    else {
+                        return "<pre class='prettyprint linenums'>". htmlspecialchars($str) ."</pre>\n";
+                    }
+                }
+                else {
+                    return "<div class='message'>This file cannot be viewed online.\n</div>\n";
+                }
+            }
+        }
+
+        public function getTree($file = null, $commit = null) {
+
+            if ( empty($commit) ) {
+                $commit = $this->tip;
+            }
+
+            $this->run("show $commit:$file");
 
             $results = explode("\n", $this->cmd['results']);
             $files = array();
@@ -202,6 +236,7 @@
                 $this->projectsdir . "/" . $this->repo . implode(" ", $switches) . 
                 " $gitcmd ". implode(" ", $args)
             ;            
+            //print "DEBUG : ". $res['cmd'] ."\n";
 
             // Enable output buffering
             ob_start();
@@ -212,12 +247,13 @@
             // Close the output buffer
             ob_end_clean();
 
-            $this->cmd = $res;
-
             if ( $res['rc'] !== 0 ) {
 
                 throw new Exception("Error running command: '". $res['cmd'] ."', rc: ". $res['rc'] ."\n");
             }
+
+            // Store the result
+            $this->cmd = $res;
         }
 
     }
