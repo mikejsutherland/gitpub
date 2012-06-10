@@ -98,11 +98,11 @@
                 $parent = explode('/', $path);
                 array_pop($parent);
 
-                $parent_uri = $CONFIG['base_uri'] ."/". $_SESSION['repo'] .'/files/'; 
+                $parent_uri = $CONFIG['base_uri'] ."/?repo=". $_SESSION['repo'] .'&nav=files'; 
 
                 if ( ! empty($parent) ) {
 
-                    $parent_uri .= base64_encode(implode('/', $parent) ."/") ."/";
+                    $parent_uri .= "&o=". base64_encode(implode('/', $parent) ."/");
                 }
 ?>
                         <tr>
@@ -123,8 +123,8 @@
 
                     print str_pad("", 24) . "<tr>\n";
                     print str_pad("", 28) . "<td class='dir_icon'> </td>\n";
-                    print str_pad("", 28) . "<td><a class='ajaxy' href='". $CONFIG['base_uri'] ."/". $_SESSION['repo'] .'/files/'.
-                        base64_encode($_SESSION['obj'] . $dir ."/") ."/'>$dir/</a></td>\n";
+                    print str_pad("", 28) . "<td><a class='ajaxy' href='". $CONFIG['base_uri'] ."/?repo=". $_SESSION['repo'] .'&nav=files&o='.
+                        base64_encode($_SESSION['obj'] . $dir ."/") ."'>$dir/</a></td>\n";
                     print str_pad("", 28) . "<td></td>\n";
                     print str_pad("", 28) . "<td></td>\n";
                     print str_pad("", 24) . "</tr>\n";
@@ -134,8 +134,8 @@
 
                     print str_pad("", 24) . "<tr>\n";
                     print str_pad("", 28) . "<td class='file_icon'> </td>\n";
-                    print str_pad("", 28) . "<td><a class='ajaxy' href='". $CONFIG['base_uri'] ."/". $_SESSION['repo'] .'/files/'.
-                        base64_encode($_SESSION['obj'] . $file) ."/'>$file</a></td>\n";
+                    print str_pad("", 28) . "<td><a class='ajaxy' href='". $CONFIG['base_uri'] ."/?repo=". $_SESSION['repo'] .'&nav=files&o='.
+                        base64_encode($_SESSION['obj'] . $file) ."'>$file</a></td>\n";
                     print str_pad("", 28) . "<td></td>\n";
                     print str_pad("", 28) . "<td></td>\n";
                     print str_pad("", 24) . "</tr>\n";
