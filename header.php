@@ -42,16 +42,11 @@
     // Set the view
     $_SESSION['nav'] = isset($_GET['nav']) ? $_GET['nav'] : 'files'; # default view mode
     // Set the object
-    $_SESSION['obj'] = isset($_GET['o']) ? base64_decode($_GET['o']) : ""; 
+    $_SESSION['o'] = isset($_GET['o']) ? base64_decode($_GET['o']) : ""; 
     // Set the commit id
     $_SESSION['commit'] = isset($_GET['commit']) ? $_GET['commit'] : null;
-
-    if ( isset($_GET['branch']) && ! empty($_GET['branch']) ) { 
-        $_SESSION['GIT']['branch'] = $_GET['branch']; 
-    }
-    elseif ( empty($_SESSION['GIT']['branch']) ) { 
-        $_SESSION['GIT']['branch'] = 'master';
-    }
+    // Set the branch
+    $_SESSION['branch'] = isset($_GET['branch']) ? $_GET['branch'] : "master";
 
     // Set the repo
     if ( ! empty($_SESSION['repo']) ) {

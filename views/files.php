@@ -3,11 +3,11 @@
                 <div class="navbar">
 <?
 
-    $navlinks = "<a class='ajaxy' href='". $CONFIG['base_uri'] ."/?repo=". $_SESSION['repo'] ."&nav=files'>". $_SESSION['repo'] ."</a>";
+    $navlinks = "<a class='ajaxy' href='". $CONFIG['base_uri'] ."/". genLink(array("o" => null)) ."'>". $_SESSION['repo'] ."</a>";
 
-    if ( ! empty($_SESSION['obj']) ) { 
+    if ( ! empty($_SESSION['o']) ) { 
 
-        $pathsegments = explode('/', preg_replace("/\/$/", "", $_SESSION['obj']));
+        $pathsegments = explode('/', preg_replace("/\/$/", "", $_SESSION['o']));
         $pathpieces = count($pathsegments);
 
         if ( $pathpieces > 0 ) {
@@ -24,19 +24,15 @@
 
                 if ( $c < $pathpieces ) {
 
-                    $navlinks .= "<a class='ajaxy' href='". $CONFIG['base_uri']
-                        ."/?repo=". $_SESSION['repo']
-                        ."&nav=files&o=". base64_encode(implode('/',$base) ."/")
+                    $navlinks .= "<a class='ajaxy' href='". $CONFIG['base_uri'] ."/".
+                        genLink(array("o" => implode('/',$base) ."/"))
                         ."'>$piece</a>";
 
                     $navlinks .= "/";
                 }
                 else {
 
-                    $navlinks .= "<a class='ajaxy' href='". $CONFIG['base_uri']
-                        ."/?repo=". $_SESSION['repo']
-                        ."&nav=files&o=". base64_encode(implode('/',$base))
-                        ."'>$piece</a>";
+                    $navlinks .= $piece;
                 }
             }
         }
@@ -55,9 +51,9 @@
 <?
 
     // Display file
-    if ( ! empty($_SESSION['obj']) && ! preg_match("/\/$/", $_SESSION['obj']) ) {
+    if ( ! empty($_SESSION['o']) && ! preg_match("/\/$/", $_SESSION['o']) ) {
 
-        $path = preg_replace("/\/$/", "", $_SESSION['obj']);
+        $path = preg_replace("/\/$/", "", $_SESSION['o']);
         $path_segments = explode('/', $path);
         $file = array_pop($path_segments);
 
@@ -70,7 +66,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><div class='fileviewer'><?=$gp->getFile($_SESSION['obj'], $_SESSION['commit']);?></div></td>
+                            <td><div class='fileviewer'><?=$gp->getFile($_SESSION['o'], $_SESSION['commit']);?></div></td>
                         </tr>
                     </tbody>
                 </table>
@@ -80,7 +76,7 @@
     // Display file tree
     else {
 
-        $files = $gp->getTree($_SESSION['obj'], $_SESSION['commit']);
+        $files = $gp->getTree($_SESSION['o'], $_SESSION['commit']);
 
         if ( count($files) > 0 ) {
 
@@ -97,17 +93,21 @@
                     <tbody>
 <?
 
-            if ( ! empty($_SESSION['obj']) ) {
+            if ( ! empty($_SESSION['o']) ) {
 
-                $path = preg_replace("/\/$/", "", $_SESSION['obj']);
+                $path = preg_replace("/\/$/", "", $_SESSION['o']);
                 $parent = explode('/', $path);
                 array_pop($parent);
 
-                $parent_uri = $CONFIG['base_uri'] ."/?repo=". $_SESSION['repo'] .'&nav=files'; 
+                $parent_uri = $CONFIG['base_uri'] ."/"; #?repo=". $_SESSION['repo'] .'&nav=files'; 
 
                 if ( ! empty($parent) ) {
 
-                    $parent_uri .= "&o=". base64_encode(implode('/', $parent) ."/");
+                    $parent_uri .= genLink(array("o" => implode('/', $parent) ."/")); 
+                }
+                else {
+
+                    $parent_uri .= "?repo=". $_SESSION['repo'] .'&nav=files';
                 }
 ?>
                         <tr>
@@ -128,8 +128,8 @@
 
                     print str_pad("", 24) . "<tr>\n";
                     print str_pad("", 28) . "<td class='dir_icon'> </td>\n";
-                    print str_pad("", 28) . "<td><a class='ajaxy' href='". $CONFIG['base_uri'] ."/?repo=". $_SESSION['repo'] .'&nav=files&o='.
-                        base64_encode($_SESSION['obj'] . $dir ."/") ."'>$dir/</a></td>\n";
+                    print str_pad("", 28) . "<td><a class='ajaxy' href='". $CONFIG['base_uri'] ."/".
+                        genLink(array("o" => $_SESSION['o'] . $dir ."/")) ."'>$dir/</a></td>\n";
                     print str_pad("", 28) . "<td></td>\n";
                     print str_pad("", 28) . "<td></td>\n";
                     print str_pad("", 24) . "</tr>\n";
@@ -139,8 +139,8 @@
 
                     print str_pad("", 24) . "<tr>\n";
                     print str_pad("", 28) . "<td class='file_icon'> </td>\n";
-                    print str_pad("", 28) . "<td><a class='ajaxy' href='". $CONFIG['base_uri'] ."/?repo=". $_SESSION['repo'] .'&nav=files&o='.
-                        base64_encode($_SESSION['obj'] . $file) ."'>$file</a></td>\n";
+                    print str_pad("", 28) . "<td><a class='ajaxy' href='". $CONFIG['base_uri'] ."/".
+                        genLink(array("o" => $_SESSION['o'] . $file)) ."'>$file</a></td>\n";
                     print str_pad("", 28) . "<td></td>\n";
                     print str_pad("", 28) . "<td></td>\n";
                     print str_pad("", 24) . "</tr>\n";

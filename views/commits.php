@@ -14,7 +14,9 @@
     // Navigated too far
     if ( $offset > 0 && count($commits) == 0 ) {
 
-        print "<div class='navbar'><a class='ajaxy' href='".$CONFIG['base_uri']."/?repo=".$_SESSION['repo']."&nav=commits&offset=$prev'>Previous</a></div>";
+        print "<div class='navbar'><a class='ajaxy' href='".$CONFIG['base_uri']."/".
+            genLink(array("offset" => $prev))."'>Previous</a></div>";
+#?repo=".$_SESSION['repo']."&nav=commits&offset=$prev'>Previous</a></div>";
         $error = "There are no more commits to view.\n";
         include($thispath ."include/error.php");
     }
@@ -26,9 +28,9 @@
         print "<div class='navbar'>";
         if ( $offset > 0 ) {
 
-            print "<a class='ajaxy' href='".$CONFIG['base_uri']."/?repo=".$_SESSION['repo']."&nav=commits&offset=$prev'>Previous</a>|";
+            print "<a class='ajaxy' href='".$CONFIG['base_uri']."/". genLink(array("offset" => $prev)) ."'>Previous</a>|";
         }
-        print "<a class='ajaxy' href='".$CONFIG['base_uri']."/?repo=".$_SESSION['repo']."&nav=commits&offset=$next'>Next</a>";
+        print "<a class='ajaxy' href='".$CONFIG['base_uri']."/". genLink(array("offset" => $next)) ."'>Next</a>";
         print "<br class='clear' /></div>";
 
         foreach($commits as $commit) {
@@ -65,7 +67,8 @@
                         <tr class="<?=(($c = !$c)?'hl':'');?>">
                             <td>
                                 <div class="right">
-                                    <a href='<?=$CONFIG['base_uri']."/?repo=".$_SESSION['repo']."&nav=commits&commit=".$commit['commit'];?>'><?=substr($commit['commit'], 0, 7);?></a>
+                                    <a href='<?=$CONFIG['base_uri']."/".
+                                        genLink(array("offset" => null, "commit" => $commit['commit']));?>'><?=substr($commit['commit'], 0, 7);?></a>
                                 </div>
                                 <div class="left">
                                     <strong><?=htmlspecialchars($commit['summary'][0], ENT_QUOTES);?></strong><br />

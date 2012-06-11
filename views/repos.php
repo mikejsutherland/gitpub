@@ -6,7 +6,7 @@
                     Available Git Repositories:<br />
                     <ul>
                         <? foreach ($gp->repos as $repo) { ?><?="\n";?>
-                        <li><a href='<?=$CONFIG['base_uri'] ."/?repo=". $repo['name'];?>'><?=$repo['name'];?></a></li>
+                        <li><a href='<?=$CONFIG['base_uri'] ."/". genLink(array("repo" => $repo['name']));?>'><?=$repo['name'];?></a></li>
                         <? } ?><?="\n";?>
                     </ul>
                 </div>

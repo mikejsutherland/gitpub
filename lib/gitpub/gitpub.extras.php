@@ -1,5 +1,30 @@
 <?
 
+    function genLink($params = array()) {
+
+        $link = "";
+        $default_params = $_GET; // existing GET params are included automatically
+
+        $parameters = array_merge($default_params, $params);
+
+        foreach ($parameters as $key => $val) {
+
+            if ( empty($val) || !isset($val) ) { continue; }
+
+            if ( $key == "o" ) {
+
+                $link .= "&o=". base64_encode($val);
+            }
+            else {
+                $link .= "&$key=$val";
+            }
+        }
+
+        $link[0] = "?";
+
+        return $link;
+    }
+
     function relativeDate($date) {
 
         // Display the relative time difference between then and now

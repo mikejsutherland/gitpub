@@ -25,7 +25,7 @@
                         <tr class="hl">
                             <td>
                                 <div class="right">
-                                    <a href='<?=$CONFIG['base_uri']."/?repo=".$_SESSION['repo']."&nav=commits&commit=".$diffs['commit_info']['commit'];?>'><?=substr($diffs['commit_info']['commit'], 0, 7);?></a>
+                                    <a class='ajaxy' href='<?=$CONFIG['base_uri']."/".genLink(array("commit" => $diffs['commit_info']['commit']));?>'><?=substr($diffs['commit_info']['commit'], 0, 7);?></a>
                                 </div>
                                 <div class="left">
                                     <strong><?=htmlspecialchars($diffs['commit_info']['summary'][0], ENT_QUOTES);?></strong><br />
@@ -52,7 +52,7 @@
                             <th>
                                 <?=$filediff['file'];?>
                                 <span class="right blue">
-                                    <a href='<?=$CONFIG['base_uri']."/?repo=".$_SESSION['repo']."&nav=files&o=".base64_encode($filediff['file'])."&commit=".$diffs['commit_info']['commit'];?>'>View file @ <?=substr($diffs['commit_info']['commit'], 0, 7);?></a>
+                                    <a href='<?=$CONFIG['base_uri']."/".genLink(array("o" => $filediff['file'], "commit" => $diffs['commit_info']['commit'], "nav" => "files"));?>'>View file @ <?=substr($diffs['commit_info']['commit'], 0, 7);?></a>
                                 </span>
                                 <br />
                             </th>
