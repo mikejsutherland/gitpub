@@ -24,10 +24,15 @@
                     <tbody>
                         <tr class="hl">
                             <td>
-                                <div class="right">
-                                    <a class='ajaxy' href='<?=$CONFIG['base_uri']."/".genLink(array("commit" => $diffs['commit_info']['commit']));?>'><?=substr($diffs['commit_info']['commit'], 0, 7);?></a>
+                                <div class="right" style="text-align: right;">
+                                    <span class="small grey">commit</span>
+                                    <span class="small black"><?=$diffs['commit_info']['commit']?></span>
+                                    <br />
+                                    <span class="small">
+                                        <a href="<?=$CONFIG['base_uri']."/".genLink(array("commit" => $diffs['commit_info']['commit'], "nav" => "files", "o" => null));?>">Browse code @ <?=substr($diffs['commit_info']['commit'], 0, 7);?></a>
+                                    </span>
                                 </div>
-                                <div class="left">
+                                <div class="left" style="width: 600px;">
                                     <strong><?=htmlspecialchars($diffs['commit_info']['summary'][0], ENT_QUOTES);?></strong><br />
                                     <span class="small">
                                         <span class="blue"><?=htmlspecialchars($diffs['commit_info']['author'], ENT_QUOTES);?></span>
@@ -54,7 +59,7 @@
                                 <span class="right blue">
                                     <a href='<?=$CONFIG['base_uri']."/".genLink(array("o" => $filediff['file'], "commit" => $diffs['commit_info']['commit'], "nav" => "files"));?>'>View file @ <?=substr($diffs['commit_info']['commit'], 0, 7);?></a>
                                 </span>
-                                <br />
+                                <br class='clear' />
                             </th>
                         </tr>
                     </thead>

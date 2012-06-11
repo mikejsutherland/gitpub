@@ -40,7 +40,7 @@
 
     if ( ! empty($_SESSION['commit']) ) {
 
-        $navlinks .= " @ <span class=''>". substr($_SESSION['commit'], 0, 7) ."</span>";
+        $navlinks .= " @ <span class=''><a href='". $CONFIG['base_uri'] ."/". genLink(array("nav" => "commits", "o" => null)) ."'>". substr($_SESSION['commit'], 0, 7) ."</a></span>";
     }
     
     print "$navlinks\n";

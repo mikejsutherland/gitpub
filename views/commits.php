@@ -16,7 +16,6 @@
 
         print "<div class='navbar'><a class='ajaxy' href='".$CONFIG['base_uri']."/".
             genLink(array("offset" => $prev))."'>Previous</a></div>";
-#?repo=".$_SESSION['repo']."&nav=commits&offset=$prev'>Previous</a></div>";
         $error = "There are no more commits to view.\n";
         include($thispath ."include/error.php");
     }
@@ -66,11 +65,18 @@
 
                         <tr class="<?=(($c = !$c)?'hl':'');?>">
                             <td>
-                                <div class="right">
-                                    <a href='<?=$CONFIG['base_uri']."/".
-                                        genLink(array("offset" => null, "commit" => $commit['commit']));?>'><?=substr($commit['commit'], 0, 7);?></a>
+                                <div class="right" style="text-align: right;">
+                                    <span class="small grey">commit</span>
+                                    <span class="blue"><a href='<?=$CONFIG['base_uri']."/".
+                                        genLink(array("offset" => null, "commit" => $commit['commit']));?>'><?=substr($commit['commit'], 0, 10);?></a>
+                                    </span>
+                                    <br />
+                                    <span class="smaller">
+                                        <a href="<?=$CONFIG['base_uri']."/".
+                                            genLink(array("commit" => $commit['commit'], "nav" => "files", "o" => null));?>">Browse code @ <?=substr($commit['commit'], 0, 7);?></a>
+                                    </span>
                                 </div>
-                                <div class="left">
+                                <div class="left" style="width: 600px;">
                                     <strong><?=htmlspecialchars($commit['summary'][0], ENT_QUOTES);?></strong><br />
                                     <span class="small">
                                         <span class="blue"><?=htmlspecialchars($commit['author'], ENT_QUOTES);?></span>
