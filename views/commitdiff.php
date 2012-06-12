@@ -32,7 +32,7 @@
                                         <a href="<?=$CONFIG['base_uri']."/".genLink(array("commit" => $diffs['commit_info']['commit'], "nav" => "files", "o" => null));?>">Browse code @ <?=substr($diffs['commit_info']['commit'], 0, 7);?></a>
                                     </span>
                                 </div>
-                                <div class="left" style="width: 600px;">
+                                <div class="left log">
                                     <strong><?=htmlspecialchars($diffs['commit_info']['summary'][0], ENT_QUOTES);?></strong><br />
                                     <span class="small">
                                         <span class="blue"><?=htmlspecialchars($diffs['commit_info']['author'], ENT_QUOTES);?></span>

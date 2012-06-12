@@ -76,7 +76,7 @@
                                             genLink(array("commit" => $commit['commit'], "nav" => "files", "o" => null));?>">Browse code @ <?=substr($commit['commit'], 0, 7);?></a>
                                     </span>
                                 </div>
-                                <div class="left" style="width: 600px;">
+                                <div class="left log">
                                     <strong><?=htmlspecialchars($commit['summary'][0], ENT_QUOTES);?></strong><br />
                                     <span class="small">
                                         <span class="blue"><?=htmlspecialchars($commit['author'], ENT_QUOTES);?></span>

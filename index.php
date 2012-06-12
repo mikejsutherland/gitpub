@@ -50,8 +50,9 @@
             }
         }
         elseif ( $_SESSION['nav'] == 'branches' ) { 
-            $error = "what...you don't dev on master?";
-            include('include/error.php');
+
+            // Commit browser
+            include('views/branches.php');
         }
 
     }

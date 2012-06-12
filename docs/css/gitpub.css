@@ -118,11 +118,17 @@ body {
 .right {
     float: right!important;
 }
+.tright {
+    text-align: right;
+}
 .grey {
     color: #aeaeae;
 }
 .blue {
     color: #398bc5;
+}
+.white {
+    color: #fff;
 }
 .black {
     color: #5b5b5b;
@@ -271,6 +277,18 @@ table.browser tbody th {
 table.browser tr.hl {
     background-color: #f7fbfc; /*#f8f8f8;*/
 }
+table.browser tr.base {
+    background-color: #444; 
+    color: #fff;
+}
+table.browser tr.base a, table.browser tr.base a:visited, table.browser tr.base a:active {
+    text-decoration: none;
+    color: #fff;
+}
+table.browser tr.base a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
 .small {
     font-size: 11px !important;
 }
@@ -363,6 +381,9 @@ pre.prettyprint { /* customizations for pretty-print */
     color: #398bc5;
     font-size: 16px;
 }
+.log {
+    width: 650px;
+}
 pre.diff {
     text-align: left;
     margin: 0px;
@@ -385,3 +406,4 @@ pre.diff span {
 .remove {
     background-color: #ffdddd;
 }
+

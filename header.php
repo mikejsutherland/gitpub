@@ -54,6 +54,11 @@
         $gp->setRepo($_SESSION['repo']);
     }
 
+    if ( ! empty($_SESSION['branch']) ) {
+
+        $gp->setBranch($_SESSION['branch']);
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

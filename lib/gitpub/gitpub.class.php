@@ -109,7 +109,7 @@
         public function getFile($file, $commit = null) {
 
             if ( empty($commit) ) {
-                $commit = $this->tip;
+                $commit = $this->branch;
             }
 
             $this->run("show $commit:$file");
@@ -143,7 +143,7 @@
         public function getTree($file = null, $commit = null) {
 
             if ( empty($commit) ) {
-                $commit = $this->tip;
+                $commit = $this->branch;
             }
 
             $this->run("show $commit:$file");
@@ -169,7 +169,7 @@
         public function getCommitDiff($commit = null) {
 
             if ( empty($commit) ) {
-                $commit = $this->tip;
+                $commit = $this->branch;
             }
 
             $args = array("--date=raw");
@@ -271,7 +271,52 @@
             return $commit;
         }
 
-        public function getCommitLog($start = 0, $max = null) {
+        public function getBranches($branch = "master") {
+
+            $args = array("-v", "--list", "--no-abbrev", "--no-merged HEAD");
+
+            $this->run("branch", $args);
+
+            $results = explode("\n", $this->cmd['results']);
+            $results = array_filter($results, 'strlen'); // remove null values
+            $results = array_map('trim', $results); // clear tabs/spaces
+
+            $branches = array();
+
+            // only master branch or other...
+            if ( count($results) ) {
+
+                foreach ($results as $line) {
+
+                    preg_match("/^([\*]*.+?)\s+([a-z0-9]+)\s+(.+)$/", $line, $matches); 
+
+                    $branch = array();
+                    $branch['name'] = preg_replace("/^\*\s/", "", $matches[1]);
+                    $branch['commit'] = $matches[2];
+                    $branch['message'] = $matches[3];
+
+                    array_push($branches, $branch);
+
+                }
+            }
+
+            return $branches;
+        }
+
+        public function getBranchRevisions($branch = "master") {
+
+            $args = array("--left-right", "HEAD...$branch");
+
+            $this->run("rev-list", $args);
+
+            $results = explode("\n", $this->cmd['results']);
+            $results = array_filter($results, 'strlen'); // remove null values
+            $results = array_map('trim', $results); // clear tabs/spaces
+
+            return $results;
+        }
+
+        public function getCommitLog($start = 0, $max = null, $branch = null) {
 
             # --max-count=<number> Limit the number of commits to output.
             # --skip=<number> Skip number commits before starting to show the commit output.
@@ -282,7 +327,15 @@
                 array_push($args, "--max-count=$max");
             }
 
-            $this->run('log', $args); 
+            if ( empty($branch) ) { 
+                $branch = $this->branch;
+            }
+
+            if ( $branch !== "master" ) {
+                $branch .= " ^master";
+            }
+
+            $this->run("log $branch", $args); 
 
             $results = explode("\n", $this->cmd['results']);
             $commits = array();
