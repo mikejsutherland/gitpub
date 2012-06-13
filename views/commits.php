@@ -14,8 +14,8 @@
     // Navigated too far
     if ( $offset > 0 && count($commits) == 0 ) {
 
-        print "<div class='navbar'><a class='ajaxy' href='".$CONFIG['base_uri']."/".
-            genLink(array("offset" => $prev))."'>Previous</a></div>";
+        print "<div class='navbar'><a class='ajaxy left' href='".$CONFIG['base_uri']."/".
+            genLink(array("offset" => $prev))."'>< Previous</a><br class='clear' /></div>";
         $error = "There are no more commits to view.\n";
         include($thispath ."include/error.php");
     }
@@ -24,13 +24,18 @@
         $c = false;
         $prevts = null;
 
-        print "<div class='navbar'>";
-        if ( $offset > 0 ) {
+        if ( $offset > 0 || count($commits) == $offset_inc ) {
+            print "<div class='navbar'>";
 
-            print "<a class='ajaxy' href='".$CONFIG['base_uri']."/". genLink(array("offset" => $prev)) ."'>Previous</a>|";
+            if ( $offset > 0 ) {
+                print "<a class='ajaxy left' href='".$CONFIG['base_uri']."/". genLink(array("offset" => $prev)) ."'>< Previous</a>";
+            }
+
+            if ( count($commits) == $offset_inc ) {
+                print "<a class='ajaxy right' href='".$CONFIG['base_uri']."/". genLink(array("offset" => $next)) ."'>Next ></a>";
+            }
+            print "<br class='clear' /></div>";
         }
-        print "<a class='ajaxy' href='".$CONFIG['base_uri']."/". genLink(array("offset" => $next)) ."'>Next</a>";
-        print "<br class='clear' /></div>";
 
         foreach($commits as $commit) {
 

@@ -6,9 +6,6 @@
     try {
 
         $branches = $gp->getBranches();
-
-        #print "<pre>"; print_r($branches); print "</pre>\n";
-
         $branch_meta = $gp->getCommitLog(0, 1, "master");
 
 ?>
@@ -31,7 +28,6 @@
 
             if ( preg_match("/master/i", $branch['name']) ) { continue; }
 
-
             $branch_meta = $gp->getCommitLog(0, 1, $branch['commit']);
             $rev = $gp->getBranchRevisions($branch['name']);
 
@@ -53,7 +49,7 @@
                                     <div class="left log">
                                         <? if ( $_SESSION['branch'] == $branch['name'] ) { ?>
                                         <img src="<?=$CONFIG['base_uri'];?>/docs/images/asterisk.gif" /> <? } ?>
-                                        <strong><a class="ajaxy" href='<?=$CONFIG['base_uri']."/". genLink(array("branch" => $branch['name']));?>'><?=$branch['name'];?></a></strong><br />
+                                        <strong><a href='<?=$CONFIG['base_uri']."/". genLink(array("branch" => $branch['name']));?>'><?=$branch['name'];?></a></strong><br />
                                         <span class="small black">Last updated <?=relativeDate($branch_meta[0]['epoch']);?> by </span>
                                         <span class="small blue"><?=$branch_meta[0]['author'];?></span>
                                     </div>
