@@ -1,18 +1,15 @@
 <?
 
-    ## Web specific settings ##
+    ## gitpub web settings ##
     $CONFIG['base_uri'] = '/gitpub';
+    $CONFIG['commits_per_page'] = 15;
 
-    ## Git repo settings ##
-    $CONFIG['repo_directory'] = '/Volumes/Development/git';
-    #$CONFIG['repo_directory'] = '/Users/michael/dev/thirdparty/ewiki';
-
-    ## Git binary ##
-    $CONFIG['git'] = '/usr/local/git/bin';
-
-
-    # Used by the gitpub class
+    ## paths ##
     $CONFIG['projects_dir'] = '/Volumes/Development/git';
     $CONFIG['git_path'] = '/usr/local/git/bin';
+
+    ## Testing ##
+    error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
+    ini_set('error_reporting', E_ALL);
 
 ?>

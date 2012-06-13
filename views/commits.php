@@ -2,14 +2,13 @@
 
 <?
 
-    $offset_inc = 10;
     $offset = ( ! empty($_GET['offset']) ) ? $_GET['offset'] : 0;
     if ( $offset < 0 ) { $offset = 0; }
 
-    $next = $offset + $offset_inc;
-    $prev = $offset - $offset_inc;
+    $next = $offset + $CONFIG['commits_per_page'];
+    $prev = $offset - $CONFIG['commits_per_page'];
 
-    $commits = $gp->getCommitLog($offset, $offset_inc);
+    $commits = $gp->getCommitLog($offset, $CONFIG['commits_per_page']);
 
     // Navigated too far
     if ( $offset > 0 && count($commits) == 0 ) {
@@ -24,14 +23,14 @@
         $c = false;
         $prevts = null;
 
-        if ( $offset > 0 || count($commits) == $offset_inc ) {
+        if ( $offset > 0 || count($commits) == $CONFIG['commits_per_page'] ) {
             print "<div class='navbar'>";
 
             if ( $offset > 0 ) {
                 print "<a class='ajaxy left' href='".$CONFIG['base_uri']."/". genLink(array("offset" => $prev)) ."'>< Previous</a>";
             }
 
-            if ( count($commits) == $offset_inc ) {
+            if ( count($commits) == $CONFIG['commits_per_page'] ) {
                 print "<a class='ajaxy right' href='".$CONFIG['base_uri']."/". genLink(array("offset" => $next)) ."'>Next ></a>";
             }
             print "<br class='clear' /></div>";
@@ -97,14 +96,14 @@
                     </tbody>
                 </table>
 <?
-        if ( $offset > 0 || count($commits) == $offset_inc ) {
+        if ( $offset > 0 || count($commits) == $CONFIG['commits_per_page'] ) {
             print "<div class='navbar'>";
 
             if ( $offset > 0 ) {
                 print "<a class='ajaxy left' href='".$CONFIG['base_uri']."/". genLink(array("offset" => $prev)) ."'>< Previous</a>";
             }
 
-            if ( count($commits) == $offset_inc ) {
+            if ( count($commits) == $CONFIG['commits_per_page'] ) {
                 print "<a class='ajaxy right' href='".$CONFIG['base_uri']."/". genLink(array("offset" => $next)) ."'>Next ></a>";
             }
             print "<br class='clear' /></div>";
