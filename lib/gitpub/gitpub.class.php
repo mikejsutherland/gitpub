@@ -274,6 +274,7 @@
         public function getBranches($branch = "master") {
 
             $args = array("-v", "--list", "--no-abbrev", "--no-merged HEAD");
+            if ( $this->_isLocal() ) { array_push($args, "-r"); } // read remotes if local
 
             $this->run("branch", $args);
 
@@ -291,7 +292,8 @@
                     preg_match("/^([\*]*.+?)\s+([a-z0-9]+)\s+(.+)$/", $line, $matches); 
 
                     $branch = array();
-                    $branch['name'] = preg_replace("/^\*\s/", "", $matches[1]);
+                    $branch['branch'] = preg_replace("/^\*\s/", "", $matches[1]);
+                    $branch['name'] = preg_replace("/^origin\//", "", $branch['branch']);
                     $branch['commit'] = $matches[2];
                     $branch['message'] = $matches[3];
 
@@ -321,7 +323,7 @@
             # --max-count=<number> Limit the number of commits to output.
             # --skip=<number> Skip number commits before starting to show the commit output.
 
-            $args = array("--skip=$start", "--date=raw");
+            $args = array("--skip=$start", "--date=raw", "--no-merges");
 
             if ( isset($max) ) { 
                 array_push($args, "--max-count=$max");
@@ -404,7 +406,7 @@
         protected function _isRemote($dir = null) {
 
             if ( empty($dir) ) {
-                $dir = $this->repodir;
+                $dir = $this->opts['projects_dir'] ."/". $repo;
             }
 
             return is_dir($dir ."/refs");
@@ -413,7 +415,7 @@
         protected function _isLocal($dir = null) {
 
             if ( empty($dir) ) {
-                $dir = $this->repodir;
+                $dir = $this->opts['projects_dir'] ."/". $this->repo;
             }
 
             return is_dir($dir ."/.git/refs");

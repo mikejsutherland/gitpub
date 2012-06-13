@@ -15,7 +15,7 @@
             -->
 
             <!-- Display the Branch -->
-            <span class="urlbox gradient_gray">branch: <em><?=$_SESSION['branch'];?></em></span>
+            <span class="urlbox gradient_gray">branch: <em><?=preg_replace("/^origin\//", "", $_SESSION['branch']);?></em></span>
 <? } ?>
             <br class="clear" />
         </div>

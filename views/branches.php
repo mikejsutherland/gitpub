@@ -26,10 +26,10 @@
 
         foreach ($branches as $branch) {        
 
-            if ( preg_match("/master/i", $branch['name']) ) { continue; }
+            if ( preg_match("/master/i", $branch['branch']) ) { continue; }
 
             $branch_meta = $gp->getCommitLog(0, 1, $branch['commit']);
-            $rev = $gp->getBranchRevisions($branch['name']);
+            $rev = $gp->getBranchRevisions($branch['branch']);
 
             $ahead = 0; $behind = 0;
 
@@ -47,9 +47,9 @@
                             <tr class="<?=(($c = !$c)?'hl':'');?>">
                                 <td>
                                     <div class="left log">
-                                        <? if ( $_SESSION['branch'] == $branch['name'] ) { ?>
+                                        <? if ( $_SESSION['branch'] == $branch['branch'] ) { ?>
                                         <img src="<?=$CONFIG['base_uri'];?>/docs/images/asterisk.gif" /> <? } ?>
-                                        <strong><a href='<?=$CONFIG['base_uri']."/". genLink(array("branch" => $branch['name']));?>'><?=$branch['name'];?></a></strong><br />
+                                        <strong><a href='<?=$CONFIG['base_uri']."/". genLink(array("branch" => $branch['branch']));?>'><?=$branch['name'];?></a></strong><br />
                                         <span class="small black">Last updated <?=relativeDate($branch_meta[0]['epoch']);?> by </span>
                                         <span class="small blue"><?=$branch_meta[0]['author'];?></span>
                                     </div>
