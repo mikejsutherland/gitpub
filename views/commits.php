@@ -97,6 +97,19 @@
                     </tbody>
                 </table>
 <?
+        if ( $offset > 0 || count($commits) == $offset_inc ) {
+            print "<div class='navbar'>";
+
+            if ( $offset > 0 ) {
+                print "<a class='ajaxy left' href='".$CONFIG['base_uri']."/". genLink(array("offset" => $prev)) ."'>< Previous</a>";
+            }
+
+            if ( count($commits) == $offset_inc ) {
+                print "<a class='ajaxy right' href='".$CONFIG['base_uri']."/". genLink(array("offset" => $next)) ."'>Next ></a>";
+            }
+            print "<br class='clear' /></div>";
+        }
+
     } 
     else {
 
