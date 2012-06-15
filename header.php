@@ -30,13 +30,6 @@
 
     $gp = new GitPub($CONFIG);
 
-    # XXX - test string   ?repo=gitpub&nav=files&cwd=Lmh0YWNjZXNz
-    #$_GET['repo'] = 'gitpub';
-    #$_GET['nav'] = 'commits'; 
-    #$_GET['o'] = 'ZG9jcy9pbmNsdWRlL2hpc3RvcnkuanMvYWpheGlmeS1odG1sNS5qcw=='; 
-    #$_GET['commit'] = 'd1fac222aefe71a939f23c0dfa7932a4a8c7ad91';
-    #$_GET['commit'] = '1kjasd87';
-
     // Set the repo
     $_SESSION['repo'] = isset($_GET['repo']) ? $_GET['repo'] : null;
     // Set the view
