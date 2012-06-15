@@ -67,29 +67,63 @@
                         <tr>
                             <td>
                                 <div class='fileviewer'>
-                                    <pre class='diff'>
 <?
-                #htmlspecialchars(implode("\n", $filediff['diff']));
 
-                foreach ($filediff['diff'] as $line) {
+    $class = "";
+    $action = "";
 
-                    if ( preg_match("/^@@/", $line) ) {
+    if ( isset($filediff['lines']) ) {
+        $action = ", with ". $filediff['lines'];
+        $action .= ($filediff['lines']>1) ? " lines" : " line";
+    }
 
-                        print "<span class='info'>$line</span>\n";
-                    }
-                    elseif ( preg_match("/^\+/", $line) ) {
+    if ( $filediff['mode'] == "new" ) {
+        $class = "add";
+    }
+    elseif ( $filediff['mode'] == "deleted" ) {
+        $class = "remove";
+    }
+    
+?>
 
-                        print "<span class='add'>$line</span>\n";
-                    }
-                    elseif ( preg_match("/^-/", $line) ) {
 
-                        print "<span class='remove'>$line</span>\n";
+                                    <pre class='diff'>
+<? 
+
+                if ( $filediff['mode'] == "new" || $filediff['mode'] == "deleted" ) {
+
+                    if ( $filediff['type'] == "text" ) {
+
+                        print "<span class='$class'>". ucfirst($filediff['mode']) ." file$action.</span>\n";
                     }
                     else {
 
-                        print "<span class=''>$line</span>\n";
+                        print "<span class='$class'>". ucfirst($filediff['mode']) ." ". $filediff['type'] ." file.</span>\n";
                     }
                 }
+                else {
+
+                    foreach ($filediff['diff'] as $line) {
+
+                        if ( preg_match("/^@@/", $line) ) {
+
+                            print "<span class='info'>$line</span>\n";
+                        }
+                        elseif ( preg_match("/^\+/", $line) ) {
+
+                            print "<span class='add'>$line</span>\n";
+                        }
+                        elseif ( preg_match("/^-/", $line) ) {
+
+                            print "<span class='remove'>$line</span>\n";
+                        }
+                        else {
+
+                            print "<span class=''>$line</span>\n";
+                        }
+                    }
+                }
+
 ?>
                                     </pre>
                                 </div>

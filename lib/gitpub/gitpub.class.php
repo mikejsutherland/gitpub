@@ -196,13 +196,24 @@
                             $diff_info['meta'] = array();
                             $diff_info['diff'] = array();
                             $diff_info['file'] = $matches[1];
+                            $diff_info['mode'] = null;
+                            $diff_info['type'] = 'text';
+                            $diff_info['lines'] = 0;
                         }
 
                         array_push($diff_info['meta'], htmlspecialchars($line));
                     }
-                    elseif ( preg_match("/^index\s+[a-zA-z0-9]{7,}\.\.[a-zA-z0-9]{7,}|^[-+]{3}\s.+|^[a-zA-Z0-9]+ file mode/", $line) ) {
+                    elseif ( preg_match("/^index\s+[a-zA-Z0-9]{7,}\.\.[a-zA-Z0-9]{7,}|^[-\+]{3}\s.+/", $line) ) {
 
                         array_push($diff_info['meta'], htmlspecialchars($line));
+                    }
+                    elseif ( preg_match("/^([a-zA-Z0-9]+) file mode/", $line, $matches) ) {
+
+                        $diff_info['mode'] = strtolower($matches[1]);
+                    }
+                    elseif ( preg_match("/^([a-zA-Z]+) files \/dev/", $line, $matches) ) {
+
+                        $diff_info['type'] = strtolower($matches[1]);
                     }
                     elseif ( preg_match("/^@@\s/", $line) ) {
 
@@ -210,7 +221,12 @@
                     }
                     else {
 
-                        array_push($diff_info['diff'], htmlspecialchars($line));
+                        $diff_info['lines']++;
+
+                        if ( empty($diff_info['mode']) ) {
+
+                            array_push($diff_info['diff'], htmlspecialchars($line));
+                        }
                     }
                 } 
                 // Process the commit message section
@@ -249,6 +265,9 @@
                         $diff_info['meta'] = array();
                         $diff_info['diff'] = array();
                         $diff_info['file'] = $matches[1];
+                        $diff_info['mode'] = null;
+                        $diff_info['type'] = 'text';
+                        $diff_info['lines'] = 0;
                         array_push($diff_info['meta'], htmlspecialchars($line)); 
                     }
                     else {
