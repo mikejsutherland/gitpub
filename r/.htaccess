@@ -1,9 +1,3 @@
 RewriteEngine on
-#RewriteRule /r/index - [L,NC]
 RewriteCond %{REQUEST_URI} !(index\.php)
-RewriteRule ^(.+)$ index.php?l=$1 [NC]
-#RewriteBase /
-#RewriteRule docs/(.+) - [L,NC]
-#RewriteRule project/(.+)/(.+)/(.+)$ ?repo=$1&nav=$2&file=$3 [L]
-#RewriteRule project/(.+)/([a-z0-9-_]+)$ ?repo=$1&nav=$2 [L]
-#RewriteRule project/(.+)$ ?repo=$1 [L]
+RewriteRule ^(.+)$ index.php?uri=$1 [QSA,L]
