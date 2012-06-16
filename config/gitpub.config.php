@@ -4,6 +4,7 @@
     $CONFIG['base_uri'] = '/gitpub';
     $CONFIG['commits_per_page'] = 15;
     $CONFIG['enable_cache'] = false;
+    $CONFIG['enable_clone'] = true;
 
     ## paths ##
     $CONFIG['projects_dir'] = '/Volumes/Development/git';

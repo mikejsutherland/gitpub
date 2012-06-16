@@ -1,4 +1,4 @@
-<? include('header.php'); ?>
+<?  include('header.php'); ?>
 
     <div class="masthead gradient_gray">
         <div class="content">
@@ -6,17 +6,25 @@
             <!-- Main gitpub link -->
             <a href="<?=$CONFIG['base_uri'];?>/">gitpub</a>
 
-<? if ( isset($_SESSION['repo']) && $_SESSION['repo'] !== "" ) { ?>
+<? 
+    if ( isset($_SESSION['repo']) && $_SESSION['repo'] !== "" ) { 
 
-            <!-- HTTP clone url -->
-            <!--
-            <input class="repourl" value="<?='http://'.$_SERVER['HTTP_HOST'].$CONFIG['base_uri'].'/r/'.$_SESSION['repo']?>" spellcheck="false" readonly="readonly" />
-            <span class="urlbox gradient_gray">HTTP</span>
-            -->
+        if ( $CONFIG['enable_clone'] ) {
 
+            $repo_url = 'http://'.$_SERVER['HTTP_HOST'].$CONFIG['base_uri'].'/r/'.$_SESSION['repo'];
+?>
+            <label>
+                <input class="repourl" type="text" value="<?=$repo_url;?>" spellcheck="false" readonly="readonly" />
+                <span class="urlbox gradient_gray">HTTP</span>
+            </label>
+<?
+        }
+?>
             <!-- Display the Branch -->
-            <span class="urlbox gradient_gray">branch: <em><?=preg_replace("/^origin\//", "", $_SESSION['branch']);?></em></span>
-<? } ?>
+            <span class="urlbox gradient_gray"><span class="grey">branch:</span> <?=preg_replace("/^origin\//", "", $_SESSION['branch']);?></span>
+<?
+    } 
+?>
             <br class="clear" />
         </div>
     </div>
