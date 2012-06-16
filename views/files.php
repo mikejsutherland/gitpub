@@ -85,9 +85,7 @@
                     <thead>
                         <tr class="gradient_gray">
                             <th style="width: 20px;"></th>
-                            <th style="width: 200px;">name</th>
-                            <th style="width: 100px;">age</th>
-                            <th>message</th>
+                            <th>name</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -113,8 +111,6 @@
                         <tr>
                             <td class=''> </td>
                             <td><a class='ajaxy' href='<?=$parent_uri;?>'>..</a></td>
-                            <td></td>
-                            <td></td>
                         </tr>
 <?
             }
@@ -130,8 +126,6 @@
                     print str_pad("", 28) . "<td class='dir_icon'> </td>\n";
                     print str_pad("", 28) . "<td><a class='ajaxy' href='". $CONFIG['base_uri'] ."/".
                         genLink(array("o" => $_SESSION['o'] . $dir ."/")) ."'>$dir/</a></td>\n";
-                    print str_pad("", 28) . "<td></td>\n";
-                    print str_pad("", 28) . "<td></td>\n";
                     print str_pad("", 24) . "</tr>\n";
 
                 }
@@ -141,8 +135,6 @@
                     print str_pad("", 28) . "<td class='file_icon'> </td>\n";
                     print str_pad("", 28) . "<td><a class='ajaxy' href='". $CONFIG['base_uri'] ."/".
                         genLink(array("o" => $_SESSION['o'] . $file)) ."'>$file</a></td>\n";
-                    print str_pad("", 28) . "<td></td>\n";
-                    print str_pad("", 28) . "<td></td>\n";
                     print str_pad("", 24) . "</tr>\n";
                 }
 
