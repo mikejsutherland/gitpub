@@ -371,7 +371,7 @@ pre.prettyprint { /* customizations for pretty-print */
     padding: 0px;
     font-size: 14px;
     float: left; /* required so line highlighting gets rendered */
-    min-width: 99%; /* needed to ensure small code blocks fill the given area (almost)  */
+    min-width: 100%; /* needed to ensure small code blocks fill the given area (almost)  */
 }
 .error {
     border: 1px solid #ddd;
@@ -392,7 +392,7 @@ pre.diff {
     font-size: 14px;
     background-color: #f8f8f8;
     float: left; /* required so line highlighting gets rendered */
-    min-width: 99%; /* needed to ensure small code blocks fill the given area (almost)  */
+    min-width: 100%; /* needed to ensure small code blocks fill the given area (almost)  */
 }
 pre.diff span {
     float: left; /* required so line highlighting gets rendered */
