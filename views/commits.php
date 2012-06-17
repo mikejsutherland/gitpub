@@ -29,51 +29,52 @@
     $next = $offset + $CONFIG['commits_per_page'];
     $prev = $offset - $CONFIG['commits_per_page'];
 
-    $commits = $gp->getCommitLog($offset, $CONFIG['commits_per_page']);
+    try {
 
-    // Navigated too far
-    if ( $offset > 0 && count($commits) == 0 ) {
+        $commits = $gp->getCommitLog($offset, $CONFIG['commits_per_page']);
 
-        print "<div class='navbar'><a class='ajaxy left' href='".$CONFIG['base_uri']."/".
-            genLink(array("offset" => $prev))."'>< Previous</a><br class='clear' /></div>";
-        $error = "There are no more commits to view.\n";
-        include($thispath ."include/error.php");
-    }
-    elseif ( count($commits) > 0 ) {
+        // Navigated too far
+        if ( $offset > 0 && count($commits) == 0 ) {
 
-        $c = false;
-        $prevts = null;
-
-        if ( $offset > 0 || count($commits) == $CONFIG['commits_per_page'] ) {
-            print "<div class='navbar'>";
-
-            if ( $offset > 0 ) {
-                print "<a class='ajaxy left' href='".$CONFIG['base_uri']."/". genLink(array("offset" => $prev)) ."'>< Previous</a>";
-            }
-
-            if ( count($commits) == $CONFIG['commits_per_page'] ) {
-                print "<a class='ajaxy right' href='".$CONFIG['base_uri']."/". genLink(array("offset" => $next)) ."'>Next ></a>";
-            }
-            print "<br class='clear' /></div>";
+            print "<div class='navbar'><a class='ajaxy left' href='".$CONFIG['base_uri']."/".
+                genLink(array("offset" => $prev))."'>< Previous</a><br class='clear' /></div>";
+            $error = "There are no more commits to view.\n";
+            include($thispath ."include/error.php");
         }
+        elseif ( count($commits) > 0 ) {
 
-        foreach($commits as $commit) {
+            $c = false;
+            $prevts = null;
 
-            if ( $prevts !== $commit['date'] ) {
+            if ( $offset > 0 || count($commits) == $CONFIG['commits_per_page'] ) {
+                print "<div class='navbar'>";
 
-                $c = false;
+                if ( $offset > 0 ) {
+                    print "<a class='ajaxy left' href='".$CONFIG['base_uri']."/". genLink(array("offset" => $prev)) ."'>< Previous</a>";
+                }
 
-                if ( ! empty($prevts) ) {
+                if ( count($commits) == $CONFIG['commits_per_page'] ) {
+                    print "<a class='ajaxy right' href='".$CONFIG['base_uri']."/". genLink(array("offset" => $next)) ."'>Next ></a>";
+                }
+                print "<br class='clear' /></div>";
+            }
+
+            foreach($commits as $commit) {
+
+                if ( $prevts !== $commit['date'] ) {
+
+                    $c = false;
+
+                    if ( ! empty($prevts) ) {
 ?>
                     </tbody>
                 </table>
                 <br />
 
 <?
-                }
+                    }
 
-
-                $prevts = $commit['date'];
+                    $prevts = $commit['date'];
 ?>
 
                 <table class="commit browser">
@@ -83,11 +84,9 @@
                         </tr>
                     </thead>
                     <tbody>
-
 <?
-            }
+                }
 ?>
-
                         <tr class="<?=(($c = !$c)?'hl':'');?>">
                             <td>
                                 <div class="right" style="text-align: right;">
@@ -112,31 +111,35 @@
                             </td>
                         </tr>
 <?
-        }
+            }
 ?>
                     </tbody>
                 </table>
 <?
-        if ( $offset > 0 || count($commits) == $CONFIG['commits_per_page'] ) {
-            print "<div class='navbar'>";
+            if ( $offset > 0 || count($commits) == $CONFIG['commits_per_page'] ) {
+                print "<div class='navbar'>";
 
-            if ( $offset > 0 ) {
-                print "<a class='ajaxy left' href='".$CONFIG['base_uri']."/". genLink(array("offset" => $prev)) ."'>< Previous</a>";
+                if ( $offset > 0 ) {
+                    print "<a class='ajaxy left' href='".$CONFIG['base_uri']."/". genLink(array("offset" => $prev)) ."'>< Previous</a>";
+                }
+
+                if ( count($commits) == $CONFIG['commits_per_page'] ) {
+                    print "<a class='ajaxy right' href='".$CONFIG['base_uri']."/". genLink(array("offset" => $next)) ."'>Next ></a>";
+                }
+                print "<br class='clear' /></div>";
             }
 
-            if ( count($commits) == $CONFIG['commits_per_page'] ) {
-                print "<a class='ajaxy right' href='".$CONFIG['base_uri']."/". genLink(array("offset" => $next)) ."'>Next ></a>";
-            }
-            print "<br class='clear' /></div>";
+        } 
+        else {
+
+            $error = "There are no commits.\n";
+            include($thispath ."include/error.php");
         }
+    }
+    catch (Exception $e) {
 
-    } 
-    else {
-
-        $error = "There are no commits.\n";
+        $error = $e;
         include($thispath ."include/error.php");
     }
-
 ?>
-
             </div>

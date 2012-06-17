@@ -87,7 +87,22 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><div class='fileviewer'><?=$gp->getFile($_SESSION['o'], $_SESSION['commit']);?></div></td>
+                            <td>
+                                <div class='fileviewer'>
+<?
+    try {
+
+        print $gp->getFile($_SESSION['o'], $_SESSION['commit']);
+    }
+    catch (Exception $e) {
+
+        $error = $e;
+        include($thispath ."include/error.php");
+    }
+
+?>
+                                </div>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -97,7 +112,15 @@
     // Display file tree
     else {
 
-        $files = $gp->getTree($_SESSION['o'], $_SESSION['commit']);
+        try {
+
+            $files = $gp->getTree($_SESSION['o'], $_SESSION['commit']);
+        }
+        catch (Exception $e) {
+
+            $error = $e;
+            include($thispath ."include/error.php");
+        }
 
         if ( count($files) > 0 ) {
 

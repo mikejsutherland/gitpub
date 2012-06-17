@@ -21,7 +21,19 @@
 ?>
             <div class="projbar">
                 Project: <a href="<?=$CONFIG['base_uri']."/".genLink();?>"><?=$_SESSION['repo'];?></a><br />
-                <span class="small"><?=$gp->getDescription();?></span>
+                <span class="small">
+<?
+                try {
+            
+                    print $gp->getDescription();
+                }
+                catch (Exception $e) {
+
+                    $error = $e;
+                    include($thispath ."include/error.php");
+                }
+?>
+                </span>
             </div>
             
             <div class="tabbar">
