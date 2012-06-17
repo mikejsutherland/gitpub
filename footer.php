@@ -63,8 +63,11 @@
 </html>
 <?
 
-    if ( $CONFIG['enable_cache'] ) {
+    if ( ! empty($_SESSION['repo']) ) { 
 
-        write_cache();
+        if ( $CONFIG['enable_cache'] ) {
+
+            write_cache();
+        }
     }
 ?>
