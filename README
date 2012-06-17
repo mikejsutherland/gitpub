@@ -1,0 +1,51 @@
+About gitpub
+--------------------------------------------------------------------------------------
+
+Gitpub aims to be a simple to deploy, PHP based web application for hosting and 
+navigating your git repos.  With an interface designed to be simple and easy to
+use -- inspired by the overall look and feel of github.
+
+
+Requirements
+--------------------------------------------------------------------------------------
+
+    - Apache with PHP support
+    - Git 1.7.x or above
+    - A directory containing git repos
+
+Apache Notes:
+    - None.
+
+Git Notes:
+    - This has not been tested on earlier versions of Git.
+
+PHP Notes:
+    - If your php installation makes use of open_basedir to restrict access
+      to directories, you will need to append the path to the git bin and
+      also to your projects directory where you house your repos. 
+    
+
+
+Installation
+--------------------------------------------------------------------------------------
+
+Git clone gitpub:
+
+    cd /var/www/html (or htdocs root)
+    git clone http://codesmak.com/gitpub/r/gitpub
+
+    
+Configure gitpub:
+
+    cd config
+
+    cp example.gitpub.config.php gitpub.config.php
+    vi gitpub.config.php (set projects dir path, and git binary path)
+
+
+Contact
+--------------------------------------------------------------------------------------
+Use gitpub?  Have a question or a comment?  I'd love to hear from you, please direct
+all questions or comments to: gitpub@codesmak.com
+
+Enjoy!
