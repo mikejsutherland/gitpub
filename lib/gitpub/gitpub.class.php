@@ -146,6 +146,9 @@
                 if ( mb_check_encoding($str, 'ASCII') ) {
 
                     # plain text (non code)
+                    if ( preg_match("/README/i", $file) ) {
+                        return "<pre class='prettyprint nocode'>". htmlspecialchars($str) ."</pre>\n";
+                    }
                     if ( preg_match("/\.(txt)$/i", $file) ) {
                         return "<pre class='prettyprint linenums nocode'>". htmlspecialchars($str) ."</pre>\n";
                     }
