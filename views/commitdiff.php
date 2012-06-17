@@ -78,7 +78,17 @@
                             <th>
                                 <?=$filediff['file'];?>
                                 <span class="right blue">
-                                    <a href='<?=$CONFIG['base_uri']."/".genLink(array("o" => $filediff['file'], "commit" => $diffs['commit_info']['commit'], "nav" => "files"));?>'>View file @ <?=substr($diffs['commit_info']['commit'], 0, 7);?></a>
+<?
+    if ( $filediff['mode'] !== "deleted" ) {
+
+        print "<a href='". $CONFIG['base_uri'] ."/".
+            genLink(array(
+                "o" => $filediff['file'],
+                "commit" => $diffs['commit_info']['commit'],
+                "nav" => "files"
+            )). "'>View file @ ". substr($diffs['commit_info']['commit'], 0, 7) ."</a>";
+    }
+?>
                                 </span>
                                 <br class='clear' />
                             </th>
@@ -111,7 +121,7 @@
                                     <pre class='diff'>
 <? 
 
-                if ( $filediff['mode'] == "new" || $filediff['mode'] == "deleted" ) {
+                if ( $filediff['mode'] == "new" ) {
 
                     if ( $filediff['type'] == "text" ) {
 
@@ -121,6 +131,10 @@
 
                         print "<span class='$class'>". ucfirst($filediff['mode']) ." ". $filediff['type'] ." file.</span>\n";
                     }
+                }
+                elseif ( $filediff['mode'] == "deleted" ) {
+
+                    print "<span class='$class'>". ucfirst($filediff['mode']) ." file.</span>\n";
                 }
                 else {
 
