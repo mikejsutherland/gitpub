@@ -24,31 +24,40 @@
             <div class="section right">
                 Thanks ;)
                 <ul>
-                    <li><a href="http://git-scm.com/" target="_blank">Git - distributed version control system</a></li>
+                    <li><a href="http://git-scm.com/" target="_blank">Git - distributed version control</a></li>
                     <li><a href="https://github.com/" target="_blank">Github - social coding</a></li>
                     <li><a href="http://php.net/" target="_blank">PHP</a></li>
+                </ul>
+            </div>
+            <div class="section right">
+                Documentation
+                <ul>
+                    <li><a href="http://git-scm.com/documentation" target="_blank">Git - Documentation</a></li>
+                    <li><a href="http://rogerdudler.github.com/git-guide/" target="_blank">Git - The simple guide ~ rogerdudler</a></li>
+                    <li><a href="http://nvie.com/posts/a-successful-git-branching-model/" target="_blank">A successful Git branching model</a></li>
                 </ul>
             </div>
             <div class="section right">
                 About
                 <ul>
                     <li><a href="http://codesmak.com" target="_blank">codesmak.com</a></li>
+                    <li><a href="<?=$CONFIG['base_uri']."/".genLink(array("nav" => "files", "commit" => null, "o" => "README", "branch" => null));?>">Gitpub</a></li>
                 </ul>
             </div>
-
             <br class="clear" />
         </div>
     </div>
     <div class="subfooter">
         <div class="content">
-            <div class="section left stamp">&lt;/futile&gt;</div>
-            <div class="section left">
-                gitpub -- copyright &copy; 2012 - codesmak.com<br />
-                an exercise in futility...
+            <div class="">
+                <div class="left stamp">&lt;/futile&gt;</div>
+                <div class="left about">
+                    gitpub -- copyright &copy; 2012 - <a href="http://codesmak.com" target="_blank">codesmak.com</a><br />
+                    an exercise in futility...
+                </div>
+                <br class="clear" />
             </div>
-            <br class="clear" />
         </div>
     </div>
-
 </body>
 </html>
