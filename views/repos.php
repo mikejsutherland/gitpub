@@ -22,7 +22,17 @@
     if ( count($gp->repos) > 0 ) {
 ?>
             <div class="box corners">
-                <div class="boxhead gradient_aqua">1 person hosting over <?=(count($gp->repos)-1);?>+ repositories</div>
+                <div class="boxhead gradient_aqua">
+                    1 person hosting
+<?
+        if ( count($gp->repos) == 1 ) {
+            print " 1 respository\n";
+        }
+        else {
+            print "over ". (count($gp->repos)-1) ."+ repositories\n";
+        }
+?>
+                </div>
                 <div class="boxbody">
                     Available Git Repositories:<br />
                     <ul>
