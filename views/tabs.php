@@ -20,7 +20,7 @@
     */
 ?>
             <div class="projbar">
-                Project: <a href="<?=$CONFIG['base_uri']."/".genLink();?>"><?=$_SESSION['repo'];?></a><br />
+                Project: <a href="<?=$CONFIG['base_uri']."/".genLink(array("nav" => null, "commit" => null, "o" => null, "branch" => null));?>"><?=$_SESSION['repo'];?></a><br />
                 <span class="small">
 <?
                 try {
