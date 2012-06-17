@@ -46,8 +46,8 @@
 
         $gp->setRepo($_SESSION['repo']);
 
+        // Caching
         if ( $CONFIG['enable_cache'] ) {
-
             require_once($thispath . 'include/cache.php');
         }
     }

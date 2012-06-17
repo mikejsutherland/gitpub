@@ -19,40 +19,38 @@
     *
     */
 
-    if ( $CONFIG['enable_cache'] ) {
+    $cachedir = "cache/". $_SESSION['repo'];
 
-        $cachedir = "cache/". $_SESSION['repo'];
+    // Create the cache dir if it doesn't exist
+    if ( ! is_dir("$cachedir") ) {
+        mkdir("$cachedir", 0777, true);
+    }
 
-        // Create the cache dir if it doesn't exist
-        if ( ! is_dir("$cachedir") ) {
-            mkdir("$cachedir", 0777, true);
-        }
+    // Flush the cache if the meta value is no longer current
+    if ( cache_meta("$cachedir/meta") !== $gp->tip ) {
 
-        // Flush the cache if the meta value is not longer current
-        if ( cache_meta("$cachedir/meta") !== $gp->tip ) {
-
-            invalidate_cache("$cachedir");
+        if ( invalidate_cache("$cachedir") ) {
             cache_meta("$cachedir/meta", $gp->tip);
         }
+    }
 
-        // Set the cache file
-        $cachefile = basename($_SERVER['SCRIPT_URI']);
-        if ($_SERVER['QUERY_STRING']!='') {
-            $cachefile .= '_'.base64_encode($_SERVER['QUERY_STRING']);
-        }
-        $cachefile = sha1($cachefile) .".cache.html";
+    // Set the cache file
+    $cachefile = basename($_SERVER['SCRIPT_URI']);
+    if ($_SERVER['QUERY_STRING']!='') {
+        $cachefile .= '_'.base64_encode($_SERVER['QUERY_STRING']);
+    }
+    $cachefile = sha1($cachefile) .".cache.html";
 
-        // Request is already cached, return contents from cache
-        if ( file_exists("$cachedir/$cachefile") ) {
+    // Request is already cached, return contents from cache
+    if ( file_exists("$cachedir/$cachefile") ) {
 
-            readfile("$cachedir/$cachefile"); 
-            exit; // exit the script
-        }
-        // Start the caching process
-        else {
+        readfile("$cachedir/$cachefile"); 
+        exit; // exit the script
+    }
+    // Start the caching process
+    else {
 
-            ob_start(); // enable the output buffer
-        }
+        ob_start(); // enable the output buffer
     }
 
     function cache_meta($metafile, $meta = null) {
@@ -86,7 +84,7 @@
 
             $cachefiles = scandir("$path");
 
-            foreach ($files as $file) {
+            foreach ($cachefiles as $file) {
 
                 if ( $file == "." || $file == ".." ) { continue; }
 
