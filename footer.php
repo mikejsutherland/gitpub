@@ -61,3 +61,10 @@
     </div>
 </body>
 </html>
+<?
+
+    if ( $CONFIG['enable_cache'] ) {
+
+        write_cache();
+    }
+?>
