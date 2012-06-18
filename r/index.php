@@ -40,6 +40,11 @@
 
     require_once($thispath . '../config/gitpub.config.php');
 
+    // Redirect if this feature is disabled
+    if ( ! $CONFIG['enable_clone'] ) {
+        header("Location: ". $CONFIG['base_uri'] .'/');
+    }
+
     $repo = null;
     $request = null;
 
