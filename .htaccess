@@ -1,8 +1,10 @@
-RewriteEngine on
+#RewriteEngine on
 #RewriteBase /
-RewriteRule ^docs/(.+) - [L,NC]
-RewriteRule ^r/ - [L,NC]
-RewriteRule ^u/ - [L,NC]
-RewriteRule ^(.+)/(.+)/(.+)/$ ?repo=$1&nav=$2&o=$3 [L]
-RewriteRule ^(.+)/(.+)/$ ?repo=$1&nav=$2 [L]
-RewriteRule ^(.+)/$ ?repo=$1 [L]
+#RewriteRule ^docs/(.+) - [L,NC]
+#RewriteRule ^r/ - [L,NC]
+#RewriteRule ^u/ - [L,NC]
+#
+#RewriteCond %{THE_REQUEST} \?
+#RewriteCond %{QUERY_STRING} ^repo=(.+)$
+#RewriteRule ^(.*) %{REQUEST_URI}%1/? [R,L]
+#RewriteRule ^(.+)/$ ?repo=$1 [L]
