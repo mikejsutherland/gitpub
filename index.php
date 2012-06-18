@@ -84,6 +84,11 @@
             // Commit browser
             include('views/branches.php');
         }
+        elseif ( $_SESSION['nav'] == 'tags' ) {
+
+            // Tag browser
+            include('views/tags.php');
+        }
 
     }
 ?>

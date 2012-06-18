@@ -312,6 +312,32 @@
             return $commit;
         }
 
+        public function getTags() {
+
+            # -l, list tags
+            # -n1, print the first line of the message
+            $args = array("-l", "-n1");
+            #if ( $this->_isLocal() ) { array_push($args, "-r"); } // read remotes if local
+
+            $this->run("tag", $args);
+
+            $results = explode("\n", $this->cmd['results']);
+            $results = array_filter($results, 'strlen'); // remove null values
+            $results = array_map('trim', $results); // clear tabs/spaces
+
+            $tags = array();
+
+            foreach ($results as $line) {
+
+                if ( preg_match("/^\s*v([^\s]+)\s*(.*)$/", $line, $matches) ) {
+
+                    $tags[$matches[1]] = $matches[2];
+                }
+            }
+
+            return $tags;
+        }
+
         public function getBranches($branch = "master") {
 
             # --list (not available in 1.7.4.1)
