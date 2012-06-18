@@ -2,16 +2,21 @@ About gitpub
 --------------------------------------------------------------------------------------
 
 Gitpub aims to be a simple to deploy, PHP based web application for hosting and 
-navigating your git repos.  With an interface designed to be simple and easy to
-use -- inspired by the overall look and feel of github.
+navigating either local or remote git repositories. Gitpub provides a simple
+interface which was inspired by the overall look and feel of github.
 
+Features include:
+    - File navigation
+    - Commit history
+    - Commit file diff
+    - Branching
 
 Requirements
 --------------------------------------------------------------------------------------
 
-    - Apache with PHP support
-    - Git 1.7.x or above
-    - A directory containing git repos
+- Apache with PHP support
+- Git 1.7.4.x or above
+- A directory containing git repos
 
 Apache Notes:
     - None.
@@ -38,7 +43,6 @@ Git clone gitpub:
 Configure gitpub:
 
     cd config
-
     cp example.gitpub.config.php gitpub.config.php
     vi gitpub.config.php (set projects dir path, and git binary path)
 
