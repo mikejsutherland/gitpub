@@ -327,7 +327,6 @@
 
             $branches = array();
 
-            // only master branch or other...
             if ( count($results) ) {
 
                 foreach ($results as $line) {
@@ -368,7 +367,7 @@
 
             $args = array("--skip=$start", "--date=raw", "--no-merges");
 
-            if ( isset($max) ) { 
+            if ( ! empty($max) ) { 
                 array_push($args, "--max-count=$max");
             }
 
@@ -482,7 +481,7 @@
                 $this->repodir . implode(" ", $switches) . 
                 " $gitcmd ". implode(" ", $args)
             ;            
-            #print "DEBUG : ". $res['cmd'] ."\n";
+            #print "<pre>DEBUG : ". $res['cmd'] ."</pre><br />\n";
 
             // Enable output buffering
             ob_start();
