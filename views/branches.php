@@ -70,8 +70,12 @@
                                         <? if ( $_SESSION['branch'] == $branch['branch'] ) { ?>
                                         <img src="<?=$CONFIG['base_uri'];?>/docs/images/asterisk.gif" /> <? } ?>
                                         <strong><a href='<?=$CONFIG['base_uri']."/". genLink(array("branch" => $branch['branch']));?>'><?=$branch['name'];?></a></strong><br />
+                                        <? if ( count($branch_meta) > 0 ) { ?>
                                         <span class="small black">Last updated <?=relativeDate($branch_meta[0]['epoch']);?> by </span>
                                         <span class="small blue"><?=$branch_meta[0]['author'];?></span>
+                                        <? } else { ?>
+                                        <span class="small black">No commits yet</span>
+                                        <? } ?>
                                     </div>
                                     <div class="right tright small grey">
                                         <?=$behind;?> behind | <?=$ahead;?> ahead

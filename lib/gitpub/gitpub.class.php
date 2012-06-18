@@ -315,7 +315,8 @@
         public function getBranches($branch = "master") {
 
             # --list (not available in 1.7.4.1)
-            $args = array("-v", "--no-abbrev", "--no-merged HEAD");
+            # --no-merged HEAD causes unmerged branches to not show up
+            $args = array("-v", "--no-abbrev");
             if ( $this->_isLocal() ) { array_push($args, "-r"); } // read remotes if local
 
             $this->run("branch", $args);
