@@ -424,7 +424,6 @@
             }
 
             if ( $branch !== "master" ) {
-                #$branch .= " ^master";
                 $branch .= " $ignore";
             }
 
