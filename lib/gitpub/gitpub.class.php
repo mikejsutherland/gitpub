@@ -365,7 +365,7 @@
             # --list (not available in 1.7.4.1)
             # --no-merged HEAD causes unmerged branches to not show up
             $args = array("-v", "--no-abbrev");
-            if ( $this->_isLocal() ) { array_push($args, "-r"); } // read remotes if local
+            #if ( $this->_isLocal() ) { array_push($args, "-r"); } // read remotes if local
 
             $this->run("branch", $args);
 
