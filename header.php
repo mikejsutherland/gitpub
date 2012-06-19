@@ -63,7 +63,6 @@
 
 <head>
     <title>GitPub - Were The Code Flows</title>
-    <base href="<?=$CONFIG['base_uri'];?>" target="_self" />
 
     <!-- google-code-prettify -->
     <link rel="stylesheet" type="text/css" media="all" href="<?=$CONFIG['base_uri'];?>/docs/include/google-code-prettify/prettify.css" />
