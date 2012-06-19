@@ -397,7 +397,7 @@
 
         public function getBranchRevisions($branch = "master") {
 
-            $args = array("--left-right", "HEAD...$branch");
+            $args = array("--left-right", "master...$branch");
 
             $this->run("rev-list", $args);
 
