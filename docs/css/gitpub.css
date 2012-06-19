@@ -393,7 +393,7 @@ div.fileviewer {
 }
 pre.prettyprint { /* customizations for pretty-print */
     text-align: left;
-    border: 1px solid red;
+    border: 0px solid red;
     margin: 0px;
     padding: 0px 0px 0px 10px;
     font-size: 14px;
