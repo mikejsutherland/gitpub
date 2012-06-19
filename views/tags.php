@@ -38,7 +38,9 @@
 <?
         $c = true;
 
-        foreach ($tags as $ver => $msg) {        
+        if ( count($tags) ) {
+
+            foreach ($tags as $ver => $msg) {        
 ?>
                             <tr class="<?=(($c = !$c)?'hl':'');?>">
                                 <td>
@@ -53,6 +55,21 @@
                                         <a href='<?=$CONFIG['base_uri']."/include/download.php?tag=$ver&type=zip";?>'>Download zip</a>
                                     </div>
                                     <br class="clear" />
+                                </td>
+                            </tr>
+<?
+            }
+        }
+        else {
+?>
+                            <tr class="">
+                                <td>
+                                    <div class="">
+<?  
+            $error = "There are no tags yet.\n";
+            include($thispath ."include/error.php");
+?>
+                                    </div>
                                 </td>
                             </tr>
 <?
