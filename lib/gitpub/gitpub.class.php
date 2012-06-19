@@ -408,7 +408,7 @@
             return $results;
         }
 
-        public function getCommitLog($start = 0, $max = null, $branch = null) {
+        public function getCommitLog($start = 0, $max = null, $branch = null, $ignore = "^master") {
 
             # --max-count=<number> Limit the number of commits to output.
             # --skip=<number> Skip number commits before starting to show the commit output.
@@ -424,7 +424,8 @@
             }
 
             if ( $branch !== "master" ) {
-                $branch .= " ^master";
+                #$branch .= " ^master";
+                $branch .= " $ignore";
             }
 
             $this->run("log $branch", $args); 

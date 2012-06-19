@@ -48,7 +48,7 @@
 
             if ( preg_match("/master/i", $branch['branch']) ) { continue; }
 
-            $branch_meta = $gp->getCommitLog(0, 1, $branch['commit']);
+            $branch_meta = $gp->getCommitLog(0, 1, $branch['commit'], "");
             $rev = $gp->getBranchRevisions($branch['branch']);
 
             $ahead = 0; $behind = 0;
