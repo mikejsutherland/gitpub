@@ -146,7 +146,7 @@
                 if ( mb_check_encoding($str, 'ASCII') ) {
 
                     # plain text (non code)
-                    if ( preg_match("/README/i", $file) ) {
+                    if ( preg_match("/README|LICENSE/i", $file) ) {
                         return "<pre class='prettyprint nocode'>". htmlspecialchars($str) ."</pre>\n";
                     }
                     if ( preg_match("/\.(txt)$/i", $file) ) {
@@ -312,6 +312,28 @@
             return $commit;
         }
 
+        public function getArchive($tag = null, $format = "tar") {
+
+            # to stdout git archive --format=tar --prefix=gitpub-1.0.0/ v1.0.0
+            # to gz git archive --format=tar --prefix=gitpub-1.0.0/ v1.0.0 | gzip >gitpub-1.0.0.tar.gz
+
+            $prefix = $this->repo;
+
+            if ( empty($tag) ) {
+                $tag = "HEAD";
+            }
+            else {
+
+                $prefix .= ($tag[0] == "v") ? "-". substr($tag, 1) : "-". $tag;
+            }
+
+            $args = array("--format=$format", "--prefix=$prefix/", $tag);
+
+            $this->run("archive", $args);
+
+            return $this->cmd['results'];
+        }
+
         public function getTags() {
 
             # -l, list tags
@@ -329,7 +351,7 @@
 
             foreach ($results as $line) {
 
-                if ( preg_match("/^\s*v([^\s]+)\s*(.*)$/", $line, $matches) ) {
+                if ( preg_match("/^\s*([^\s]+)\s*(.*)$/", $line, $matches) ) {
 
                     $tags[$matches[1]] = $matches[2];
                 }

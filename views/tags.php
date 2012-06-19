@@ -42,11 +42,15 @@
 ?>
                             <tr class="<?=(($c = !$c)?'hl':'');?>">
                                 <td>
-                                    <div class="">
-                                        <strong><a href=''><?=$ver?></a></strong>
+                                    <div class="left">
+                                        <strong><a href='<?=$CONFIG['base_uri']."/include/download.php?tag=$ver";?>'><?=$ver?></a></strong>
                                         <? if ( ! empty($msg) ) { ?>
-                                        <span class="small black"> - <?=$msg;?></span>
+                                        <span class="grey"> - <?=$msg;?></span>
                                         <? } ?>
+                                    </div>
+                                    <div class="right small blue">
+                                        <a href='<?=$CONFIG['base_uri']."/include/download.php?tag=$ver";?>'>Download tarball</a><br />
+                                        <a href='<?=$CONFIG['base_uri']."/include/download.php?tag=$ver&type=zip";?>'>Download zip</a>
                                     </div>
                                     <br class="clear" />
                                 </td>
