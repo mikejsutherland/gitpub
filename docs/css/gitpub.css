@@ -203,6 +203,7 @@ input.repourl {
     float: right;
     font-family: Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;
     font-size: 11px;
+    line-height: 22px;
     height: 24px;
     padding: 0 5px;
     margin-top: 0px;
@@ -392,9 +393,9 @@ div.fileviewer {
 }
 pre.prettyprint { /* customizations for pretty-print */
     text-align: left;
-    border: 0px solid red;
+    border: 1px solid red;
     margin: 0px;
-    padding: 0px;
+    padding: 0px 0px 0px 10px;
     font-size: 14px;
     float: left; /* required so line highlighting gets rendered */
     min-width: 100%; /* needed to ensure small code blocks fill the given area (almost)  */
