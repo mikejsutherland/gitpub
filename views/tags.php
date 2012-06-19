@@ -19,7 +19,7 @@
     *
     */
 ?>
-                <div id="tagbrowser">
+                <div id="tagsbrowser">
 
 <?
 
@@ -28,7 +28,7 @@
         $tags = $gp->getTags();
 
 ?>
-                    <table class="tag browser">
+                    <table class="tags browser">
                         <thead>
                             <tr class="gradient_gray">
                                 <th>Tags</th>
