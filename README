@@ -11,6 +11,7 @@ Features include:
     - Commit file diff
     - Branching
 
+
 Requirements
 --------------------------------------------------------------------------------------
 
@@ -30,7 +31,6 @@ PHP Notes:
       also to your projects directory where you house your repos. 
     
 
-
 Installation
 --------------------------------------------------------------------------------------
 
@@ -38,7 +38,6 @@ Git clone gitpub:
 
     cd /var/www/html (or htdocs root)
     git clone http://codesmak.com/gitpub/r/gitpub
-
     
 Configure gitpub:
 
