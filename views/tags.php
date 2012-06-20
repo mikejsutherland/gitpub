@@ -27,6 +27,9 @@
 
         $tags = $gp->getTags();
 
+        $c = true;
+
+        if ( count($tags) ) {
 ?>
                     <table class="tags browser">
                         <thead>
@@ -36,10 +39,6 @@
                         </thead>
                         <tbody>
 <?
-        $c = true;
-
-        if ( count($tags) ) {
-
             foreach ($tags as $ver => $msg) {        
 ?>
                             <tr class="<?=(($c = !$c)?'hl':'');?>">
@@ -59,28 +58,16 @@
                             </tr>
 <?
             }
-        }
-        else {
 ?>
-                            <tr class="">
-                                <td>
-                                    <div class="">
-<?  
-            $error = "There are no tags yet.\n";
-            include($thispath ."include/error.php");
-?>
-                                    </div>
-                                </td>
-                            </tr>
-<?
-        }
-?>
-
                         </tbody>
                     </table>
-                
 <?
+        }
+        else {
 
+            $error = "There are no tags yet.\n";
+            include($thispath ."include/error.php");
+        }
     }
     catch (Exception $e) {
 
