@@ -54,8 +54,13 @@
             if ( $this->_isLocal() ) {
                 $this->repodir .= "/.git";
             }
+
+            // Get all the tips
+            $this->setTips();
+
             // Set the top commit id
             $this->setCommitId();
+
             // Set the tip (top commit id)
             $this->tip = $this->commit;
 
@@ -67,12 +72,12 @@
                 $this->newCache();
 
                 // Flush the cache if necessary
-                if ( $this->metaCache() !== $this->tip ) {
+                if ( $this->metaCache() !== implode(",", $this->tips) ) {
 
                     // Flush the cache
                     $this->flushCache();
                     // Update the cache meta
-                    $this->metaCache($this->tip);
+                    $this->metaCache(implode(",", $this->tips));
                 }
 
                 // Turn on caching
@@ -179,22 +184,26 @@
             $this->repos = $repos;
         }
 
+        public function setTips() {
+
+            $this->tips = array();
+
+            $branches = $this->getBranches();
+
+            foreach ($branches as $branch) {
+
+                $this->tips[$branch['branch']] = $branch['commit'];
+            }
+
+            // Sort the results by branch name
+            ksort($this->tips);
+        }
+
         public function setCommitId($id = null) {
 
-            if ( empty($id) ) {
+            if ( count($this->tips) ) {
 
-                // Disable caching
-                $this->enable_cache = false;
-
-                // Run the command to get the tip
-                $this->run('log', array("--skip=0","--max-count=1", "--no-notes"));
-                preg_match("/commit ([a-zA-Z0-9]+)/", $this->cmd['results'], $commit_sha1);
-
-                // Re-enable caching
-                $this->enable_cache = $this->opts['enable_cache'];
-
-                // Store it
-                $this->commit = ( isset($commit_sha1[1]) ) ? $commit_sha1[1] : null;
+                $this->commit = $this->tips[$this->branch];
             }
             else {
 
@@ -461,7 +470,14 @@
             $args = array("-v", "--no-abbrev");
             #if ( $this->_isLocal() ) { array_push($args, "-r"); } // read remotes if local
 
+            // Disable caching
+            $this->enable_cache = false;
+
+            // Run the command
             $this->run("branch", $args);
+
+            // Reset the cache
+            $this->enable_cache = $this->opts['enable_cache'];
 
             $results = explode("\n", $this->cmd['results']);
             $results = array_filter($results, 'strlen'); // remove null values
@@ -628,10 +644,10 @@
             if ( $this->enable_cache ) {
 
                 // Invalidate cache if the commit tip has changed
-                if ( $this->metaCache() !== $this->tip ) {
+                if ( $this->metaCache() !== implode(",", $this->tips) ) {
 
                     $this->flushCache();
-                    $this->metaCache($this->tip);
+                    $this->metaCache(implode(",", $this->tips));
                 }
 
                 $cachefile = sha1($res['cmd']) .".cache";
