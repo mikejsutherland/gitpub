@@ -45,11 +45,6 @@
     if ( ! empty($_SESSION['repo']) ) {
 
         $gp->setRepo($_SESSION['repo']);
-
-        // Caching
-        if ( $CONFIG['enable_cache'] ) {
-            require_once($thispath . 'include/cache.php');
-        }
     }
 
     if ( ! empty($_SESSION['branch']) ) {

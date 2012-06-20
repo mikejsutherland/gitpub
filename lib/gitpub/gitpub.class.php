@@ -30,6 +30,7 @@
                 'projects_dir' => '',
                 'branch' => 'master',
                 'repo' => '',
+                'enable_cache' => false,
             );
             $this->opts = array_merge($default_opts, $opts);
 
@@ -57,6 +58,92 @@
             $this->setCommitId();
             // Set the tip (top commit id)
             $this->tip = $this->commit;
+
+            // Set the directory to cache to            
+            if ( $this->opts['enable_cache'] ) {
+                
+                // Initialize the cache dir
+                $this->cachedir = "cache/". $repo;
+                $this->newCache();
+
+                // Flush the cache if necessary
+                if ( $this->metaCache() !== $this->tip ) {
+
+                    // Flush the cache
+                    $this->flushCache();
+                    // Update the cache meta
+                    $this->metaCache($this->tip);
+                }
+
+                // Turn on caching
+                $this->enable_cache = $this->opts['enable_cache'];
+            }
+
+            return;
+        }
+
+        // Create the directory to cache to
+        public function newCache() {
+
+            if ( ! isset($this->repo) ) {
+                return false;
+            }
+
+            // Create the cache dir if it doesn't exist
+            if ( ! is_dir("$this->cachedir") ) {
+                mkdir("$this->cachedir", 0777, true);
+            }
+
+            return;
+        }
+
+        // Removes all cache files
+        public function flushCache() {
+
+            if ( ! isset($this->repo) ) {
+                return false;
+            }
+
+            if ( is_dir("$this->cachedir") ) {
+
+                $cache = scandir("$this->cachedir");
+
+                foreach ($cache as $fn) {
+
+                    if ( $fn == "." || $fn == ".." ) { continue; }
+
+                    chmod("$this->cachedir/$fn", 0777);
+                    unlink("$this->cachedir/$fn");
+                }
+            }
+
+            return;
+        }
+
+        // Set an abstract data point
+        public function metaCache($meta = null) {
+
+            $metafile = $this->cachedir ."/meta";
+
+            // Fetch the cache meta value
+            if ( empty($meta) ) {
+
+                $cachemeta = null;
+
+                if ( file_exists("$metafile") ) {
+                    $cachemeta = file_get_contents("$metafile");
+                }
+                return $cachemeta;
+            }
+            // Write the cache meta value
+            else {
+
+                $fp = fopen("$metafile", 'w');
+                fwrite($fp, $meta);
+                fclose($fp);
+            }
+
+            return;
         }
 
         public function setBranch($branch) {
@@ -96,10 +183,17 @@
 
             if ( empty($id) ) {
 
-                # --no-notes
+                // Disable caching
+                $this->enable_cache = false;
+
+                // Run the command to get the tip
                 $this->run('log', array("--skip=0","--max-count=1", "--no-notes"));
                 preg_match("/commit ([a-zA-Z0-9]+)/", $this->cmd['results'], $commit_sha1);
 
+                // Re-enable caching
+                $this->enable_cache = $this->opts['enable_cache'];
+
+                // Store it
                 $this->commit = ( isset($commit_sha1[1]) ) ? $commit_sha1[1] : null;
             }
             else {
@@ -531,12 +625,51 @@
             ;            
             #print "<pre>DEBUG : ". $res['cmd'] ."</pre><br />\n";
 
+            if ( $this->enable_cache ) {
+
+                // Invalidate cache if the commit tip has changed
+                if ( $this->metaCache() !== $this->tip ) {
+
+                    $this->flushCache();
+                    $this->metaCache($this->tip);
+                }
+
+                $cachefile = sha1($res['cmd']) .".cache";
+
+                // Return the cached result if present
+                if ( file_exists($this->cachedir ."/$cachefile") ) {
+
+                    // Start the output buffer
+                    ob_start();
+                    // Read the cached results
+                    readfile($this->cachedir ."/$cachefile");
+                    // Store the results from the output buffer
+                    $res['results'] = ob_get_contents();
+                    // Close the output buffer
+                    ob_end_clean();
+
+                    // Store the result
+                    $this->cmd = $res;
+
+                    return;
+                }
+            }
+
             // Enable output buffering
             ob_start();
             // Execute the command
             passthru($res['cmd'], $res['rc']);
             // Store the results from the output buffer
             $res['results'] = ob_get_contents();
+
+            if ( $this->enable_cache ) {
+
+                // Cache the results
+                $fp = fopen("$this->cachedir/". $cachefile, 'w');
+                fwrite($fp, ob_get_contents());
+                fclose($fp);
+            }
+
             // Close the output buffer
             ob_end_clean();
 
@@ -548,7 +681,6 @@
             // Store the result
             $this->cmd = $res;
         }
-
     }
 
 ?>

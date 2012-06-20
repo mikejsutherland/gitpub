@@ -61,13 +61,3 @@
     </div>
 </body>
 </html>
-<?
-
-    if ( ! empty($_SESSION['repo']) ) { 
-
-        if ( $CONFIG['enable_cache'] ) {
-
-            write_cache();
-        }
-    }
-?>
