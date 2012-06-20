@@ -57,7 +57,7 @@
 <html lang="en">
 
 <head>
-    <title>GitPub - Were The Code Flows</title>
+    <title>GitPub / <?=($_SESSION['repo']=='gitpub')?"internals":$_SESSION['repo'];?></title>
 
     <!-- google-code-prettify -->
     <link rel="stylesheet" type="text/css" media="all" href="<?=$CONFIG['base_uri'];?>/docs/include/google-code-prettify/prettify.css" />
