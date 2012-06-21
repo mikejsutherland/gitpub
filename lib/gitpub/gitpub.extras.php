@@ -40,8 +40,8 @@
         }
 
         $link[0] = "?";
-
-        return $link;
+        
+        return str_replace('&', '&amp;', $link);
     }
 
     function relativeDate($date) {
