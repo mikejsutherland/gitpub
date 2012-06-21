@@ -58,7 +58,7 @@
 <html lang="en">
 
 <head>
-    <title>GitPub / <?=($_SESSION['repo']=='gitpub')?"internals":$_SESSION['repo'];?></title>
+    <title><?=(isset($_SESSION['repo'])) ? "gitpub / ".$_SESSION['repo'] : "gitpub";?></title>
 
     <!-- google-code-prettify -->
     <link rel="stylesheet" type="text/css" media="all" href="<?=$CONFIG['base_uri'];?>/docs/include/google-code-prettify/prettify.css" />
