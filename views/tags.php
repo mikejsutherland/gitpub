@@ -44,14 +44,14 @@
                             <tr class="<?=(($c = !$c)?'hl':'');?>">
                                 <td>
                                     <div class="left">
-                                        <strong><a href='<?=$CONFIG['base_uri']."/include/download.php?tag=$ver";?>'><?=$ver?></a></strong>
+                                        <strong><a href='<?=$CONFIG['base_uri']."/download.php?tag=$ver";?>'><?=$ver?></a></strong>
                                         <? if ( ! empty($msg) ) { ?>
                                         <span class="grey"> - <?=$msg;?></span>
                                         <? } ?>
                                     </div>
                                     <div class="right small blue">
-                                        <a href='<?=$CONFIG['base_uri']."/include/download.php?tag=$ver";?>'>Download tarball</a><br />
-                                        <a href='<?=$CONFIG['base_uri']."/include/download.php?tag=$ver&amp;type=zip";?>'>Download zip</a>
+                                        <a href='<?=$CONFIG['base_uri']."/download.php?tag=$ver";?>'>Download tarball</a><br />
+                                        <a href='<?=$CONFIG['base_uri']."/download.php?tag=$ver&amp;type=zip";?>'>Download zip</a>
                                     </div>
                                     <br class="clear" />
                                 </td>
