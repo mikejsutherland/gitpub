@@ -433,8 +433,6 @@
             $args = array("--format=$format", "--prefix=$prefix/", $tag);
 
             $this->run("archive", $args);
-
-            #return $this->cmd['results'];
         }
 
         public function getTags() {
@@ -660,8 +658,8 @@
                     // Read the cached results
                     readfile($this->cachedir ."/$cachefile");
                     // Store the results from the output buffer
-                    $res['results'] = ob_get_contents();
                     $res['size'] = ob_get_length();
+                    $res['results'] = ob_get_contents();
                     // Close the output buffer
                     ob_end_clean();
 
@@ -677,8 +675,8 @@
             // Execute the command
             passthru($res['cmd'], $res['rc']);
             // Store the results from the output buffer
-            $res['results'] = ob_get_contents();
             $res['size'] = ob_get_length();
+            $res['results'] = ob_get_contents();
 
             if ( $this->enable_cache ) {
 

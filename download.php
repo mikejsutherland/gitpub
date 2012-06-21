@@ -1,8 +1,8 @@
 <?
     $thispath = realpath(dirname(__FILE__).DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR;
 
-    require_once($thispath . '../config/gitpub.config.php');
-    require_once($thispath . '../lib/gitpub/gitpub.class.php');
+    require_once($thispath . 'config/gitpub.config.php');
+    require_once($thispath . 'lib/gitpub/gitpub.class.php');
 
     session_start();
 
