@@ -434,7 +434,7 @@
 
             $this->run("archive", $args);
 
-            return $this->cmd['results'];
+            #return $this->cmd['results'];
         }
 
         public function getTags() {
@@ -661,6 +661,7 @@
                     readfile($this->cachedir ."/$cachefile");
                     // Store the results from the output buffer
                     $res['results'] = ob_get_contents();
+                    $res['size'] = ob_get_length();
                     // Close the output buffer
                     ob_end_clean();
 
@@ -677,6 +678,7 @@
             passthru($res['cmd'], $res['rc']);
             // Store the results from the output buffer
             $res['results'] = ob_get_contents();
+            $res['size'] = ob_get_length();
 
             if ( $this->enable_cache ) {
 

@@ -14,14 +14,30 @@
         $fn = $_SESSION['repo'];
         $fn .= ($tag[0] == "v") ? "-". substr($tag, 1) : "-". $tag;
 
-        //ini_set("zlib.output_compression", "Off");
+        if ( ini_get('zlib.output_compression') ) {
+            ini_set('zlib.output_compression', 'Off');
+        }
+
         header("Content-Type: application/octet-stream");
         header("Content-disposition: attachment; filename=\"$fn.$type\"");
+        #header("Content-Transfer-Encoding: binary"); 
 
         $gp = new GitPub($CONFIG);
         $gp->setRepo($_SESSION['repo']);
 
-        echo $gp->getArchive($tag, $type);
+        try {
+
+            $gp->getArchive($tag, $type);
+            header("Content-Length: ". $gp->cmd['size']);
+            echo $gp->cmd['results'];
+        }
+        catch (Exception $e) {
+
+            print "$e\n"
+        }
+
+        header("Content-Length: ".$gp->[]
+
     }
     else {
 
