@@ -52,6 +52,7 @@
         $gp->setBranch($_SESSION['branch']);
     }
 
+    header('Content-type: text/html; charset=utf-8');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,21 +64,21 @@
     <link rel="stylesheet" type="text/css" media="all" href="<?=$CONFIG['base_uri'];?>/docs/include/google-code-prettify/prettify.css" />
 
     <!-- jquery javascript frameworks -->
-    <script rel="javascript" type="text/javascript" src="<?=$CONFIG['base_uri'];?>/docs/include/jquery/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="<?=$CONFIG['base_uri'];?>/docs/include/jquery/jquery-1.7.1.min.js"></script>
 
     <!-- google-code-prettify -->
-    <script rel="javascript" type="text/javascript" src="<?=$CONFIG['base_uri'];?>/docs/include/google-code-prettify/prettify.js"></script>
+    <script type="text/javascript" src="<?=$CONFIG['base_uri'];?>/docs/include/google-code-prettify/prettify.js"></script>
 
     <!-- history.js -->
-    <script rel="javascript" type="text/javascript" src="<?=$CONFIG['base_uri'];?>/docs/include/history.js/jquery.history.js"></script>      
-    <script rel="javascript" type="text/javascript" src="<?=$CONFIG['base_uri'];?>/docs/include/history.js/ajaxify-html5.js"></script>
+    <script type="text/javascript" src="<?=$CONFIG['base_uri'];?>/docs/include/history.js/jquery.history.js"></script>      
+    <script type="text/javascript" src="<?=$CONFIG['base_uri'];?>/docs/include/history.js/ajaxify-html5.js"></script>
 
     <!-- gitpub stylesheet -->
     <link rel="stylesheet" type="text/css" media="all" href="<?=$CONFIG['base_uri'];?>/docs/css/gitpub.css" />
     <!--[if lte IE 8]><link rel="stylesheet" type="text/css" href="<?=$CONFIG['base_uri'];?>/docs/css/ie.gitpub.css" /><![endif]-->
 
     <!-- gitpub javascript library -->
-    <script rel="javascript" type="text/javascript" src="<?=$CONFIG['base_uri'];?>/docs/javascript/gitpub.js"></script>
+    <script type="text/javascript" src="<?=$CONFIG['base_uri'];?>/docs/javascript/gitpub.js"></script>
 
 </head>
 <body>
