@@ -33,11 +33,8 @@
         }
         catch (Exception $e) {
 
-            print "$e\n"
+            print "$e\n";
         }
-
-        header("Content-Length: ".$gp->[]
-
     }
     else {
 
