@@ -42,6 +42,7 @@
 
     // Redirect if this feature is disabled
     if ( ! $CONFIG['enable_clone'] ) {
+
         header("Location: ". $CONFIG['base_uri'] .'/');
     }
 
@@ -61,13 +62,15 @@
 
     // Redirect on empty request
     if ( empty($request) ) {
+
         header("Location: ". $CONFIG['base_uri'] .'/');
     }
     else {
 
         // Reject any file request which contains parent notation
         if ( preg_match("/\.\./", $request) ) {
-            print "die die die\n";
+
+            error_log("gitpub: attempt to break out of repo directory", 0);
             exit;
         }
 
@@ -79,36 +82,23 @@
 
             $requested_file = $repo_path ."/". $request;
 
-            if ( preg_match("/^info\/refs/", $request) ) {
-
-                $branches = scandir($repo_path ."/refs/heads");
-
-                foreach ($branches as $branch) {
-
-                    $requested_file = $repo_path ."/refs/heads/$branch";
-
-                    if ( $branch == '.' || $branch == '..' || ! is_file("$requested_file") ) { continue; }
-
-                    print trim(file_get_contents($requested_file)) ."\trefs/heads/$branch\n";
-                }
-            }
-            #elseif ( preg_match("/^HEAD$/", $request) ) {
-
-            #    print "ref: refs/heads/master\n";
-            #}
-            elseif ( file_exists($requested_file) ) {
+            if ( file_exists($requested_file) ) {
 
                 $fp = fopen($requested_file, 'rb');
                 fpassthru($fp);
             }
+            elseif ( preg_match("/^info\/refs/", $request) ) {
+
+                error_log("gitpub: failed to find $request, did you run 'git update-server-info' on your repo?", 0);
+            }
             else {
 
-                print "die die die\n";
-                exit;
+                error_log("gitpub: failed to find $request", 0);
             }
         }
         else {
 
+            error_log("gitpub: http clone request did not originate from git", 0);
             header("Location: ". $CONFIG['base_uri'] .'/');
         }
     }
