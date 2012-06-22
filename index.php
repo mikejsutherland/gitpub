@@ -43,7 +43,7 @@
         }
 ?>
             <!-- Display the Branch -->
-            <span class="urlbox gradient_gray"><span class="grey">branch:</span> <?=preg_replace("/^origin\//", "", $_SESSION['branch']);?></span>
+            <span class="urlbox gradient_gray"><span class="black">branch:</span> <?=preg_replace("/^origin\//", "", $_SESSION['branch']);?></span>
 <?
     } 
 ?>
