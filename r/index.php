@@ -19,16 +19,6 @@
     *
     */
 
-    if ( empty($_GET['service']) ) {
-        header('Content-Type', 'text/plain');
-    }
-    else {
-        header('Content-Type', "application/x-". $_GET['service'] ."-advertisement");
-    }
-    header('Expires', 'Fri, 01 Jan 1980 00:00:00 GMT');
-    header('Pragma', 'no-cache');
-    header('Cache-Control', 'no-cache, max-age=0, must-revalidate');
-
    /*
     * This file will with the help of the associated .htaccess file
     * return any corresponding git repo file, as would be requested
@@ -84,16 +74,34 @@
 
             if ( file_exists($requested_file) ) {
 
+                // Set the headers
+                if ( empty($_GET['service']) ) {
+                    header('Content-Type', 'text/plain');
+                }
+                else {
+                    header('Content-Type', "application/x-". $_GET['service'] ."-advertisement");
+                }
+                header('Expires', 'Fri, 01 Jan 1980 00:00:00 GMT');
+                header('Pragma', 'no-cache');
+                header('Cache-Control', 'no-cache, max-age=0, must-revalidate');
+
+                // Return the file to git
                 $fp = fopen($requested_file, 'rb');
                 fpassthru($fp);
             }
-            elseif ( preg_match("/^info\/refs/", $request) ) {
-
-                error_log("gitpub: failed to find $request, did you run 'git update-server-info' on your repo?", 0);
-            }
             else {
+            
+                if ( preg_match("/^info\/refs/", $request) ) {
 
-                error_log("gitpub: failed to find $request", 0);
+                    error_log("gitpub: failed to find $request, did you run 'git update-server-info' on your repo?", 0);
+                }
+                else {
+
+                    error_log("gitpub: failed to find $request", 0);
+                }
+
+                // Tell git its not available
+                header("HTTP/1.0 404 Not Found");
             }
         }
         else {
