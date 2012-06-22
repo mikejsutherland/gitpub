@@ -70,8 +70,8 @@
             $repo_path = $CONFIG['projects_dir'] ."/$repo"; 
             $repo_path .= is_dir($repo_path ."/refs") ? "" : is_dir($repo_path ."/.git/refs") ? "/.git" : "";
 
-            // Ensure update hook is enabled
-            if ( file_exists($repo_path ."/hooks/update") ) {
+            // Ensure post-update hook is enabled
+            if ( file_exists($repo_path ."/hooks/post-update") ) {
 
                 $requested_file = $repo_path ."/". $request;
 
@@ -110,7 +110,7 @@
             // Update hook is not enabled, cannot accurately clone over http
             else {
 
-                error_log("gitpub: failed to find $request, did you enable the update hook?", 0);
+                error_log("gitpub: failed to find hooks/post-update, did you forget to enable it?", 0);
                 header('HTTP/1.1 500 Internal Server Error');
             }
         }
