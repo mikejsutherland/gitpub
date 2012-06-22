@@ -47,7 +47,7 @@
     elseif ( preg_match("/^([^\/]+)/", $_GET['uri'], $matches) ) {
 
         $repo = $matches[1];
-        $request = (isset($matches[2])) ? $matches[2] : null;
+        $request = null;
     }
 
     // Redirect on empty request
@@ -70,38 +70,48 @@
             $repo_path = $CONFIG['projects_dir'] ."/$repo"; 
             $repo_path .= is_dir($repo_path ."/refs") ? "" : is_dir($repo_path ."/.git/refs") ? "/.git" : "";
 
-            $requested_file = $repo_path ."/". $request;
+            // Ensure update hook is enabled
+            if ( file_exists($repo_path ."/hooks/update") ) {
 
-            if ( file_exists($requested_file) ) {
+                $requested_file = $repo_path ."/". $request;
 
-                // Set the headers
-                if ( empty($_GET['service']) ) {
-                    header('Content-Type', 'text/plain');
+                if ( file_exists($requested_file) ) {
+
+                    // Set the headers
+                    if ( empty($_GET['service']) ) {
+                        header('Content-Type', 'text/plain');
+                    }
+                    else {
+                        header('Content-Type', "application/x-". $_GET['service'] ."-advertisement");
+                    }
+                    header('Expires', 'Fri, 01 Jan 1980 00:00:00 GMT');
+                    header('Pragma', 'no-cache');
+                    header('Cache-Control', 'no-cache, max-age=0, must-revalidate');
+
+                    // Return the file to git
+                    $fp = fopen($requested_file, 'rb');
+                    fpassthru($fp);
                 }
                 else {
-                    header('Content-Type', "application/x-". $_GET['service'] ."-advertisement");
-                }
-                header('Expires', 'Fri, 01 Jan 1980 00:00:00 GMT');
-                header('Pragma', 'no-cache');
-                header('Cache-Control', 'no-cache, max-age=0, must-revalidate');
-
-                // Return the file to git
-                $fp = fopen($requested_file, 'rb');
-                fpassthru($fp);
-            }
-            else {
             
-                if ( preg_match("/^info\/refs/", $request) ) {
+                    if ( preg_match("/^info\/refs/", $request) ) {
 
-                    error_log("gitpub: failed to find $request, did you run 'git update-server-info' on your repo?", 0);
+                        error_log("gitpub: failed to find $request, did you run 'git update-server-info' on your repo?", 0);
+                    }
+                    else {
+
+                        error_log("gitpub: failed to find $request", 0);
+                    }
+
+                    // Tell git its not available
+                    header("HTTP/1.0 404 Not Found");
                 }
-                else {
+            }
+            // Update hook is not enabled, cannot accurately clone over http
+            else {
 
-                    error_log("gitpub: failed to find $request", 0);
-                }
-
-                // Tell git its not available
-                header("HTTP/1.0 404 Not Found");
+                error_log("gitpub: failed to find $request, did you enable the update hook?", 0);
+                header('HTTP/1.1 500 Internal Server Error');
             }
         }
         else {
