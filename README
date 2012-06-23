@@ -11,6 +11,7 @@ Features include:
     - Commit file diff
     - Branching
     - Tags
+    - Cloning
 
 
 Requirements
@@ -18,34 +19,50 @@ Requirements
 
 - Apache with PHP support
 - Git 1.7.4.x or above
-- A directory containing git repos
+- A directory containing git repositories
 
-Apache Notes:
-    - None.
-
-Git Notes:
-    - This has not been tested on earlier versions of Git.
-
-PHP Notes:
-    - If your php installation makes use of open_basedir to restrict access
-      to directories, you will need to append the path to the git bin and
-      also to your projects directory where you house your repos. 
-    
 
 Installation
 --------------------------------------------------------------------------------------
 
-Git clone gitpub:
+1) Get the source:
 
-    cd /var/www/html (or htdocs root)
+    - clone the repo:
+
     git clone http://codesmak.com/gitpub/r/gitpub
-    
-Configure gitpub:
+    cd gitpub
+
+    - download tarball:
+
+    tar xvf gitpub-1.1.2.tar
+    cd gitpub-1.1.2/
+
+    - download zip:
+
+    unzip gitpub-1.1.2.zip
+    cd gitpub-1.1.2/
+
+2) Configure gitpub:
 
     cd config
     cp example.gitpub.config.php gitpub.config.php
-    vi gitpub.config.php (set projects dir path, and git binary path)
+    vi gitpub.config.php ( set options accordingly )
 
+
+Notes
+--------------------------------------------------------------------------------------
+
+Apache:
+    - None.
+
+Git:
+    - This has not been tested on versions of Git lower than 1.7.4.1
+
+PHP:
+    - If your php installation makes use of open_basedir to restrict access
+      to directories. Append the path to both the git bin and the directory 
+      where you keep your git repositories. 
+    
 
 Contact
 --------------------------------------------------------------------------------------
