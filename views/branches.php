@@ -96,7 +96,7 @@
     catch (Exception $e) {
 
         $error = $e;
-        include($thispath ."include/error.php");
+        include($thispath ."error.php");
     }
 ?>
 

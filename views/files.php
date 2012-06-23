@@ -97,7 +97,7 @@
     catch (Exception $e) {
 
         $error = $e;
-        include($thispath ."include/error.php");
+        include($thispath ."error.php");
     }
 
 ?>
@@ -119,7 +119,7 @@
         catch (Exception $e) {
 
             $error = $e;
-            include($thispath ."include/error.php");
+            include($thispath ."error.php");
         }
 
         if ( count($files) > 0 ) {
@@ -191,7 +191,7 @@
         else {
 
             $error = "This repository has no files yet.\n";
-            include($thispath. 'include/error.php');
+            include($thispath. 'error.php');
         }
     }
 ?>

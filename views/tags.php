@@ -66,13 +66,13 @@
         else {
 
             $error = "There are no tags yet.\n";
-            include($thispath ."include/error.php");
+            include($thispath ."error.php");
         }
     }
     catch (Exception $e) {
 
         $error = $e;
-        include($thispath ."include/error.php");
+        include($thispath ."error.php");
     }
 ?>
 
