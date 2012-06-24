@@ -34,13 +34,13 @@ Installation
 
     - download tarball:
 
-    tar xvf gitpub-1.1.2.tar
-    cd gitpub-1.1.2/
+    tar xvf gitpub-1.0.0.tar
+    cd gitpub-1.0.0/
 
     - download zip:
 
-    unzip gitpub-1.1.2.zip
-    cd gitpub-1.1.2/
+    unzip gitpub-1.0.0.zip
+    cd gitpub-1.0.0/
 
 2) Configure gitpub:
 
@@ -70,3 +70,4 @@ Use gitpub?  Have a question or a comment?  I'd love to hear from you, please di
 all questions or comments to: gitpub@codesmak.com
 
 Enjoy!
+
