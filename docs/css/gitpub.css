@@ -398,7 +398,7 @@ pre.prettyprint { /* customizations for pretty-print */
     padding: 0px 0px 0px 10px;
     font-size: 14px;
     float: left; /* required so line highlighting gets rendered */
-    min-width: 100%; /* needed to ensure small code blocks fill the given area (almost)  */
+    min-width: 99%; /* needed to ensure small code blocks fill the given area (almost)  */
 }
 .error {
     border: 1px solid #ddd;
