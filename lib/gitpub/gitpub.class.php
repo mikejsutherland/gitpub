@@ -521,7 +521,7 @@
             # --max-count=<number> Limit the number of commits to output.
             # --skip=<number> Skip number commits before starting to show the commit output.
 
-            $args = array("--skip=$start", "--date=raw", "--no-merges");
+            $args = array("--skip=$start", "--date=raw");
 
             if ( ! empty($max) ) { 
                 array_push($args, "--max-count=$max");
