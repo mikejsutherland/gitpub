@@ -149,8 +149,7 @@
                 }
                 else {
 
-                    #$parent_uri .= "?repo=". $_SESSION['repo'] .'&nav=files';
-                    $parent_uri .= genLink();
+                    $parent_uri .= genLink(array("o" => null));
                 }
 ?>
                         <tr>
