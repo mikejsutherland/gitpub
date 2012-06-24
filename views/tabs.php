@@ -30,7 +30,7 @@
                 catch (Exception $e) {
 
                     $error = $e;
-                    include($thispath ."error.php");
+                    include($thispath ."views/error.php");
                 }
 ?>
                 </span>

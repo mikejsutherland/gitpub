@@ -39,7 +39,7 @@
             print "<div class='navbar'><a class='ajaxy left' href='".$CONFIG['base_uri']."/".
                 genLink(array("offset" => $prev))."'>< Previous</a><br class='clear' /></div>";
             $error = "There are no more commits to view.\n";
-            include($thispath ."error.php");
+            include($thispath ."views/error.php");
         }
         elseif ( count($commits) > 0 ) {
 
@@ -133,13 +133,13 @@
         else {
 
             $error = "There are no commits.\n";
-            include($thispath ."error.php");
+            include($thispath ."views/error.php");
         }
     }
     catch (Exception $e) {
 
         $error = $e;
-        include($thispath ."error.php");
+        include($thispath ."views/error.php");
     }
 ?>
             </div>

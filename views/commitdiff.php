@@ -174,14 +174,14 @@
         else {
 
             $error = "Unable to display commit diff\n";
-            include($thispath ."error.php");
+            include($thispath ."views/error.php");
         }
 
     }
     catch (Exception $e) {
 
         $error = $e;
-        include($thispath ."error.php");
+        include($thispath ."views/error.php");
     }
 
 ?>

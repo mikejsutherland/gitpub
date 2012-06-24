@@ -52,6 +52,6 @@
             $error = "No git repositories found at: ". $gp->projectsdir;
         }
 
-        include($thispath."error.php");
+        include($thispath."views/error.php");
     }
 ?>
