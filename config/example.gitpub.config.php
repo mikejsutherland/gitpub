@@ -19,8 +19,10 @@
     #
     $CONFIG['commits_per_page'] = 15;
 
-    # Caching -- requires a cache/ directory to be created
-    # and given write permissions
+    # Caching -- controls caching of git command output
+    # which can save overhead on larger or busier projects.
+    # Requires a cache/ directory to be created and given
+    # write permissions by the webserver.
     #
     $CONFIG['enable_cache'] = false;
 
@@ -34,7 +36,7 @@
     #
     # The below php settings can be adjusted here if you are
     # experiencing odd behavior from gitpub. If all goes well
-    # you will should not need them.
+    # you should not need them.
     #
 
     # Increase the error reporting by uncommenting the below

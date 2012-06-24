@@ -41,7 +41,7 @@
                 About
                 <ul>
                     <li><a href="http://codesmak.com" target="_blank">codesmak.com</a></li>
-                    <li><a href="<?=$CONFIG['base_uri']."/".genLink(array("nav" => "files", "commit" => null, "o" => "README", "branch" => null));?>">Gitpub</a></li>
+                    <li><a href="<?=$CONFIG['base_uri']."/".genLink(array("nav" => "files", "commit" => null, "o" => "README", "branch" => null));?>">GitPub</a></li>
                 </ul>
             </div>
             <br class="clear" />
