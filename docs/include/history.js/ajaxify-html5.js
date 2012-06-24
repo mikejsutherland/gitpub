@@ -176,7 +176,7 @@
 				complete: function(jqXHR, textStatus){
 
 					// Customizations
-					fileBrowserLoaded();
+					tabLoaded();
 				}
 			}); // end ajax
 

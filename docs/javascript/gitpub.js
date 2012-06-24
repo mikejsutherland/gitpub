@@ -20,8 +20,8 @@
 
 $(document).ready(function() {
 
-    // Initial the pretty print methods
-    prettyPrint();
+    // Init -- call to other functions if necessary
+    tabLoaded();
 
     // Select the text inside input box when clicked
     $("input[type=text]").click(function(){
@@ -32,13 +32,17 @@ $(document).ready(function() {
 
 });
 
-// history.js customizations
-// -- called after content is fetched and displayed
+// The below function fires other functions when specific
+// sections are displayed.  This is called by history.js
 //
-fileBrowserLoaded = function() {
+tabLoaded = function() {
 
-    // enable syntax highlighting
-    prettyPrint();
+    // Specific functions for the 'Files' tab
+    if ( $('#filebrowser').length ) {
+
+        // Initialize syntax highlighter
+        prettyPrint();
+    }
 
     return;
 }
