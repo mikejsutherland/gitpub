@@ -238,11 +238,20 @@
 
             if ( preg_match("/\.(jpg|jpeg|png|gif|ico|bmp)$/i", $file) ) {
 
-                return "<img src='data:image/png;base64,". base64_encode($this->cmd['results']) ."' />\n";
+                $browser = get_browser();
+
+                // IE <= 7 does not support data urls
+                if( $browser->browser == 'IE' && $browser->majorver <= 7 ) {
+
+                    return "<div class='message'>Your browser does not support dynamically viewing images.\n</div>\n";
+                }
+                else {
+
+                    return "<img src='data:image/png;base64,". base64_encode($this->cmd['results']) ."' />\n";
+                }
             }
             else {
 
-                #$str = implode("\n", $this->cmd['results']);
                 $str = $this->cmd['results'];
 
                 # verify we have ascii data
