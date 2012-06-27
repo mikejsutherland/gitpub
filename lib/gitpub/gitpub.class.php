@@ -238,12 +238,16 @@
 
             if ( preg_match("/\.(jpg|jpeg|png|gif|ico|bmp)$/i", $file) ) {
 
-                $browser = get_browser();
-
                 // IE <= 7 does not support data urls
-                if( $browser->browser == 'IE' && $browser->majorver <= 7 ) {
+                preg_match("/MSIE\s+(\d+)/", $_SERVER['HTTP_USER_AGENT'], $ie);
+
+                if( isset($ie[1]) && $ie[1] <= 7 ) {
 
                     return "<div class='message'>Your browser does not support dynamically viewing images.\n</div>\n";
+                }
+                elseif ( isset($ie[1]) && $ie[1] == 8 && $this->cmd['size'] >= (32*1024) ) {
+
+                    return "<div class='message'>Your browser does not support dynamically viewing images larger than 32kb.\n</div>\n";
                 }
                 else {
 
