@@ -434,4 +434,9 @@ pre.diff span {
 .remove {
     background-color: #ffdddd;
 }
-
+a.dl, a.dl:active, a.dl:visited, a.dl:hover { 
+    padding-left: 12px;
+}
+a.dl:hover {
+    background: url('../images/blue-arrow-down.gif') no-repeat left top;
+}
