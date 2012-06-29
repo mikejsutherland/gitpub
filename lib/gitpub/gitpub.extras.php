@@ -21,14 +21,22 @@
 
     function genLink($params = array()) {
 
-        $link = "";
-        $default_params = $_GET; // existing GET params are included automatically
+        $uri = "";
+        $link = ""; 
 
+        $default_params = $_GET; // existing GET params are included automatically
         $parameters = array_merge($default_params, $params);
+
+        $mod_rewrite = has_mod_rewrite();
 
         foreach ($parameters as $key => $val) {
 
             if ( empty($val) || !isset($val) ) { continue; }
+
+            if ( $mod_rewrite ) {
+
+                if ( $key == 'repo' || $key == 'nav' ) { continue; }
+            }
 
             if ( $key == "o" ) {
 
@@ -39,9 +47,30 @@
             }
         }
 
-        $link[0] = "?";
-        
-        return str_replace('&', '&amp;', $link);
+        if ( $mod_rewrite ) {
+
+            $uri .= (isset($parameters['repo'])) ? $parameters['repo'] ."/" : "";
+            $uri .= (isset($parameters['nav'])) ? $parameters['nav'] ."/" : "";
+        }
+
+        if ( ! empty($link) ) {
+
+            $link[0] = "?"; 
+            $link = str_replace('&', '&amp;', $link);
+        }
+
+        return $uri . $link;
+    }
+
+    function prettify_url($uri) {
+
+
+
+    }
+
+    function has_mod_rewrite() {
+
+        return ($_SERVER['HTTP_MOD_REWRITE'] == 'On' || in_array('mod_rewrite', apache_get_modules())) ? true : false;
     }
 
     function relativeDate($date) {

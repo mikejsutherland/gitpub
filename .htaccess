@@ -1,10 +1,10 @@
-#RewriteEngine on
-#RewriteBase /
-#RewriteRule ^docs/(.+) - [L,NC]
-#RewriteRule ^r/ - [L,NC]
-#RewriteRule ^u/ - [L,NC]
-#
-#RewriteCond %{THE_REQUEST} \?
-#RewriteCond %{QUERY_STRING} ^repo=(.+)$
-#RewriteRule ^(.*) %{REQUEST_URI}%1/? [R,L]
-#RewriteRule ^(.+)/$ ?repo=$1 [L]
+<IfModule mod_rewrite.c>
+    SetEnv HTTP_MOD_REWRITE On
+
+    RewriteEngine on
+    RewriteRule ^docs/(.+) - [L,NC]
+    RewriteRule ^r/ - [L,NC]
+    #RewriteRule ^u/ - [L,NC]
+    RewriteRule ^([^\/]+)/([^\/]+)/$ ?repo=$1&nav=$2 [QSA,L]
+    RewriteRule ^([^\/]+)/$ ?repo=$1 [QSA,L]
+</IfModule>
