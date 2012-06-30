@@ -478,8 +478,8 @@
 
             # --list (not available in 1.7.4.1)
             # --no-merged HEAD causes unmerged branches to not show up
-            $args = array("-v", "--no-abbrev");
-            #if ( $this->_isLocal() ) { array_push($args, "-r"); } // read remotes if local
+            $args = array("-v", "-l", "--no-abbrev");
+            if ( $this->_isLocal() ) { array_push($args, "-r"); } // read remotes if local
 
             // Disable caching
             $this->enable_cache = false;
@@ -500,16 +500,16 @@
 
                 foreach ($results as $line) {
 
-                    preg_match("/^([\*]*.+?)\s+([a-z0-9]+)\s+(.+)$/", $line, $matches); 
+                    if ( preg_match("/^([\*]*.+?)\s+([a-z0-9]+)\s+(.+)$/", $line, $matches) ) { 
 
-                    $branch = array();
-                    $branch['branch'] = preg_replace("/^\*\s/", "", $matches[1]);
-                    $branch['name'] = preg_replace("/^origin\//", "", $branch['branch']);
-                    $branch['commit'] = $matches[2];
-                    $branch['message'] = $matches[3];
+                        $branch = array();
+                        $branch['branch'] = preg_replace("/^\*\s/", "", $matches[1]);
+                        $branch['name'] = $branch['branch']; #preg_replace("/^origin\//", "", $branch['branch']);
+                        $branch['commit'] = $matches[2];
+                        $branch['message'] = $matches[3];
 
-                    array_push($branches, $branch);
-
+                        array_push($branches, $branch);
+                    }
                 }
             }
 
