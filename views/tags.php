@@ -44,7 +44,7 @@
                             <tr class="<?=(($c = !$c)?'hl':'');?>">
                                 <td>
                                     <div class="left">
-                                        <strong><a href='<?=$CONFIG['base_uri']."/download.php?tag=$ver";?>'><?=$ver?></a></strong>
+                                        <strong><a href='<?=$CONFIG['base_uri']."/download.php?tag=$ver&amp;type=zip";?>'><?=$ver?></a></strong>
                                         <? if ( ! empty($msg) ) { ?>
                                         <span class="grey"> - <?=$msg;?></span>
                                         <? } ?>
