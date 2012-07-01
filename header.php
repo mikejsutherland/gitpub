@@ -59,6 +59,7 @@
 
 <head>
     <title><?=(isset($_SESSION['repo'])) ? "gitpub / ".$_SESSION['repo'] : "gitpub";?></title>
+    <link rel="shortcut icon" href="data:,">
 
     <!-- google-code-prettify -->
     <link rel="stylesheet" type="text/css" media="all" href="<?=$CONFIG['base_uri'];?>/docs/include/google-code-prettify/prettify.css" />
