@@ -163,18 +163,20 @@
 
         public function setBranch($branch) {
 
-            $test_branch = $branch;
+            // Clear the existing branch
+            $this->branch = null;
 
-            if ( $this->_isLocal() ) {
+            foreach(array_keys($this->tips) as $branch_name) {
 
-                $test_branch = "origin/$branch";
+                if ( $branch == $branch_name || "origin/$branch", $branch_name ) {
+
+                    $this->branch = $branch;
+                    break;
+                }
             }
 
-            if ( in_array($test_branch, array_keys($this->tips)) ) {
-
-                $this->branch = $branch;
-            }
-            else {
+            // Throw an error if empty
+            if ( empty($this->branch) ) {
 
                 error_log("gitpub: branch '$branch' does not exist", 0);
                 throw new Exception("Unknown branch.\n");
@@ -529,7 +531,7 @@
 
                         $branch = array();
                         $branch['branch'] = preg_replace("/^\*\s/", "", $matches[1]);
-                        $branch['name'] = $branch['branch']; #preg_replace("/^origin\//", "", $branch['branch']);
+                        $branch['name'] = preg_replace("/^origin\//", "", $branch['branch']);
                         $branch['commit'] = $matches[2];
                         $branch['message'] = $matches[3];
 
@@ -675,7 +677,7 @@
                 $this->repodir . implode(" ", $switches) . 
                 " $gitcmd ". implode(" ", $args)
             );            
-            print "<pre>DEBUG : ". $res['cmd'] ."</pre><br />\n";
+            #print "<pre>DEBUG : ". $res['cmd'] ."</pre><br />\n";
 
             if ( $this->enable_cache ) {
 
