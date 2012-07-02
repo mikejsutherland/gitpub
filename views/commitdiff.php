@@ -20,11 +20,6 @@
     */
 ?>
             <div id="commitbrowser">
-
-                <div class="navbar">
-                    Commit diff <?=$_SESSION['commit'];?>
-                </div>
-
 <?
 
     try {
@@ -35,6 +30,9 @@
         if ( count($diffs) > 0 ) {
 
 ?>
+                <div class="navbar">
+                    Commit diff <?=$_SESSION['commit'];?>
+                </div>
 
                 <table class="commit browser">
                     <thead>
@@ -180,7 +178,7 @@
     }
     catch (Exception $e) {
 
-        $error = $e;
+        $error = "Unable to retrieve the requested commit.";
         include($thispath ."views/error.php");
     }
 

@@ -138,7 +138,7 @@
     }
     catch (Exception $e) {
 
-        $error = $e;
+        $error = "Unable to retrieve commits.";
         include($thispath ."views/error.php");
     }
 ?>

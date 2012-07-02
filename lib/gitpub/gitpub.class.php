@@ -568,6 +568,9 @@
             # --max-count=<number> Limit the number of commits to output.
             # --skip=<number> Skip number commits before starting to show the commit output.
 
+            if ( ! preg_match("/^\d+$/", $start) ) { $start = 0; }
+            if ( ! preg_match("/^\d+$/", $max) ) { $max = 15; }
+
             $args = array("--skip=$start", "--date=raw");
 
             if ( ! empty($max) ) { 
