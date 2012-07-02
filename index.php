@@ -89,7 +89,12 @@
             // Tag browser
             include('views/tags.php');
         }
+        else {
 
+            // Throw an error
+            $error = "Unknown view.";
+            include('views/error.php');
+        }
     }
 ?>
  
