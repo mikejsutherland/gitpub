@@ -23,8 +23,15 @@
 
 <?
 
-    $offset = ( ! empty($_GET['offset']) ) ? $_GET['offset'] : 0;
-    if ( $offset < 0 ) { $offset = 0; }
+    $offset = 0;
+
+    if ( ! empty($_GET['offset']) ) {
+
+        $offset = $_GET['offset'];
+
+        // Reset offset to 0 if its out of range or not a number
+        if ( ! preg_match("/^\d+$/", $offset) || $offset < 0 ) { $offset = 0; }
+    }
 
     $next = $offset + $CONFIG['commits_per_page'];
     $prev = $offset - $CONFIG['commits_per_page'];
