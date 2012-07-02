@@ -568,8 +568,8 @@
             # --max-count=<number> Limit the number of commits to output.
             # --skip=<number> Skip number commits before starting to show the commit output.
 
-            if ( ! preg_match("/^\d+$/", $start) ) { $start = 0; }
-            if ( ! preg_match("/^\d+$/", $max) ) { $max = 15; }
+            if ( ! preg_match("/^\d+$/", $start) || $start < 0 ) { $start = 0; }
+            if ( ! preg_match("/^\d+$/", $max) || $max <= 0 ) { $max = isset($this->opts['commits_per_page']) ? $this->opts['commits_per_page'] : 10; }
 
             $args = array("--skip=$start", "--date=raw");
 
