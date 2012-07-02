@@ -99,7 +99,7 @@
     }
     catch (Exception $e) {
 
-        $error = $e;
+        $error = "Error retrieving available branches.\n";
         include($thispath ."views/error.php");
     }
 ?>
