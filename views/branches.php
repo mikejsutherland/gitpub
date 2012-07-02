@@ -32,15 +32,15 @@
                     <table class="branch browser">
                         <tbody>
                             <tr class="base">
-                                <td>
+                                <td class="base_content">
                                     <div class="left log">
                                         <strong><a href='<?=$CONFIG['base_uri']."/". genLink(array("branch" => "master"));?>'>master</a></strong><br />
                                         <span class="small grey">Last updated <?=relativeDate($branch_meta[0]['epoch']);?> by </span>
                                         <span class="small blue"><?=$branch_meta[0]['author'];?></span>
                                     </div>
-                                    <div class="right small dl">
-                                        <a href='<?=$CONFIG['base_uri']."/download.php?tag=HEAD";?>'>Download tarball</a><br />
-                                        <a href='<?=$CONFIG['base_uri']."/download.php?tag=HEAD&amp;type=zip";?>'>Download zip</a>
+                                    <div class="right small">
+                                        <a class="dl" href='<?=$CONFIG['base_uri']."/download.php?tag=HEAD";?>'>Download tarball</a><br />
+                                        <a class="dl" href='<?=$CONFIG['base_uri']."/download.php?tag=HEAD&amp;type=zip";?>'>Download zip</a>
                                     </div>
                                     <br class="clear" />
                                 </td>

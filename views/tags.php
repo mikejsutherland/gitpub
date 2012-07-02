@@ -49,9 +49,9 @@
                                         <span class="grey"> - <?=$msg;?></span>
                                         <? } ?>
                                     </div>
-                                    <div class="right small dl">
-                                        <a href='<?=$CONFIG['base_uri']."/download.php?tag=$ver";?>'>Download tarball</a><br />
-                                        <a href='<?=$CONFIG['base_uri']."/download.php?tag=$ver&amp;type=zip";?>'>Download zip</a>
+                                    <div class="right small">
+                                        <a class="dl" href='<?=$CONFIG['base_uri']."/download.php?tag=$ver";?>'>Download tarball</a><br />
+                                        <a class="dl" href='<?=$CONFIG['base_uri']."/download.php?tag=$ver&amp;type=zip";?>'>Download zip</a>
                                     </div>
                                     <br class="clear" />
                                 </td>

@@ -302,13 +302,20 @@ table.browser tr.base {
     background-color: #444; 
     color: #fff;
 }
-table.browser tr.base a, table.browser tr.base a:visited, table.browser tr.base a:active {
+table.browser tr.base td.base_content a, table.browser tr.base td.base_content a:visited, table.browser tr.base td.base_content a:active {
     text-decoration: none;
     color: #fff;
 }
-table.browser tr.base a:hover {
+table.browser tr.base td.base_content a:hover {
     color: #fff;
     text-decoration: underline;
+}
+table.browser tr.base td.base_content a.dl, table.browser tr.base td.base_content a.dl:visited, table.browser tr.base td.base_content a.dl:active {
+    color: #fff;
+}
+table.browser tr.base td.base_content a.dl:hover {
+    color: #fff;
+    background: url('../images/white-arrow-down.gif') no-repeat left top;
 }
 .small {
     font-size: 11px !important;
@@ -437,11 +444,11 @@ pre.diff span {
 .remove {
     background-color: #ffdddd;
 }
-.dl a, .dl a:active, .dl a:visited, .dl a:hover {
+a.dl, a.dl:active, a.dl:visited, a.dl:hover {
     color: #398bc5;
     padding-left: 12px;
 }
-.dl a:hover {
+a.dl:hover {
     color: #398bc5;
     background: url('../images/blue-arrow-down.gif') no-repeat left top;
 }
