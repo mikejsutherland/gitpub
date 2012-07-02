@@ -71,7 +71,7 @@
     }
     catch (Exception $e) {
 
-        $error = $e;
+        $error = "Unable to retrieve tags.";
         include($thispath ."views/error.php");
     }
 ?>

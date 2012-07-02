@@ -25,13 +25,13 @@
 <?
                 try {
             
-                    print $gp->getDescription();
+                    $description = $gp->getDescription();
                 }
                 catch (Exception $e) {
 
-                    $error = $e;
-                    include($thispath ."views/error.php");
+                    $description = "No description available.";
                 }
+                print $description;
 ?>
                 </span>
             </div>
