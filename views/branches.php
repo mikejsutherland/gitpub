@@ -38,9 +38,10 @@
                                         <span class="small grey">Last updated <?=relativeDate($branch_meta[0]['epoch']);?> by </span>
                                         <span class="small blue"><?=$branch_meta[0]['author'];?></span>
                                     </div>
-                                    <div class="right small">
-                                        <a class="dl" href='<?=$CONFIG['base_uri']."/download.php?tag=HEAD";?>'>Download tarball</a><br />
-                                        <a class="dl" href='<?=$CONFIG['base_uri']."/download.php?tag=HEAD&amp;type=zip";?>'>Download zip</a>
+                                    <div class="right small grey tright">
+                                        Download<br />
+                                        <a class="dl" href='<?=$CONFIG['base_uri']."/download.php?tag=HEAD";?>'>TAR</a>
+                                        <a class="dl" href='<?=$CONFIG['base_uri']."/download.php?tag=HEAD&type=zip";?>'>ZIP</a>
                                     </div>
                                     <br class="clear" />
                                 </td>

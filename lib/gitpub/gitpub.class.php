@@ -462,17 +462,14 @@
             return $commit;
         }
 
-        public function getArchive($tag = null, $format = "tar") {
+        public function getArchive($tag = "HEAD", $format = "tar") {
 
             # to stdout git archive --format=tar --prefix=gitpub-1.0.0/ v1.0.0
             # to gz git archive --format=tar --prefix=gitpub-1.0.0/ v1.0.0 | gzip >gitpub-1.0.0.tar.gz
 
             $prefix = $this->repo;
 
-            if ( empty($tag) ) {
-                $tag = "HEAD";
-            }
-            else {
+            if ( $tag !== "HEAD" ) {
 
                 $prefix .= ($tag[0] == "v") ? "-". substr($tag, 1) : "-". $tag;
             }

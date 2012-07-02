@@ -12,7 +12,7 @@
         $type = (isset($_GET['type'])) ? $_GET['type'] : "tar";
 
         $fn = $_SESSION['repo'];
-        $fn .= ($tag[0] == "v") ? "-". substr($tag, 1) : "-". $tag;
+        $fn .= ($tag[0] == "v") ? "-". substr($tag, 1) : ($tag !== "HEAD") ? "-". $tag : "";
 
         // Instantiate repository
         $gp = new GitPub($CONFIG);
@@ -33,7 +33,7 @@
         }
         catch (Exception $e) {
 
-            $error = $e;
+            $error = "The requested tag could not be retrieved.";
             include($thispath .'views/error.php');
         }
     }
