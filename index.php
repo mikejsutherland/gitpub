@@ -67,8 +67,10 @@
 
             // Throw an error
             include('views/error.php');
+            print "<br />\n";
         }
-        elseif ( $_SESSION['nav'] == 'files' ) { 
+
+        if ( $_SESSION['nav'] == 'files' ) { 
 
             // Display the file navigator
             include('views/files.php');

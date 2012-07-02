@@ -168,7 +168,7 @@
 
             foreach(array_keys($this->tips) as $branch_name) {
 
-                if ( $branch == $branch_name || "origin/$branch", $branch_name ) {
+                if ( $branch == $branch_name || "origin/$branch" == $branch_name ) {
 
                     $this->branch = $branch;
                     break;

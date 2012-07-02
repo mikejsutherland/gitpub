@@ -61,8 +61,11 @@
         }
         catch (Exception $e) {
 
-            $_SESSION['branch'] = "";
-            $error = "Unknown branch.\n";
+            $_SESSION['branch'] = null;
+            $error = "The requested branch does not exist.\n";
+
+            // Force to branches tab
+            $_SESSION['nav'] = 'branches';
         }
     }
 
