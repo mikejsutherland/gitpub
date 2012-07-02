@@ -687,7 +687,7 @@
                 $this->repodir . implode(" ", $switches) . 
                 " $gitcmd ". implode(" ", $args)
             );            
-            print "<pre>DEBUG : ". $res['cmd'] ."</pre><br />\n";
+            #print "<pre>DEBUG : ". $res['cmd'] ."</pre><br />\n";
 
             if ( $this->enable_cache ) {
 
