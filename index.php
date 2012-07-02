@@ -63,7 +63,14 @@
 
         include('views/tabs.php');
 
-        if ( $_SESSION['nav'] == 'files' ) { 
+        if ( ! empty($error) ) {
+
+            // Throw an error
+            include('views/error.php');
+        }
+        elseif ( $_SESSION['nav'] == 'files' ) { 
+
+            // Display the file navigator
             include('views/files.php');
         }
         elseif ( $_SESSION['nav'] == 'commits' ) {
@@ -96,6 +103,7 @@
             include('views/error.php');
         }
     }
+
 ?>
  
         </div>

@@ -37,7 +37,6 @@
             // Set projects dir 
             $this->setProjectsDir($this->opts['projects_dir']);
             $this->setRepos($this->opts['projects_dir']);
-            $this->setBranch($this->opts['branch']);
         }
 
         public function __get($var){
@@ -49,39 +48,50 @@
 
             // Set the name of the repo
             $this->repo = $repo;
+
             // Set the path of the repo
             $this->repodir = $this->opts['projects_dir'] ."/". $repo;
+
             if ( $this->_isLocal() ) {
                 $this->repodir .= "/.git";
             }
 
-            // Get all the tips
-            $this->setTips();
+            // Verify the repo path exists
+            if ( ! is_dir("$this->repodir") ) {
 
-            // Set the top commit id
-            $this->setCommitId();
+                error_log("gitpub: repo '$repo' at path ". $this->repodir ." does not exist", 0);
+                throw new Exception("Unknown repository.\n");
+            }
+            else {
 
-            // Set the tip (top commit id)
-            $this->tip = $this->commit;
+                // Get all the tips
+                $this->setTips();
 
-            // Set the directory to cache to            
-            if ( $this->opts['enable_cache'] ) {
+                // Set the top commit id
+                $this->setCommitId();
+
+                // Set the tip (top commit id)
+                $this->tip = $this->commit;
+
+                // Set the directory to cache to            
+                if ( $this->opts['enable_cache'] ) {
                 
-                // Initialize the cache dir
-                $this->cachedir = "cache/". $repo;
-                $this->newCache();
+                    // Initialize the cache dir
+                    $this->cachedir = "cache/". $repo;
+                    $this->newCache();
 
-                // Flush the cache if necessary
-                if ( $this->metaCache() !== implode(",", $this->tips) ) {
+                    // Flush the cache if necessary
+                    if ( $this->metaCache() !== implode(",", $this->tips) ) {
 
-                    // Flush the cache
-                    $this->flushCache();
-                    // Update the cache meta
-                    $this->metaCache(implode(",", $this->tips));
+                        // Flush the cache
+                        $this->flushCache();
+                        // Update the cache meta
+                        $this->metaCache(implode(",", $this->tips));
+                    }
+
+                    // Turn on caching
+                    $this->enable_cache = $this->opts['enable_cache'];
                 }
-
-                // Turn on caching
-                $this->enable_cache = $this->opts['enable_cache'];
             }
 
             return;
@@ -153,7 +163,22 @@
 
         public function setBranch($branch) {
 
-            $this->branch = $branch;
+            $test_branch = $branch;
+
+            if ( $this->_isLocal() ) {
+
+                $test_branch = "origin/$branch";
+            }
+
+            if ( in_array($test_branch, array_keys($this->tips)) ) {
+
+                $this->branch = $branch;
+            }
+            else {
+
+                error_log("gitpub: branch '$branch' does not exist", 0);
+                throw new Exception("Unknown branch.\n");
+            }
         }
 
         public function setProjectsDir($dir) {

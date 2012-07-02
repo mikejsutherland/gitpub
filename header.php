@@ -44,12 +44,26 @@
     // Set the repo
     if ( ! empty($_SESSION['repo']) ) {
 
-        $gp->setRepo($_SESSION['repo']);
+        try {
+            $gp->setRepo($_SESSION['repo']);
+        }
+        catch (Exception $e) {
+
+            $_SESSION['repo'] = "";
+            $error = "Unknown repository.\n";
+        }
     }
 
-    if ( ! empty($_SESSION['branch']) ) {
+    if ( ! empty($_SESSION['repo']) && ! empty($_SESSION['branch']) ) {
 
-        $gp->setBranch($_SESSION['branch']);
+        try {
+            $gp->setBranch($_SESSION['branch']);
+        }
+        catch (Exception $e) {
+
+            $_SESSION['branch'] = "";
+            $error = "Unknown branch.\n";
+        }
     }
 
     header('Content-type: text/html; charset=utf-8');
