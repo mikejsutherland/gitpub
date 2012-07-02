@@ -257,6 +257,13 @@
 
         public function getFile($file, $commit = null) {
 
+            // Ensure requested file contains valid characters
+            if ( ! preg_match("/^[\/a-z0-9-_\.]+$/i", $file) ) {
+
+                error_log("gitput: requested file '$file' contains invalid characters.", 0);
+                throw new Exception("Invalid file.\n");
+            }
+
             if ( empty($commit) ) {
                 $commit = $this->branch;
             }
@@ -677,7 +684,7 @@
                 $this->repodir . implode(" ", $switches) . 
                 " $gitcmd ". implode(" ", $args)
             );            
-            #print "<pre>DEBUG : ". $res['cmd'] ."</pre><br />\n";
+            print "<pre>DEBUG : ". $res['cmd'] ."</pre><br />\n";
 
             if ( $this->enable_cache ) {
 

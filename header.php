@@ -35,7 +35,7 @@
     // Set the view
     $_SESSION['nav'] = isset($_GET['nav']) ? $_GET['nav'] : 'files'; # default view mode
     // Set the object
-    $_SESSION['o'] = isset($_GET['o']) ? base64_decode($_GET['o']) : ""; 
+    $_SESSION['o'] = (isset($_GET['o']) && base64_decode($_GET['o'], true) && strlen($_GET['o']) % 4 == 0) ? base64_decode($_GET['o']) : ""; 
     // Set the commit id
     $_SESSION['commit'] = isset($_GET['commit']) ? $_GET['commit'] : null;
     // Set the branch
