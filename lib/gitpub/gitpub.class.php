@@ -646,11 +646,11 @@
             $res = array();
 
             // Define the command to be executed
-            $res['cmd'] = $this->_chopPath($this->opts['git_path']) . "/git --no-pager --git-dir=" .
+            $res['cmd'] = escapeshellcmd($this->_chopPath($this->opts['git_path']) . "/git --no-pager --git-dir=" .
                 $this->repodir . implode(" ", $switches) . 
                 " $gitcmd ". implode(" ", $args)
-            ;            
-            #print "<pre>DEBUG : ". $res['cmd'] ."</pre><br />\n";
+            );            
+            print "<pre>DEBUG : ". $res['cmd'] ."</pre><br />\n";
 
             if ( $this->enable_cache ) {
 
@@ -704,7 +704,8 @@
 
             if ( $res['rc'] !== 0 ) {
 
-                throw new Exception("Error running command: '". $res['cmd'] ."', rc: ". $res['rc'] ."\n");
+                error_log("Error running command: '". $res['cmd'] ."', rc: ". $res['rc'], 0);
+                throw new Exception("An error occurred.\n");
             }
 
             // Store the result
