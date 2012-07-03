@@ -1,4 +1,5 @@
 <?
+
     #######################################################################
     # GitPub Settings:
     #
@@ -21,10 +22,11 @@
 
     # Caching -- controls caching of git command output
     # which can save overhead on larger or busier projects.
-    # Requires a cache/ directory to be created and given
+    # Requires a cache directory to be created and given
     # write permissions by the webserver.
     #
     $CONFIG['enable_cache'] = false;
+    $CONFIG['cache_dir'] = '/tmp/gitpub.cache';
 
     # Allow cloning over http -- requires post-update hook to be
     # enabled. (cp hooks/post-update.sample hooks/post-update)

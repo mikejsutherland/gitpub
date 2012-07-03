@@ -26,11 +26,12 @@
         public function __construct($opts = array()) {
 
             $default_opts = array(
-                'git_path' => '/usr/local/git/bin',
+                'git_path' => '/usr/bin',
                 'projects_dir' => '',
                 'branch' => 'master',
-                'repo' => '',
+                'repo' => null,
                 'enable_cache' => false,
+                'cache_dir' => '/tmp/gitpub.cache',
             );
             $this->opts = array_merge($default_opts, $opts);
 
@@ -77,7 +78,7 @@
                 if ( $this->opts['enable_cache'] ) {
                 
                     // Initialize the cache dir
-                    $this->cachedir = "cache/". $repo;
+                    $this->cachedir = $this->opts['cache_dir'] .'/'. $repo;
                     $this->newCache();
 
                     // Flush the cache if necessary
@@ -566,7 +567,7 @@
             # --skip=<number> Skip number commits before starting to show the commit output.
 
             if ( ! preg_match("/^\d+$/", $start) || $start < 0 ) { $start = 0; }
-            if ( ! preg_match("/^\d+$/", $max) || $max <= 0 ) { $max = isset($this->opts['commits_per_page']) ? $this->opts['commits_per_page'] : 10; }
+            if ( ! preg_match("/^\d+$/", $max) || $max <= 0 ) { $max = isset($this->opts['commits_per_page']) ? $this->opts['commits_per_page'] : 20; }
 
             $args = array("--skip=$start", "--date=raw");
 
