@@ -19,34 +19,6 @@
     *
     */
 ?>
-    <div class="footer">
-        <div class="content">
-            <div class="section right">
-                Thanks ;)
-                <ul>
-                    <li><a href="http://git-scm.com/" target="_blank">Git - distributed version control</a></li>
-                    <li><a href="https://github.com/" target="_blank">Github - social coding</a></li>
-                    <li><a href="http://php.net/" target="_blank">PHP</a></li>
-                </ul>
-            </div>
-            <div class="section right">
-                Documentation
-                <ul>
-                    <li><a href="http://git-scm.com/documentation" target="_blank">Git - Documentation</a></li>
-                    <li><a href="http://rogerdudler.github.com/git-guide/" target="_blank">Git - The simple guide ~ rogerdudler</a></li>
-                    <li><a href="http://nvie.com/posts/a-successful-git-branching-model/" target="_blank">A successful Git branching model</a></li>
-                </ul>
-            </div>
-            <div class="section right">
-                About
-                <ul>
-                    <li><a href="http://codesmak.com" target="_blank">codesmak.com</a></li>
-                    <li><a href="<?=$CONFIG['base_uri']."/".genLink(array("nav" => "files", "commit" => null, "o" => "README"));?>">gitpub</a></li>
-                </ul>
-            </div>
-            <br class="clear" />
-        </div>
-    </div>
     <div class="subfooter">
         <div class="content">
             <div class="">
@@ -59,5 +31,6 @@
             </div>
         </div>
     </div>
+
 </body>
 </html>
