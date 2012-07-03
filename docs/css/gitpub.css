@@ -330,15 +330,11 @@ table.browser tr.base td.base_content a.dl:hover {
     font-size: 9px !important;
 }
 .subfooter {
-    margin: 60px 0px 0px 0px;
+    margin: 15px 0px 0px 0px;
     font-size: 12px;
     font-weight: normal;
     color: #c5c5bf;
     padding-bottom: 10px;
-}
-.subfooter .stamp {
-    font-size: 24px;
-    padding-right: 10px;
 }
 .subfooter .about {
     font-size: 12px;

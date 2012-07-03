@@ -21,12 +21,8 @@
 ?>
     <div class="subfooter">
         <div class="content">
-            <div class="right">
-                <div class="left stamp">&lt;/futile&gt;</div>
-                <div class="left about">
-                    gitpub -- copyright &copy; 2012 - <a href="http://codesmak.com" target="_blank">codesmak.com</a><br />
-                    an exercise in futility...
-                </div>
+            <div class="about right">
+                Powered by <a href="http://codesmak.com/gitpub/" target="_blank">gitpub</a> -- copyright &copy; 2012 - <a href="http://codesmak.com" target="_blank">codesmak.com</a>
             </div>
             <br class="clear" />
         </div>
