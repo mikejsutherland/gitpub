@@ -107,7 +107,7 @@
 
             // Create the cache dir if it doesn't exist
             if ( ! is_dir("$this->cachedir") ) {
-                mkdir("$this->cachedir", 0777, true);
+                mkdir("$this->cachedir", 0700, true);
             }
 
             return;
@@ -128,7 +128,7 @@
 
                     if ( $fn == "." || $fn == ".." ) { continue; }
 
-                    chmod("$this->cachedir/$fn", 0777);
+                    chmod("$this->cachedir/$fn", 0700);
                     unlink("$this->cachedir/$fn");
                 }
             }
@@ -157,6 +157,7 @@
                 $fp = fopen("$metafile", 'w');
                 fwrite($fp, $meta);
                 fclose($fp);
+                chmod("$metafile", 0700);
             }
 
             return;
@@ -732,6 +733,7 @@
                 $fp = fopen("$this->cachedir/". $cachefile, 'w');
                 fwrite($fp, ob_get_contents());
                 fclose($fp);
+                chmod("$this->cachedir/". $cachefile, 0700);
             }
 
             // Close the output buffer
