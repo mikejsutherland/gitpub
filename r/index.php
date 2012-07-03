@@ -29,9 +29,10 @@
     $thispath = realpath(dirname(__FILE__).DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR;
 
     require_once($thispath . '../config/gitpub.config.php');
+    require_once($thispath . 'lib/gitpub/gitpub.extras.php');
 
     // Redirect if this feature is disabled
-    if ( ! $CONFIG['enable_clone'] ) {
+    if ( ! $CONFIG['enable_clone'] || ! has_mod_rewrite() ) {
 
         header("Location: ". $CONFIG['base_uri'] .'/');
     }

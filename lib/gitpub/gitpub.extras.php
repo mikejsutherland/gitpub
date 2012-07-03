@@ -62,12 +62,6 @@
         return $uri . $link;
     }
 
-    function prettify_url($uri) {
-
-
-
-    }
-
     function has_mod_rewrite() {
 
         return ($_SERVER['HTTP_MOD_REWRITE'] == 'On' || in_array('mod_rewrite', apache_get_modules())) ? true : false;
