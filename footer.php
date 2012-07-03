@@ -21,14 +21,14 @@
 ?>
     <div class="subfooter">
         <div class="content">
-            <div class="">
+            <div class="right">
                 <div class="left stamp">&lt;/futile&gt;</div>
                 <div class="left about">
                     gitpub -- copyright &copy; 2012 - <a href="http://codesmak.com" target="_blank">codesmak.com</a><br />
                     an exercise in futility...
                 </div>
-                <br class="clear" />
             </div>
+            <br class="clear" />
         </div>
     </div>
 
