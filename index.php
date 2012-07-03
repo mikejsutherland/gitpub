@@ -36,14 +36,14 @@
             $repo_url = 'http://'.$_SERVER['HTTP_HOST'].$CONFIG['base_uri'].'/r/'.$_SESSION['repo'];
 ?>
             <label>
-                <input class="repourl" type="text" value="<?=$repo_url;?>" spellcheck="false" readonly="readonly" />
-                <span class="urlbox gradient_gray">HTTP</span>
+                <input class="masthead_repo_url" type="text" value="<?=$repo_url;?>" spellcheck="false" readonly="readonly" />
+                <span class="masthead_button gradient_gray">HTTP</span>
             </label>
 <?
         }
 ?>
             <!-- Display the Branch -->
-            <span class="urlbox gradient_gray"><span class="black">branch:</span> <?=preg_replace("/^origin\//", "", $_SESSION['branch']);?></span>
+            <span class="masthead_button gradient_gray"><span class="black">branch:</span> <?=preg_replace("/^origin\//", "", $_SESSION['branch']);?></span>
 <?
     } 
 ?>

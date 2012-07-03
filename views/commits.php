@@ -97,12 +97,12 @@
                         <tr class="<?=(($c = !$c)?'hl':'');?>">
                             <td>
                                 <div class="right" style="text-align: right;">
-                                    <span class="small grey">commit</span>
+                                    <span class="small grey">Show commit: </span>
                                     <span class="blue"><a href='<?=$CONFIG['base_uri']."/".
-                                        genLink(array("offset" => null, "commit" => $commit['commit']));?>'><?=substr($commit['commit'], 0, 10);?></a>
+                                        genLink(array("offset" => null, "commit" => $commit['commit']));?>'><?=substr($commit['commit'], 0, 7);?></a>
                                     </span>
                                     <br />
-                                    <span class="smaller">
+                                    <span class="small blue">
                                         <a href="<?=$CONFIG['base_uri']."/".
                                             genLink(array("commit" => $commit['commit'], "nav" => "files", "o" => null));?>">Browse code @ <?=substr($commit['commit'], 0, 7);?></a>
                                     </span>
