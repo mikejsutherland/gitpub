@@ -23,6 +23,7 @@
     RewriteRule ^docs/(.+) - [L,NC]
     RewriteRule ^r/ - [L,NC]
     #RewriteRule ^u/ - [L,NC]
-    RewriteRule ^([^\/]+)/([^\/]+)/$ ?repo=$1&nav=$2 [QSA,L]
+    RewriteRule ^([^\/]+)/(.+)/([^\/]+)/$ ?repo=$1&branch=$2&nav=$3 [QSA,L]
+    RewriteRule ^([^\/]+)/(.+)/$ ?repo=$1&branch=$2 [QSA,L]
     RewriteRule ^([^\/]+)/$ ?repo=$1 [QSA,L]
 </IfModule>

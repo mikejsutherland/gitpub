@@ -24,7 +24,7 @@
         $uri = "";
         $link = ""; 
 
-        $default_params = $_GET; // existing GET params are included automatically
+        $default_params = $_SESSION; // GET vars are parsed/stored as SESSION vars, include them
         $parameters = array_merge($default_params, $params);
 
         $mod_rewrite = has_mod_rewrite();
@@ -35,7 +35,7 @@
 
             if ( $mod_rewrite ) {
 
-                if ( $key == 'repo' || $key == 'nav' ) { continue; }
+                if ( $key == 'repo' || $key == 'branch' || $key == 'nav' ) { continue; }
             }
 
             if ( $key == "o" ) {
@@ -50,6 +50,7 @@
         if ( $mod_rewrite ) {
 
             $uri .= (isset($parameters['repo'])) ? $parameters['repo'] ."/" : "";
+            $uri .= (isset($parameters['branch'])) ? $parameters['branch'] ."/" : "";
             $uri .= (isset($parameters['nav'])) ? $parameters['nav'] ."/" : "";
         }
 
