@@ -55,6 +55,7 @@ body {
 .masthead a, .masthead a:active {
     float: left;
     color: #398bc5;
+    text-shadow: -1px -1px #fff;
     text-decoration: none;
 }
 .masthead a:hover {
@@ -172,16 +173,9 @@ br.clear {
     line-height: 0px;
     font-size: 0px;
 }
-span.urlbox {
+span.masthead_button {
     display: block;
-    -moz-border-bottom-colors: none;
-    -moz-border-image: none;
-    -moz-border-left-colors: none;
-    -moz-border-right-colors: none;
-    -moz-border-top-colors: none;
-    border-color: #ddd;
-    border-style: solid;
-    border-width: 1px 1px 1px 1px;
+    border: 1px solid #ddd;
     font-size: 14px;
     font-weight: normal;
     margin: 0px -1px 0px 0px;
@@ -194,16 +188,9 @@ span.urlbox {
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
 }
-input.repourl {
+input.masthead_repo_url {
     display: block;
-    -moz-border-bottom-colors: none;
-    -moz-border-image: none;
-    -moz-border-left-colors: none;
-    -moz-border-right-colors: none;
-    -moz-border-top-colors: none;
-    border-color: #ddd;
-    border-style: solid;
-    border-width: 1px;
+    border: 1px solid #ddd;
     cursor: pointer;
     color: #666;
     float: right;
@@ -302,7 +289,7 @@ table.browser tbody th {
     width: 300px;
 }
 table.browser tr.hl {
-    background-color: #f7fbfc; /*#f8f8f8;*/
+    background-color: #f7fbfc;
 }
 table.browser tr.base {
     background-color: #444; 
@@ -379,13 +366,20 @@ pre.prettyprint { /* customizations for pretty-print */
     min-width: 99%; /* needed to ensure small code blocks fill the given area (almost)  */
 }
 .error {
-    border: 1px solid #ddd;
 }
 .message {
     text-align: center;
-    padding: 30px;
+    padding: 10px;
     color: #398bc5;
     font-size: 16px;
+    border: 1px solid #ddd;
+    -webkit-box-shadow: 0px 0px 5px rgba(200, 200, 200, 0.5);
+    -moz-box-shadow:    0px 0px 5px rgba(200, 200, 200, 0.5);
+    box-shadow:         0px 0px 5px rgba(200, 200, 200, 0.5);
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
 }
 .log {
     width: 650px;
