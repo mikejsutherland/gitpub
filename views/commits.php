@@ -96,15 +96,11 @@
 ?>
                         <tr class="<?=(($c = !$c)?'hl':'');?>">
                             <td>
-                                <div class="right" style="text-align: right;">
-                                    <span class="small grey">Show commit: </span>
-                                    <span class="blue"><a href='<?=$CONFIG['base_uri']."/".
-                                        genLink(array("offset" => null, "commit" => $commit['commit']));?>'><?=substr($commit['commit'], 0, 7);?></a>
-                                    </span>
-                                    <br />
-                                    <span class="small blue">
-                                        <a href="<?=$CONFIG['base_uri']."/".
-                                            genLink(array("commit" => $commit['commit'], "nav" => "files", "o" => null));?>">Browse code @ <?=substr($commit['commit'], 0, 7);?></a>
+                                <div class="right tright grey">
+                                    <span class="small">Show commit:</span> <a href='<?=$CONFIG['base_uri']."/".
+                                        genLink(array("offset" => null, "commit" => $commit['commit']));?>'><?=substr($commit['commit'], 0, 7);?></a><br />
+                                    <span class="small"><a href="<?=$CONFIG['base_uri']."/".
+                                        genLink(array("commit" => $commit['commit'], "nav" => "files", "o" => null));?>">Browse code @ <?=substr($commit['commit'], 0, 7);?></a>
                                     </span>
                                 </div>
                                 <div class="left log">
