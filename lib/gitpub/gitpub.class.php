@@ -206,6 +206,13 @@
                 $repo['name'] = $dir;
                 $repo['path'] = $this_path;
 
+                if ( $this->_isLocal($this_path) ) {
+                    $repo['desc'] = $this->getDescription($this_path ."/.git");
+                }
+                else {
+                    $repo['desc'] = $this->getDescription($this_path);
+                }
+
                 array_push($repos, $repo);
 
             }
@@ -254,7 +261,12 @@
                 $dir = $this->repodir;
             }
 
-            return file_get_contents($dir ."/description", NULL);
+            if ( is_file($dir ."/description") ) {
+                return rtrim(file_get_contents($dir ."/description", NULL));
+            }
+            else {
+                return null;
+            }
         }
 
         public function getFile($file, $commit = null) {
