@@ -57,6 +57,7 @@
 <? 
     if ( ! isset($_SESSION['repo']) || $_SESSION['repo'] == '' ) { 
 
+        session_destroy();
         include('views/repos.php');
 
     } else {
