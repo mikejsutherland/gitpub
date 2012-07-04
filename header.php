@@ -40,11 +40,14 @@
     $_SESSION['commit'] = isset($_GET['commit']) ? $_GET['commit'] : null;
     // Set the branch
     $_SESSION['branch'] = isset($_GET['branch']) ? $_GET['branch'] : "master";
+    // Set the base feed path
+    $feed = $CONFIG['base_uri'] ."/feed.php";
 
     // Set the repo
     if ( ! empty($_SESSION['repo']) ) {
 
         try {
+
             $gp->setRepo($_SESSION['repo']);
         }
         catch (Exception $e) {
@@ -57,7 +60,9 @@
     if ( ! empty($_SESSION['repo']) && ! empty($_SESSION['branch']) ) {
 
         try {
+
             $gp->setBranch($_SESSION['branch']);
+            $feed .= "?repo=".$_SESSION['repo']."&branch=".$_SESSION['branch'];
         }
         catch (Exception $e) {
 
@@ -66,6 +71,7 @@
 
             // Force to branches tab
             $_SESSION['nav'] = 'branches';
+            $feed = $CONFIG['base_uri'] ."/feed.php";
         }
     }
 
@@ -77,6 +83,7 @@
 <head>
     <title><?=(isset($_SESSION['repo'])) ? "gitpub / ".$_SESSION['repo'] : "gitpub";?></title>
     <link rel="shortcut icon" href="data:,">
+    <link href="<?=$feed;?>" rel="alternate" type="application/rss+xml" title="gitpub - available repositories" />
 
     <!-- google-code-prettify -->
     <link rel="stylesheet" type="text/css" media="all" href="<?=$CONFIG['base_uri'];?>/docs/include/google-code-prettify/prettify.css" />

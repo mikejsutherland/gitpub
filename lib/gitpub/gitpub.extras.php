@@ -24,7 +24,8 @@
         $uri = "";
         $link = ""; 
 
-        $default_params = $_SESSION; // GET vars are parsed/stored as SESSION vars, include them
+        // GET vars are parsed/stored as SESSION vars, include them
+        $default_params = isset($_SESSION) ? $_SESSION : array();
         $parameters = array_merge($default_params, $params);
 
         $mod_rewrite = has_mod_rewrite();
