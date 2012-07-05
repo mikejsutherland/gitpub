@@ -66,7 +66,14 @@
 
     function has_mod_rewrite() {
 
-        return ($_SERVER['HTTP_MOD_REWRITE'] == 'On' || in_array('mod_rewrite', apache_get_modules())) ? true : false;
+        if ( function_exists(apache_get_modules) ) {
+
+            return ($_SERVER['HTTP_MOD_REWRITE'] == 'On' || in_array('mod_rewrite', apache_get_modules())) ? true : false;
+        }
+        else {
+
+            return ($_SERVER['HTTP_MOD_REWRITE'] == 'On') ? true : false;
+        }
     }
 
     function relativeDate($date) {
