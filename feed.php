@@ -5,7 +5,9 @@
     require_once($thispath . 'lib/gitpub/gitpub.class.php');
     require_once($thispath . 'lib/gitpub/gitpub.extras.php');
 
-    print "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<rss version=\"2.0\">\n"; 
+    print "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n";
+    print "<rss version=\"2.0\">\n"; 
+    print "  <channel>\n";
 
     $gp = new GitPub($CONFIG);
 
@@ -23,7 +25,6 @@
                 "commit" => null)
             );
 
-            print "  <channel>\n";
             print "    <title>Commit history for ".$_GET['repo']." on branch ".$_GET['branch']."</title>\n";
             print "    <link>".$link."</link>\n";
             print "    <description></description>\n";
@@ -55,7 +56,6 @@
 
         $link = 'http://'.$_SERVER['HTTP_HOST'].$CONFIG['base_uri'].'/';
 
-        print "  <channel>\n";
         print "    <title>GitPub Repositories</title>\n";
         print "    <link>$link</link>\n";
         print "    <description>Available repositories</description>\n";
@@ -66,8 +66,8 @@
         foreach ($gp->repos as $repo) {
 
             print "    <item>\n";
-            print "      <title>".$repo['name']."</title>\n";
-            print "      <description>".$repo['desc']."</description>\n";
+            print "      <title>".htmlspecialchars($repo['name'], ENT_QUOTES)."</title>\n";
+            print "      <description>".htmlspecialchars($repo['desc'], ENT_QUOTES)."</description>\n";
             print "      <link>".'http://'.$_SERVER['HTTP_HOST'].$CONFIG['base_uri']."/".genLink(array("repo" => $repo['name']))."</link>\n";
             print "    </item>\n";
         }
