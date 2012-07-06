@@ -237,17 +237,20 @@
 
         public function setCommitId($id = null) {
 
-            if ( count($this->tips) ) {
+            if ( count($this->tips) && isset($this->branch) ) {
 
                 $this->commit = $this->tips[$this->branch];
             }
-            else {
+            elseif ( ! empty($id) ) {
 
                 $this->commit = $id;
             }
 
             // Set the abbreviated commit id as well
-            $this->setAbbrCommitId($this->commit);
+            if ( isset($this->commit) ) {
+
+                $this->setAbbrCommitId($this->commit);
+            }
         }
 
         public function setAbbrCommitId($id) {
@@ -353,6 +356,12 @@
         }
 
         public function getCommitDiff($commit = null) {
+
+            if ( ! empty($commit) && ! preg_match("/^[a-z0-9]{1,40}$/i", $commit) ) {
+
+                error_log("gitpub: commit id '$commit' is invalid", 0);
+                throw new Exception("Invalid commit id.\n");
+            }
 
             if ( empty($commit) ) {
                 $commit = $this->branch;
