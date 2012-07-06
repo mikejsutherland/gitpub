@@ -357,7 +357,7 @@
 
         public function getCommitDiff($commit = null) {
 
-            if ( ! empty($commit) && ! preg_match("/^[a-z0-9]{1,40}$/i", $commit) ) {
+            if ( ! empty($commit) && ! preg_match("/^[a-z0-9]{7,40}$/i", $commit) ) {
 
                 error_log("gitpub: commit id '$commit' is invalid", 0);
                 throw new Exception("Invalid commit id.\n");
