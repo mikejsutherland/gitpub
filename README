@@ -6,12 +6,15 @@ navigating either local or remote git repositories. Gitpub provides a simple
 interface which was inspired by the overall look and feel of github.
 
 Features include:
+    - Multiple repositories
     - File navigation
+    - Branches
     - Commit history
-    - Commit file diff
-    - Branching
-    - Tags
-    - Cloning
+    - Commit file diffs
+    - Tag and tag downloads
+    - Readonly http cloning
+    - RSS feeds
+    - Caching
 
 
 Requirements
