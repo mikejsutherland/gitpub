@@ -11,21 +11,24 @@
 
     $gp = new GitPub($CONFIG);
 
-    if ( ! empty($_GET['repo']) && ! empty($_GET['branch']) ) {
+    $repo = isset($_GET['repo']) ? $_GET['repo'] : null;
+    $branch = isset($_GET['branch']) ? $_GET['branch'] : "master";
+
+    if ( ! empty($repo) && ! empty($branch) ) {
 
         try {
 
-            $gp->setRepo($_GET['repo']);
-            $gp->setBranch($_GET['branch']);
+            $gp->setRepo($repo);
+            $gp->setBranch($branch);
 
             $link = 'http://'.$_SERVER['HTTP_HOST'].$CONFIG['base_uri']."/".genLink(array(
-                "repo" => $_GET['repo'],
-                "branch" => $_GET['branch'],
+                "repo" => $repo,
+                "branch" => $branch,
                 "nav" => "commits",
                 "commit" => null)
             );
 
-            print "    <title>Commit history for ".$_GET['repo']." on branch ".$_GET['branch']."</title>\n";
+            print "    <title>Commit history for ".$repo." on branch ".$branch."</title>\n";
             print "    <link>".$link."</link>\n";
             print "    <description></description>\n";
             print "    <language>en-us</language>\n";
@@ -41,7 +44,11 @@
                 print "      <description>Commit ".substr($commit['commit'], 0, 10).
                     " authored by ".htmlspecialchars($commit['author'], ENT_QUOTES).
                     " at ".$commit['date']."</description>\n";
-                print "      <link>".'http://'.$_SERVER['HTTP_HOST'].$CONFIG['base_uri']."/".genLink(array("nav" => "commits", "commit" => $commit['commit']))."</link>\n";
+                print "      <link>".'http://'.$_SERVER['HTTP_HOST'].$CONFIG['base_uri']."/".genLink(array(
+                    "repo" => $repo,
+                    "branch" => $branch,
+                    "nav" => "commits",
+                    "commit" => $commit['commit']))."</link>\n";
                 print "      <pubDate>".date("r", $commit['epoch'])."</pubDate>\n";
                 print "    </item>\n";
             }
