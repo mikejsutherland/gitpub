@@ -233,7 +233,7 @@ input.masthead_repo_url {
     border-bottom: 1px solid #fff;
     color: #5b5b5b;
 }
-#tabs a, #tabs a:active {
+#tabs a, #tabs a:active, #tabs a:visited {
     position: relative;
     width: 90px;
     margin: 0px 0px -2px 0px;
