@@ -51,8 +51,8 @@
         if ( $mod_rewrite ) {
 
             $uri .= (isset($parameters['repo'])) ? $parameters['repo'] ."/" : "";
-            $uri .= (isset($parameters['branch'])) ? $parameters['branch'] ."/" : "";
             $uri .= (isset($parameters['nav'])) ? $parameters['nav'] ."/" : "";
+            $uri .= (isset($parameters['branch'])) ? $parameters['branch'] ."/" : "";
         }
 
         if ( ! empty($link) ) {

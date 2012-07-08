@@ -41,10 +41,13 @@
             </label>
 <?
         }
+
+        if ( isset($_SESSION['branch']) && ! empty($_SESSION['branch']) ) {
 ?>
             <!-- Display the Branch -->
             <span class="masthead_button gradient_gray"><span class="black">branch:</span> <?=preg_replace("/^origin\//", "", $_SESSION['branch']);?></span>
 <?
+        }
     } 
 ?>
             <br class="clear" />

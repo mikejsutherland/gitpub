@@ -66,7 +66,7 @@
         }
         else {
 
-            $error = "There are no tags yet.\n";
+            $error = "There are no tags.\n";
             include($thispath ."views/error.php");
         }
     }

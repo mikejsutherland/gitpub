@@ -28,7 +28,7 @@
             $default_opts = array(
                 'git_path' => '/usr/bin',
                 'projects_dir' => '',
-                'branch' => 'master',
+                'branch' => null,
                 'repo' => null,
                 'enable_cache' => false,
                 'cache_dir' => '/tmp/gitpub.cache',
@@ -163,7 +163,7 @@
             return;
         }
 
-        public function setBranch($branch) {
+        public function setBranch($branch = null) {
 
             // Clear the existing branch
             $this->branch = null;
@@ -331,8 +331,11 @@
 
         public function getTree($file = null, $commit = null) {
 
-            if ( empty($commit) ) {
+            if ( empty($commit) && ! empty($this->branch) ) {
                 $commit = $this->branch;
+            }
+            elseif ( empty($commit) ) {
+                return null;
             }
 
             $this->run("show $commit:$file");
@@ -528,7 +531,7 @@
             return $tags;
         }
 
-        public function getBranches($branch = "master") {
+        public function getBranches() {
 
             # --list (not available in 1.7.4.1)
             # --no-merged HEAD causes unmerged branches to not show up
@@ -597,8 +600,11 @@
                 array_push($args, "--max-count=$max");
             }
 
-            if ( empty($branch) ) { 
-                $branch = $this->branch;
+            if ( empty($branch) && empty($this->branch) ) {
+                return null;
+            }
+            else {
+                $branch = empty($branch) ? $this->branch : $branch;
             }
 
             if ( $branch !== "master" ) {

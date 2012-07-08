@@ -39,7 +39,7 @@
     // Set the commit id
     $_SESSION['commit'] = isset($_GET['commit']) ? $_GET['commit'] : null;
     // Set the branch
-    $_SESSION['branch'] = isset($_GET['branch']) ? $_GET['branch'] : "master";
+    $_SESSION['branch'] = isset($_GET['branch']) ? $_GET['branch'] : null;
     // Set the base feed path
     $feed = $CONFIG['base_uri'] ."/feed.php";
 

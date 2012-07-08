@@ -136,7 +136,7 @@
             }
             else {
 
-                $error = "This branch has no files yet.\n";
+                $error = "There are no files.\n";
                 include($thispath. 'views/error.php');
             }
         }
