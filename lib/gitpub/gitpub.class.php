@@ -224,7 +224,12 @@
 
             $this->tips = array();
 
+            // Disable the cache
+            $this->enable_cache = false;
+            // Get all the available branches
             $branches = $this->getBranches();
+            // Re-enable the cache
+            $this->enable_cache = $this->opts['enable_cache'];
 
             foreach ($branches as $branch) {
 
@@ -539,13 +544,13 @@
             if ( $this->_isLocal() ) { array_push($args, "-r"); } // read remotes if local
 
             // Disable caching
-            $this->enable_cache = false;
+            //$this->enable_cache = false;
 
             // Run the command
             $this->run("branch", $args);
 
             // Reset the cache
-            $this->enable_cache = $this->opts['enable_cache'];
+            //$this->enable_cache = $this->opts['enable_cache'];
 
             $results = explode("\n", $this->cmd['results']);
             $results = array_filter($results, 'strlen'); // remove null values
@@ -575,7 +580,7 @@
 
         public function getBranchRevisions($branch = "master") {
 
-            $args = array("--left-right", "master...$branch");
+            $args = array("--left-right", "HEAD...$branch");
 
             $this->run("rev-list", $args);
 
@@ -607,7 +612,7 @@
                 $branch = empty($branch) ? $this->branch : $branch;
             }
 
-            if ( $branch !== "master" ) {
+            if ( $branch !== "master" && $branch !== "origin/master" ) {
                 $branch .= " $ignore";
             }
 
@@ -713,7 +718,7 @@
                 $this->repodir . implode(" ", $switches) . 
                 " $gitcmd ". implode(" ", $args)
             );            
-            #print "<pre>DEBUG : ". $res['cmd'] ."</pre><br />\n";
+            error_log("gitpub [DEBUG]: ". $res['cmd'], 0);
 
             if ( $this->enable_cache ) {
 

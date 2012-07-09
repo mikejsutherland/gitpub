@@ -20,6 +20,12 @@
 
 $(document).ready(function() {
 
+    $("select").selectBox()
+        .change( function() {
+            window.location = $(this).val();
+        }
+    );
+
     // Init -- call to other functions if necessary
     tabLoaded();
 

@@ -55,23 +55,47 @@
             $_SESSION['repo'] = "";
             $error = "Unknown repository.\n";
         }
-    }
 
-    if ( ! empty($_SESSION['repo']) && ! empty($_SESSION['branch']) ) {
+        // No branch set, look for a master branch
+        if ( empty($_SESSION['branch']) ) {
 
-        try {
+            try {
 
-            $gp->setBranch($_SESSION['branch']);
-            $feed .= "?repo=".$_SESSION['repo']."&branch=".$_SESSION['branch'];
+                $branches = $gp->getBranches();
+
+                foreach ($branches as $b) {
+
+                    if ( $b['branch'] == 'master' || $b['branch'] == 'origin/master' ) {
+
+                        $_SESSION['branch'] = 'master';
+                        break;
+                    }
+                }
+
+            }
+            catch (Exception $e) {
+
+                $_SESSION['branch'] = null;
+            }
         }
-        catch (Exception $e) {
 
-            $_SESSION['branch'] = null;
-            $error = "The requested branch does not exist.\n";
+        // Set the branch
+        if ( ! empty($_SESSION['branch']) ) {
 
-            // Force to branches tab
-            $_SESSION['nav'] = 'branches';
-            $feed = $CONFIG['base_uri'] ."/feed.php";
+            try {
+
+                $gp->setBranch($_SESSION['branch']);
+                $feed .= "?repo=".$_SESSION['repo']."&branch=".$_SESSION['branch'];
+            }
+            catch (Exception $e) {
+
+                $_SESSION['branch'] = null;
+                $error = "The requested branch does not exist.\n";
+
+                // Force to branches tab
+                $_SESSION['nav'] = 'branches';
+                $feed = $CONFIG['base_uri'] ."/feed.php";
+            }
         }
     }
 
@@ -90,6 +114,10 @@
 
     <!-- jquery javascript frameworks -->
     <script type="text/javascript" src="<?=$CONFIG['base_uri'];?>/docs/include/jquery/jquery-1.7.1.min.js"></script>
+
+    <!-- jquery-selectBox -->
+    <script type="text/javascript" src="<?=$CONFIG['base_uri'];?>/docs/include/jquery-selectBox/jquery.selectBox.js"></script>
+    <link rel="stylesheet" type="text/css" href="<?=$CONFIG['base_uri'];?>/docs/include/jquery-selectBox/jquery.selectBox.css" />
 
     <!-- google-code-prettify -->
     <script type="text/javascript" src="<?=$CONFIG['base_uri'];?>/docs/include/google-code-prettify/prettify.js"></script>

@@ -37,16 +37,44 @@
 ?>
             <label>
                 <input class="masthead_repo_url" type="text" value="<?=$repo_url;?>" spellcheck="false" readonly="readonly" />
-                <span class="masthead_button gradient_gray">HTTP</span>
+                <span class="masthead_label masthead_button black">Clone </span>
             </label>
 <?
         }
 
-        if ( isset($_SESSION['branch']) && ! empty($_SESSION['branch']) ) {
+        try {
+
+            $branches = $gp->getBranches();
+#print_r($branches);
 ?>
-            <!-- Display the Branch -->
-            <span class="masthead_button gradient_gray"><span class="black">branch:</span> <?=preg_replace("/^origin\//", "", $_SESSION['branch']);?></span>
+            <select name="branch_dropdown" class="branch_dropdown right">
 <?
+            if ( ! isset($_SESSION['branch']) || empty($_SESSION['branch']) ) {
+                    
+                print "<option class=\"selectBox-opt\" value=\"\" selected=\"selected\"></option>\n";
+            }
+
+            foreach ($branches as $b) {
+
+                $uri = $CONFIG['base_uri'] .'/'. genLink(array("branch" => $b['branch']));
+
+                if ( isset($_SESSION['branch']) && ( $_SESSION['branch'] == $b['name'] || $_SESSION['branch'] == 'origin/'.$b['name'] )) {
+
+                    print "<option class=\"selectBox-opt\" value=\"".$uri."\" selected=\"selected\">".$b['name']."</option>\n";
+                }
+                else {
+
+                    print "<option class=\"selectBox-opt\" value=\"".$uri."\">".$b['name']."</option>\n";
+                }
+            }
+?>
+            </select>
+            <span class="masthead_label black">Branch: </span>
+<?
+        }
+        catch (Exception $e) {
+
+                
         }
     } 
 ?>

@@ -29,20 +29,19 @@
 
         if ( count($branches) > 0 ) {
 
-            $master_branch = $gp->getCommitLog(0, 1, "master");
-
+            $selected_branch = $gp->getCommitLog(0, 1, $_SESSION['branch'], "");
 ?>
                     <table class="branch browser">
                         <tbody>
 <?
-            if ( count($master_branch) > 0 ) {
+            if ( count($selected_branch) > 0 ) {
 ?>
                             <tr class="base">
                                 <td class="base_content">
                                     <div class="left log">
-                                        <strong><a href='<?=$CONFIG['base_uri']."/". genLink(array("branch" => "master"));?>'>master</a></strong><br />
-                                        <span class="small grey">Last updated <?=relativeDate($master_branch[0]['epoch']);?> by </span>
-                                        <span class="small blue"><?=$master_branch[0]['author'];?></span>
+                                        <strong><a href='<?=$CONFIG['base_uri']."/". genLink(array());?>'><?=$_SESSION['branch'];?></a></strong><br />
+                                        <span class="small grey">Last updated <?=relativeDate($selected_branch[0]['epoch']);?> by </span>
+                                        <span class="small blue"><?=$selected_branch[0]['author'];?></span>
                                     </div>
                                     <div class="right small grey tright">
                                         Download<br />
@@ -59,7 +58,7 @@
 
             foreach ($branches as $branch) {        
 
-                if ( preg_match("/master/i", $branch['branch']) ) { continue; }
+                if ( $_SESSION['branch'] == $branch['branch'] || "origin/".$_SESSION['branch'] == $branch['branch'] ) { continue; }
 
                 $branch_meta = $gp->getCommitLog(0, 1, $branch['commit'], "");
                 $rev = $gp->getBranchRevisions($branch['branch']);

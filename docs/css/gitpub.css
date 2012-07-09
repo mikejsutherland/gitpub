@@ -141,6 +141,9 @@ body {
 .left {
     float: left!important;
 }
+.tleft {
+    text-align: left;
+}
 .right {
     float: right!important;
 }
@@ -173,24 +176,51 @@ br.clear {
     line-height: 0px;
     font-size: 0px;
 }
-span.masthead_button {
-    display: block;
-    border: 1px solid #ddd;
+.masthead_button {
+    border: 1px solid #bbb;
+    line-height: 100%;
+    padding-top: 4px !important;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+.branch_dropdown {
+    height: 24px;
+    width: 200px;
     font-size: 14px;
-    font-weight: normal;
+    text-align: left;
+    border: 1px solid #bbb;
     margin: 0px -1px 0px 0px;
-    padding: 2px 5px;
-    height: 20px;
-    float: right;
     color: #398bc5;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
 }
+.masthead_label {
+    display: block;
+    font-size: 14px;
+    font-weight: normal;
+    float: right;
+    height: 20px;
+    margin: 0px -1px 0px 0px;
+    padding: 5px 5px 0px 5px;
+}
+.selectBox-optgroup {
+    text-align: left;
+}
+.selectBox-opt {
+    text-align: left;
+    font-size: 12px;
+}
+.selectBox-label {
+    font-size: 14px;
+    margin-top: -1px;
+}
 input.masthead_repo_url {
     display: block;
-    border: 1px solid #ddd;
+    border: 1px solid #bbb;
     cursor: pointer;
     color: #666;
     float: right;
