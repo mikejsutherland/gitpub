@@ -57,11 +57,11 @@
                 print "<div class='navbar'>";
 
                 if ( $offset > 0 ) {
-                    print "<a class='ajaxy left' href='".$CONFIG['base_uri']."/". genLink(array("offset" => $prev)) ."'>< Previous</a>";
+                    print "<a class='ajaxy left' href='".$CONFIG['base_uri']."/". genLink(array("offset" => $prev)) ."'>< Newer</a>";
                 }
 
                 if ( count($commits) == $CONFIG['commits_per_page'] ) {
-                    print "<a class='ajaxy right' href='".$CONFIG['base_uri']."/". genLink(array("offset" => $next)) ."'>Next ></a>";
+                    print "<a class='ajaxy right' href='".$CONFIG['base_uri']."/". genLink(array("offset" => $next)) ."'>Older ></a>";
                 }
                 print "<br class='clear' /></div>";
             }
@@ -123,11 +123,11 @@
                 print "<div class='navbar'>";
 
                 if ( $offset > 0 ) {
-                    print "<a class='ajaxy left' href='".$CONFIG['base_uri']."/". genLink(array("offset" => $prev)) ."'>< Previous</a>";
+                    print "<a class='ajaxy left' href='".$CONFIG['base_uri']."/". genLink(array("offset" => $prev)) ."'>< Newer</a>";
                 }
 
                 if ( count($commits) == $CONFIG['commits_per_page'] ) {
-                    print "<a class='ajaxy right' href='".$CONFIG['base_uri']."/". genLink(array("offset" => $next)) ."'>Next ></a>";
+                    print "<a class='ajaxy right' href='".$CONFIG['base_uri']."/". genLink(array("offset" => $next)) ."'>Older ></a>";
                 }
                 print "<br class='clear' /></div>";
             }
