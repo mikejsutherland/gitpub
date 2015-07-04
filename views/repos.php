@@ -1,4 +1,4 @@
-<?
+<?php
    /*
     * Copyright (c) 2012 codesmak.com
     *
@@ -24,7 +24,7 @@
             <div class="box corners">
                 <div class="boxhead gradient_aqua">
                     1 person hosting
-<?
+<?php
         if ( count($gp->repos) == 1 ) {
             print " 1 respository\n";
         }
@@ -36,13 +36,13 @@
                 <div class="boxbody">
                     Available Git Repositories:<br />
                     <ul>
-                        <? foreach ($gp->repos as $repo) { ?><?="\n";?>
-                        <li><a href='<?=$CONFIG['base_uri'] ."/". genLink(array("repo" => $repo['name']));?>'><?=$repo['name'];?></a></li>
-                        <? } ?><?="\n";?>
+                        <?php foreach ($gp->repos as $repo) { ?><?php echo "\n";?>
+                        <li><a href='<?php echo $CONFIG['base_uri'] ."/". genLink(array("repo" => $repo['name']));?>'><?php echo $repo['name'];?></a></li>
+                        <?php } ?><?php echo "\n";?>
                     </ul>
                 </div>
             </div>
-<?
+<?php
     } else { 
 
         if ( empty($gp->projectsdir) ) {

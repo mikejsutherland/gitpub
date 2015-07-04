@@ -1,4 +1,4 @@
-<?
+<?php
    /*
     * Copyright (c) 2012 codesmak.com
     *
@@ -20,7 +20,7 @@
     */
 ?>
             <div id="commitbrowser">
-<?
+<?php
 
     try {
 
@@ -31,13 +31,13 @@
 
 ?>
                 <div class="navbar">
-                    Commit diff <?=$_SESSION['commit'];?>
+                    Commit diff <?php echo $_SESSION['commit'];?>
                 </div>
 
                 <table class="commit browser">
                     <thead>
                         <tr class="gradient_gray">
-                            <th><?=$diffs['commit_info']['date'];?></th>
+                            <th><?php echo $diffs['commit_info']['date'];?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -45,17 +45,17 @@
                             <td>
                                 <div class="right" style="text-align: right;">
                                     <span class="small grey">commit</span>
-                                    <span class="small black"><?=$diffs['commit_info']['commit']?></span>
+                                    <span class="small black"><?php echo $diffs['commit_info']['commit']?></span>
                                     <br />
                                     <span class="small">
-                                        <a href="<?=$CONFIG['base_uri']."/".genLink(array("commit" => $diffs['commit_info']['commit'], "nav" => "files", "o" => null));?>">Browse code @ <?=substr($diffs['commit_info']['commit'], 0, 7);?></a>
+                                        <a href="<?php echo $CONFIG['base_uri']."/".genLink(array("commit" => $diffs['commit_info']['commit'], "nav" => "files", "o" => null));?>">Browse code @ <?php echo substr($diffs['commit_info']['commit'], 0, 7);?></a>
                                     </span>
                                 </div>
                                 <div class="left log">
-                                    <strong><?=htmlspecialchars($diffs['commit_info']['summary'][0], ENT_QUOTES);?></strong><br />
+                                    <strong><?php echo htmlspecialchars($diffs['commit_info']['summary'][0], ENT_QUOTES);?></strong><br />
                                     <span class="small">
-                                        <span class="blue"><?=htmlspecialchars($diffs['commit_info']['author'], ENT_QUOTES);?></span>
-                                        <span class="grey"> -- <?=((isset($diffs['commit_info']['epoch']))?relativeDate($diffs['commit_info']['epoch']):$diffs['commit_info']['date']);?></span>
+                                        <span class="blue"><?php echo htmlspecialchars($diffs['commit_info']['author'], ENT_QUOTES);?></span>
+                                        <span class="grey"> -- <?php echo ((isset($diffs['commit_info']['epoch']))?relativeDate($diffs['commit_info']['epoch']):$diffs['commit_info']['date']);?></span>
                                     </span>
                                 </div>
                                 <br class="clear" />
@@ -65,7 +65,7 @@
                 </table>
                 <br />
 
-<?
+<?php
 
             foreach ( $diffs['diffs'] as $filediff ) {
 ?>
@@ -74,9 +74,9 @@
                     <thead>
                         <tr class="gradient_gray">
                             <th>
-                                <?=$filediff['file'];?>
+                                <?php echo $filediff['file'];?>
                                 <span class="right blue">
-<?
+<?php
     if ( $filediff['mode'] !== "deleted" ) {
 
         print "<a href='". $CONFIG['base_uri'] ."/".
@@ -96,7 +96,7 @@
                         <tr>
                             <td>
                                 <div class='fileviewer'>
-<?
+<?php
 
     $class = "";
     $action = "";
@@ -117,7 +117,7 @@
 
 
                                     <pre class='diff'>
-<? 
+<?php 
 
                 if ( $filediff['mode'] == "new" ) {
 
@@ -165,7 +165,7 @@
                     </tbody>
                 </table>
                 <br />
-<?
+<?php
             }
         }
         // Display error

@@ -1,4 +1,4 @@
-<?
+<?php
    /*
     * Copyright (c) 2012 codesmak.com
     *
@@ -21,7 +21,7 @@
 ?>
                 <div id="branchbrowser">
 
-<?
+<?php
 
     try {
 
@@ -33,25 +33,25 @@
 ?>
                     <table class="branch browser">
                         <tbody>
-<?
+<?php
             if ( count($selected_branch) > 0 ) {
 ?>
                             <tr class="base">
                                 <td class="base_content">
                                     <div class="left log">
-                                        <strong><a href='<?=$CONFIG['base_uri']."/". genLink(array());?>'><?=$_SESSION['branch'];?></a></strong><br />
-                                        <span class="small grey">Last updated <?=relativeDate($selected_branch[0]['epoch']);?> by </span>
-                                        <span class="small blue"><?=$selected_branch[0]['author'];?></span>
+                                        <strong><a href='<?php echo $CONFIG['base_uri']."/". genLink(array());?>'><?php echo $_SESSION['branch'];?></a></strong><br />
+                                        <span class="small grey">Last updated <?php echo relativeDate($selected_branch[0]['epoch']);?> by </span>
+                                        <span class="small blue"><?php echo $selected_branch[0]['author'];?></span>
                                     </div>
                                     <div class="right small grey tright">
                                         Download<br />
-                                        <a class="dl" href='<?=$CONFIG['base_uri']."/download.php?tag=HEAD";?>'>TAR</a>
-                                        <a class="dl" href='<?=$CONFIG['base_uri']."/download.php?tag=HEAD&type=zip";?>'>ZIP</a>
+                                        <a class="dl" href='<?php echo $CONFIG['base_uri']."/download.php?tag=HEAD";?>'>TAR</a>
+                                        <a class="dl" href='<?php echo $CONFIG['base_uri']."/download.php?tag=HEAD&type=zip";?>'>ZIP</a>
                                     </div>
                                     <br class="clear" />
                                 </td>
                             </tr>
-<?
+<?php
             }
 
             $c = true;
@@ -76,33 +76,33 @@
                 }
 
 ?>
-                            <tr class="<?=(($c = !$c)?'hl':'');?>">
+                            <tr class="<?php echo (($c = !$c)?'hl':'');?>">
                                 <td>
                                     <div class="left log">
-                                        <? if ( $_SESSION['branch'] == $branch['branch'] ) { ?>
-                                        <img src="<?=$CONFIG['base_uri'];?>/docs/images/asterisk.gif" /> <? } ?>
-                                        <strong><a href='<?=$CONFIG['base_uri']."/". genLink(array("branch" => $branch['branch']));?>'><?=$branch['name'];?></a></strong><br />
-                                        <? if ( count($branch_meta) > 0 ) { ?>
-                                        <span class="small black">Last updated <?=relativeDate($branch_meta[0]['epoch']);?> by </span>
-                                        <span class="small blue"><?=$branch_meta[0]['author'];?></span>
-                                        <? } else { ?>
+                                        <?php if ( $_SESSION['branch'] == $branch['branch'] ) { ?>
+                                        <img src="<?php echo $CONFIG['base_uri'];?>/docs/images/asterisk.gif" /> <?php } ?>
+                                        <strong><a href='<?php echo $CONFIG['base_uri']."/". genLink(array("branch" => $branch['branch']));?>'><?php echo $branch['name'];?></a></strong><br />
+                                        <?php if ( count($branch_meta) > 0 ) { ?>
+                                        <span class="small black">Last updated <?php echo relativeDate($branch_meta[0]['epoch']);?> by </span>
+                                        <span class="small blue"><?php echo $branch_meta[0]['author'];?></span>
+                                        <?php } else { ?>
                                         <span class="small black">No commits yet</span>
-                                        <? } ?>
+                                        <?php } ?>
                                     </div>
                                     <div class="right tright small grey">
-                                        <?=$behind;?> behind | <?=$ahead;?> ahead
+                                        <?php echo $behind;?> behind | <?php echo $ahead;?> ahead
                                     </div>
                                     <br class="clear" />
                                 </td>
                             </tr>
-<?
+<?php
             }
 ?>
 
                         </tbody>
                     </table>
                 
-<?
+<?php
         }
         else {
 

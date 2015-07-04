@@ -1,4 +1,4 @@
-<?
+<?php
    /*
     * Copyright (c) 2012 codesmak.com
     *
@@ -26,9 +26,9 @@
         <div class="content">
 
             <!-- Main gitpub link -->
-            <a href="<?=$CONFIG['base_uri'];?>/">gitpub</a>
+            <a href="<?php echo $CONFIG['base_uri'];?>/">gitpub</a>
 
-<? 
+<?php 
     if ( isset($_SESSION['repo']) && $_SESSION['repo'] !== "" ) { 
 
         if ( $CONFIG['enable_clone'] ) {
@@ -36,10 +36,10 @@
             $repo_url = 'http://'.$_SERVER['HTTP_HOST'].$CONFIG['base_uri'].'/r/'.$_SESSION['repo'];
 ?>
             <label>
-                <input class="masthead_repo_url" type="text" value="<?=$repo_url;?>" spellcheck="false" readonly="readonly" />
+                <input class="masthead_repo_url" type="text" value="<?php echo $repo_url;?>" spellcheck="false" readonly="readonly" />
                 <span class="masthead_label masthead_button black">Clone </span>
             </label>
-<?
+<?php
         }
 
         try {
@@ -48,7 +48,7 @@
 #print_r($branches);
 ?>
             <select name="branch_dropdown" class="branch_dropdown right">
-<?
+<?php
             if ( ! isset($_SESSION['branch']) || empty($_SESSION['branch']) ) {
                     
                 print "<option class=\"selectBox-opt\" value=\"\" selected=\"selected\"></option>\n";
@@ -70,7 +70,7 @@
 ?>
             </select>
             <span class="masthead_label black">Branch: </span>
-<?
+<?php
         }
         catch (Exception $e) {
 
@@ -85,7 +85,7 @@
     <div class="page">
         <div id="main" class="content">
 
-<? 
+<?php 
     if ( ! isset($_SESSION['repo']) || $_SESSION['repo'] == '' ) { 
 
         session_destroy();
@@ -143,4 +143,4 @@
         </div>
     </div>
 
-<? include('footer.php'); ?>
+<?php include('footer.php'); ?>

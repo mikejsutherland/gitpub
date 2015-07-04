@@ -1,4 +1,4 @@
-<?
+<?php
    /*
     * Copyright (c) 2012 codesmak.com
     *
@@ -20,7 +20,7 @@
     */
 ?>
             <div id="filebrowser">
-<?
+<?php
 
     // Display file
     if ( ! empty($_SESSION['o']) && ! preg_match("/\/$/", $_SESSION['o']) ) {
@@ -38,20 +38,20 @@
                 <table class="file browser">
                     <thead>
                         <tr class="gradient_gray">
-                            <th><?=$file;?></th>
+                            <th><?php echo $file;?></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>
                                 <div class='fileviewer'>
-                                    <?=$file_contents;?>
+                                    <?php echo $file_contents;?>
                                 </div>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-<?
+<?php
 
         }
         catch (Exception $e) {
@@ -80,7 +80,7 @@
                             </tr>
                         </thead>
                         <tbody>
-<?
+<?php
                 if ( ! empty($_SESSION['o']) ) {
 
                     $path = preg_replace("/\/$/", "", $_SESSION['o']);
@@ -100,9 +100,9 @@
 ?>
                         <tr>
                             <td class=''> </td>
-                            <td><a class='ajaxy' href='<?=$parent_uri;?>'>..</a></td>
+                            <td><a class='ajaxy' href='<?php echo $parent_uri;?>'>..</a></td>
                         </tr>
-<?
+<?php
                 }
 
                 foreach ($files as $file) {
@@ -132,7 +132,7 @@
 ?>
                     </tbody>
                 </table>
-<?
+<?php
             }
             else {
 

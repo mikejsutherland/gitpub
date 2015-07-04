@@ -1,4 +1,4 @@
-<?
+<?php
    /*
     * Copyright (c) 2012 codesmak.com
     *
@@ -20,9 +20,9 @@
     */
 ?>
             <div class="projbar">
-                Project: <a href="<?=$CONFIG['base_uri']."/".genLink(array("nav" => null, "commit" => null, "o" => null, "branch" => null));?>"><?=$_SESSION['repo'];?></a> <a href="<?=$feed;?>"><img src="<?=$CONFIG['base_uri'];?>/docs/images/rss_icon.gif" /></a><br />
+                Project: <a href="<?php echo $CONFIG['base_uri']."/".genLink(array("nav" => null, "commit" => null, "o" => null, "branch" => null));?>"><?php echo $_SESSION['repo'];?></a> <a href="<?php echo $feed;?>"><img src="<?php echo $CONFIG['base_uri'];?>/docs/images/rss_icon.gif" /></a><br />
                 <span class="small">
-<?
+<?php
                 try {
             
                     $description = $gp->getDescription();
@@ -38,10 +38,10 @@
             
             <div class="tabbar">
                 <ul id="tabs">
-                    <li class="tab <?=isActiveTab('files');?>"><a href="<?=$CONFIG['base_uri']."/".genLink(array("nav" => "files", "commit" => null, "o" => null));?>">Files</a></li>
-                    <li class="tab <?=isActiveTab('commits');?>"><a href="<?=$CONFIG['base_uri']."/".genLink(array("nav" => "commits", "commit" => null, "o" => null, "offset" => null));?>">Commits</a></li>
-                    <li class="tab <?=isActiveTab('branches');?>"><a href="<?=$CONFIG['base_uri']."/".genLink(array("nav" => "branches", "commit" => null, "o" => null));?>">Branches</a></li>
-                    <li class="tab <?=isActiveTab('tags');?>"><a href="<?=$CONFIG['base_uri']."/".genLink(array("nav" => "tags", "commit" => null, "o" => null));?>">Tags</a></li>
+                    <li class="tab <?php echo isActiveTab('files');?>"><a href="<?php echo $CONFIG['base_uri']."/".genLink(array("nav" => "files", "commit" => null, "o" => null));?>">Files</a></li>
+                    <li class="tab <?php echo isActiveTab('commits');?>"><a href="<?php echo $CONFIG['base_uri']."/".genLink(array("nav" => "commits", "commit" => null, "o" => null, "offset" => null));?>">Commits</a></li>
+                    <li class="tab <?php echo isActiveTab('branches');?>"><a href="<?php echo $CONFIG['base_uri']."/".genLink(array("nav" => "branches", "commit" => null, "o" => null));?>">Branches</a></li>
+                    <li class="tab <?php echo isActiveTab('tags');?>"><a href="<?php echo $CONFIG['base_uri']."/".genLink(array("nav" => "tags", "commit" => null, "o" => null));?>">Tags</a></li>
                 </ul>
                 <br class="clear" />
             </div>

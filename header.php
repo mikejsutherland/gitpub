@@ -1,4 +1,4 @@
-<?
+<?php
 
    /*
     * Copyright (c) 2012 codesmak.com
@@ -105,33 +105,33 @@
 <html lang="en">
 
 <head>
-    <title><?=(isset($_SESSION['repo'])) ? "gitpub / ".$_SESSION['repo'] : "gitpub";?></title>
+    <title><?php echo (isset($_SESSION['repo'])) ? "gitpub / ".$_SESSION['repo'] : "gitpub";?></title>
     <link rel="shortcut icon" href="data:,">
-    <link href="<?=$feed;?>" rel="alternate" type="application/rss+xml" title="gitpub - available repositories" />
+    <link href="<?php echo $feed;?>" rel="alternate" type="application/rss+xml" title="gitpub - available repositories" />
 
     <!-- google-code-prettify -->
-    <link rel="stylesheet" type="text/css" media="all" href="<?=$CONFIG['base_uri'];?>/docs/include/google-code-prettify/prettify.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="<?php echo $CONFIG['base_uri'];?>/docs/include/google-code-prettify/prettify.css" />
 
     <!-- jquery javascript frameworks -->
-    <script type="text/javascript" src="<?=$CONFIG['base_uri'];?>/docs/include/jquery/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="<?php echo $CONFIG['base_uri'];?>/docs/include/jquery/jquery-1.7.1.min.js"></script>
 
     <!-- jquery-selectBox -->
-    <script type="text/javascript" src="<?=$CONFIG['base_uri'];?>/docs/include/jquery-selectBox/jquery.selectBox.js"></script>
-    <link rel="stylesheet" type="text/css" href="<?=$CONFIG['base_uri'];?>/docs/include/jquery-selectBox/jquery.selectBox.css" />
+    <script type="text/javascript" src="<?php echo $CONFIG['base_uri'];?>/docs/include/jquery-selectBox/jquery.selectBox.js"></script>
+    <link rel="stylesheet" type="text/css" href="<?php echo $CONFIG['base_uri'];?>/docs/include/jquery-selectBox/jquery.selectBox.css" />
 
     <!-- google-code-prettify -->
-    <script type="text/javascript" src="<?=$CONFIG['base_uri'];?>/docs/include/google-code-prettify/prettify.js"></script>
+    <script type="text/javascript" src="<?php echo $CONFIG['base_uri'];?>/docs/include/google-code-prettify/prettify.js"></script>
 
     <!-- history.js -->
-    <script type="text/javascript" src="<?=$CONFIG['base_uri'];?>/docs/include/history.js/jquery.history.js"></script>      
-    <script type="text/javascript" src="<?=$CONFIG['base_uri'];?>/docs/include/history.js/ajaxify-html5.js"></script>
+    <script type="text/javascript" src="<?php echo $CONFIG['base_uri'];?>/docs/include/history.js/jquery.history.js"></script>      
+    <script type="text/javascript" src="<?php echo $CONFIG['base_uri'];?>/docs/include/history.js/ajaxify-html5.js"></script>
 
     <!-- gitpub stylesheet -->
-    <link rel="stylesheet" type="text/css" media="all" href="<?=$CONFIG['base_uri'];?>/docs/css/gitpub.css" />
-    <!--[if lte IE 8]><link rel="stylesheet" type="text/css" href="<?=$CONFIG['base_uri'];?>/docs/css/ie.gitpub.css" /><![endif]-->
+    <link rel="stylesheet" type="text/css" media="all" href="<?php echo $CONFIG['base_uri'];?>/docs/css/gitpub.css" />
+    <!--[if lte IE 8]><link rel="stylesheet" type="text/css" href="<?php echo $CONFIG['base_uri'];?>/docs/css/ie.gitpub.css" /><![endif]-->
 
     <!-- gitpub javascript library -->
-    <script type="text/javascript" src="<?=$CONFIG['base_uri'];?>/docs/javascript/gitpub.js"></script>
+    <script type="text/javascript" src="<?php echo $CONFIG['base_uri'];?>/docs/javascript/gitpub.js"></script>
 
 </head>
 <body>

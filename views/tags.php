@@ -1,4 +1,4 @@
-<?
+<?php
    /*
     * Copyright (c) 2012 codesmak.com
     *
@@ -21,7 +21,7 @@
 ?>
                 <div id="tagsbrowser">
 
-<?
+<?php
 
     try {
 
@@ -38,31 +38,31 @@
                             </tr>
                         </thead>
                         <tbody>
-<?
+<?php
             foreach ($tags as $ver => $msg) {        
 ?>
-                            <tr class="<?=(($c = !$c)?'hl':'');?>">
+                            <tr class="<?php echo (($c = !$c)?'hl':'');?>">
                                 <td>
                                     <div class="left">
-                                        <strong><a href='<?=$CONFIG['base_uri']."/download.php?tag=$ver&amp;type=zip";?>'><?=$ver?></a></strong>
-                                        <? if ( ! empty($msg) ) { ?>
-                                        <span class="grey"> - <?=$msg;?></span>
-                                        <? } ?>
+                                        <strong><a href='<?php echo $CONFIG['base_uri']."/download.php?tag=$ver&amp;type=zip";?>'><?php echo $ver?></a></strong>
+                                        <?php if ( ! empty($msg) ) { ?>
+                                        <span class="grey"> - <?php echo $msg;?></span>
+                                        <?php } ?>
                                     </div>
                                     <div class="right small tright grey">
                                         Download<br />
-                                        <a class="dl" href='<?=$CONFIG['base_uri']."/download.php?tag=$ver";?>'>TAR</a>
-                                        <a class="dl" href='<?=$CONFIG['base_uri']."/download.php?tag=$ver&amp;type=zip";?>'>ZIP</a>
+                                        <a class="dl" href='<?php echo $CONFIG['base_uri']."/download.php?tag=$ver";?>'>TAR</a>
+                                        <a class="dl" href='<?php echo $CONFIG['base_uri']."/download.php?tag=$ver&amp;type=zip";?>'>ZIP</a>
                                     </div>
                                     <br class="clear" />
                                 </td>
                             </tr>
-<?
+<?php
             }
 ?>
                         </tbody>
                     </table>
-<?
+<?php
         }
         else {
 
